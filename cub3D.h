@@ -3,11 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrodenbu <mrodenbu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/10/26 23:27:32 by mrodenbu         ###   ########.fr       */
+/*   Updated: 2024/10/31 15:17:30 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef CUB3D_H
+# define CUB3D_H
 
+#endif
