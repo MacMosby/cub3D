@@ -6,7 +6,7 @@
 #    By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/31 15:17:42 by lde-taey          #+#    #+#              #
-#    Updated: 2024/10/31 15:18:37 by lde-taey         ###   ########.fr        #
+#    Updated: 2024/11/05 17:56:34 by lde-taey         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ CC = gcc
 
 MLX = minilibx-linux/libmlx.a
 
-SRCS = 
+SRCS = main.c \
+	parse.c
 
 OBJS = $(SRCS:.c=.o)
 
