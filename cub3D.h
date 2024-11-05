@@ -13,7 +13,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define SCREEN_WIDTH 320
+# define CUBE_SIZE 64
 # define SCREEN_HEIGHT 200
+# define SCREEN_WIDTH 320
 
 #endif
