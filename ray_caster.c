@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   ray_caster.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: mrodenbu <mrodenbu@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/10/31 15:17:30 by lde-taey         ###   ########.fr       */
+/*   Created: 2024/11/05 14:14:00 by mrodenbu          #+#    #+#             */
+/*   Updated: 2024/11/05 14:14:02 by mrodenbu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+void	ray_caster(void)
+{
+	int i = 0;
 
-# define SCREEN_WIDTH 320
-# define SCREEN_HEIGHT 200
-
-#endif
+	while (i < 320)
+	{
+		
+	}
+}
