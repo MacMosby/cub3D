@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/05 17:40:32 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/05 18:12:12 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,31 @@
 # define WIDTH 320
 # define HEIGTH 200
 
-struct s_point
+typedef struct s_point
 {
 	double x;
 	double y;
 }	t_point;
 
-struct s_color
+typedef struct s_color
 {
 	float	r;
 	float	g;
 	float	b;
 }	t_color;
 
-struct s_data
+typedef struct s_data
 {
 	char	**map;
 	char	*we; // path to west texture
 	char	*no; // path to north texture
 	char 	*so; // path to south texture
 	char	*ea; // path to east texture
-	s_color	c_floor; // floor color
-	s_color	c_ceiling; 
+	t_color	c_floor; // floor color
+	t_color	c_ceiling; 
 } 	t_data;
+
+// parsing
+int		check_ext(char *mapfile);
 
 #endif

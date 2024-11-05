@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:58 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/05 17:55:43 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/05 18:14:55 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ int	init_everything(char *map)
 
 int check_args(int argc, char **argv)
 {
-	if (argc > 2)
+	if (argc == 1 || argc > 2)
 	{
-		printf("This program does not accept more than one argument\n.");
+		printf("This program needs one (and only one) argument.\n");
 		return (1);
 	}
 	if (check_ext(argv[1]))
 	{
-		printf("This program only takes .cub files as argument\n.");
+		printf("This program only accepts .cub files as an argument\n.");
 		return (1);
 	}
 	return (0);
@@ -44,10 +44,11 @@ int	main(int argc, char **argv)
 	if (check_args(argc, argv))
 		return (1);
 	if (init_everything(argv[1]))
-		return (error_message());
+		return (1);
 	while (1)
 	{
 		render_update();
 	}
 	cleanup();
+	return (0);
 }
