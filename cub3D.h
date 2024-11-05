@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/05 18:28:55 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/05 18:36:33 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
 
-# define GRID_SIZE 64
+# define CUBE_SIZE 64
 # define FOV 60
 # define WIDTH 320
 # define HEIGTH 200
