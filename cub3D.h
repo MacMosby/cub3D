@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/05 18:12:12 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/05 18:16:54 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ typedef struct s_data
 	char 	*so; // path to south texture
 	char	*ea; // path to east texture
 	t_color	c_floor; // floor color
-	t_color	c_ceiling; 
+	t_color	c_ceiling;
+	double	plane_dist;
 } 	t_data;
 
 // parsing
