@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/05 18:28:55 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:37:57 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <X11/X.h>
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
+# include "libft/libft.h"
 
 # define GRID_SIZE 64
 # define FOV 60
@@ -49,9 +50,11 @@ typedef struct s_data
 	t_color	c_floor; // floor color
 	t_color	c_ceiling;
 	double	plane_dist;
+	int		all_info;
 } 	t_data;
 
 // parsing
 int		check_ext(char *mapfile);
+void	parse_map(char *mapfile);
 
 #endif

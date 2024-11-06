@@ -6,20 +6,22 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:58 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/05 18:14:55 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/06 12:57:44 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	init_everything(char *map)
+int	init_everything(char *input)
 {
-	parse_map(map);
-	if (!init_mlx())
+	t_data	data;
+	
+	parse_input(input, &data);
+	if (!init_mlx(&data))
 		return (1);
-	if (!init_hooks())
+	if (!init_hooks(&data))
 		return (1);
-	if (!init_render())
+	if (!init_render(&data))
 		return (1);
 	return (0);
 }

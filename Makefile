@@ -6,7 +6,7 @@
 #    By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/31 15:17:42 by lde-taey          #+#    #+#              #
-#    Updated: 2024/11/05 17:56:34 by lde-taey         ###   ########.fr        #
+#    Updated: 2024/11/06 13:31:24 by lde-taey         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,16 +24,19 @@ SRCS = main.c \
 OBJS = $(SRCS:.c=.o)
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(MLX) -lX11 -lXext -lm
+	make -C ./libft
+	$(CC) $(CFLAGS) $(OBJS) libft/libft.a -o $(NAME) $(MLX) -lX11 -lXext -lm
 
 all : $(NAME)
 
 .PHONY : clean fclean re
 
 clean :
+	make clean -C ./libft
 	rm -f $(OBJS)
 
 fclean : clean
+	make fclean -C ./libft
 	rm -f $(NAME)
 
 re : fclean all
