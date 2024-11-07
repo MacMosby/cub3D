@@ -6,26 +6,18 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:20:17 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/07 14:33:11 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:52:44 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	store_and_check_color_f(char *info, t_data *data)
+void	color_check_loop(char **colors)
 {
-	char 	**colors;
 	int		i;
 	int		j;
 	int		val;
-
-	if (!info || *info == '\0')
-		return ; // error handling
-	while(*info != '\0' && *info == ' ')
-		info++;
-	colors = ft_split(info, ',');
-	if (!colors || colors[0] == NULL)
-		color_error(colors);
+	
 	i = 0;
 	val = 0;
 	while (i < 3)
@@ -44,7 +36,42 @@ void	store_and_check_color_f(char *info, t_data *data)
 			color_error(colors);
 		i++;
 	}
-	if (colors[i] != NULL)
+}
+
+void	store_and_check_color_c(char *info, t_data *data)
+{
+	char 	**colors;
+
+	if (!info || *info == '\0')
+		return ; // error handling
+	while(*info != '\0' && *info == ' ')
+		info++;
+	colors = ft_split(info, ',');
+	if (!colors || colors[0] == NULL)
+		color_error(colors);
+	color_check_loop(colors);
+	if (colors[3] != NULL)
+		color_error(colors);
+	data->c_ceiling.r = ft_atoi(colors[0]);
+	data->c_ceiling.g = ft_atoi(colors[1]);
+	data->c_ceiling.b = ft_atoi(colors[2]);
+	free_array(colors);
+	data->c_ceiling.full = 1;
+}
+
+void	store_and_check_color_f(char *info, t_data *data)
+{
+	char 	**colors;
+
+	if (!info || *info == '\0')
+		return ; // error handling
+	while(*info != '\0' && *info == ' ')
+		info++;
+	colors = ft_split(info, ',');
+	if (!colors || colors[0] == NULL)
+		color_error(colors);
+	color_check_loop(colors);
+	if (colors[3] != NULL)
 		color_error(colors);
 	data->c_floor.r = ft_atoi(colors[0]);
 	data->c_floor.g = ft_atoi(colors[1]);
