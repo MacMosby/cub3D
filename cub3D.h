@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/06 13:37:57 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:24:18 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ typedef struct s_point
 
 typedef struct s_color
 {
-	float	r;
-	float	g;
-	float	b;
+	int	r;
+	int	g;
+	int	b;
+	int	full;
 }	t_color;
 
 typedef struct s_data
@@ -50,11 +51,28 @@ typedef struct s_data
 	t_color	c_floor; // floor color
 	t_color	c_ceiling;
 	double	plane_dist;
-	int		all_info;
 } 	t_data;
+
+// setup
+void	init_struct(t_data *data);
 
 // parsing
 int		check_ext(char *mapfile);
+void	parse_firstpart(int fd, char *input, t_data *data);
 void	parse_map(char *mapfile);
+void	store_path_no(char *path, t_data *data);
+void	store_path_so(char *path, t_data *data);
+void	store_path_we(char *path, t_data *data);
+void	store_path_ea(char *path, t_data *data);
+void	store_and_check_color_f(char *info, t_data *data);
+
+// errors
+void	color_error(char **colors);
+void	malloc_error(void);
+
+// cleanup
+void	free_array(char **array);
+
+
 
 #endif
