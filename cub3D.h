@@ -25,6 +25,17 @@
 # define FOV 60
 # define WIDTH 320
 # define HEIGTH 200
+# define PLANE_DIST 277
+# define MOVE_SPEED 10
+# define TURN_SPEED 1
+
+typedef struct s_point t_point;
+
+typedef struct s_player
+{
+	t_point	position;
+	double	angle;
+};
 
 typedef struct s_point
 {
@@ -48,7 +59,7 @@ typedef struct s_data
 	char	*ea; // path to east texture
 	t_color	c_floor; // floor color
 	t_color	c_ceiling;
-	double	plane_dist;
+	//double	plane_dist;
 } 	t_data;
 
 // parsing
