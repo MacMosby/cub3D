@@ -12,12 +12,9 @@
 
 #include "cub3D.h"
 
-typedef struct s_point
-{
-	double	x;
-	double	y;
-}	t_point;
-
+/* calculates and returns the distance to the next wall based on the
+x-coordinate of the player, the x-coordinate of the next wall and the player's
+viewing angle */
 double	calculate_distance(t_point *player, t_point *wall)
 {
 	return (fabs(data->player->position->x - wall->x) / cos(ALPHA));
@@ -53,7 +50,7 @@ void	find_vertical_wall(t_data *data)
 		border.y += dY;
 		cube.y = border.y / CUBE_SIZE;
 	}
-	return (calculate_distance());
+	return (calculate_distance(data->player, border));
 }
 
 void	find_horizontal_wall(t_data *data)
@@ -65,7 +62,11 @@ void	find_horizontal_wall(t_data *data)
 
 	// getting y coordinate of Point A
 	// if ray is facing up
-	border.y = rounded_down(data->player->position->y/CUBE_SIZE) * (CUBE_SIZE) - 1;
+	border.y = rounded_down(data->player->position->y/typedef struct s_point
+{
+	double	x;
+	double	y;
+}	t_point;CUBE_SIZE) * (CUBE_SIZE) - 1;
 	// if ray is facing down
 	border.y = rounded_down(data->player->position->y/CUBE_SIZE) (CUBE_SIZE) + CUBE_SIZE;
 	// getting y coordinate of the grid it belongs to
@@ -90,7 +91,7 @@ void	find_horizontal_wall(t_data *data)
 		border.y += dY;
 		cube.y = border.y / CUBE_SIZE;
 	}
-	return (calculate_distance());
+	return (calculate_distance(data->player, border));
 }
 
 double	get_correct_distance(double hori_dist, double vert_dist)

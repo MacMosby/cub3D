@@ -35,7 +35,7 @@ typedef struct s_player
 {
 	t_point	position;
 	double	angle;
-};
+}	t_player;
 
 typedef struct s_point
 {
@@ -60,6 +60,7 @@ typedef struct s_data
 	t_color	c_floor; // floor color
 	t_color	c_ceiling;
 	//double	plane_dist;
+	t_player	player;
 } 	t_data;
 
 // parsing
