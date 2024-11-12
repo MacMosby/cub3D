@@ -62,11 +62,7 @@ void	find_horizontal_wall(t_data *data)
 
 	// getting y coordinate of Point A
 	// if ray is facing up
-	border.y = rounded_down(data->player->position->y/typedef struct s_point
-{
-	double	x;
-	double	y;
-}	t_point;CUBE_SIZE) * (CUBE_SIZE) - 1;
+	border.y = rounded_down(data->player->position->y/CUBE_SIZE) * (CUBE_SIZE) - 1;
 	// if ray is facing down
 	border.y = rounded_down(data->player->position->y/CUBE_SIZE) (CUBE_SIZE) + CUBE_SIZE;
 	// getting y coordinate of the grid it belongs to
