@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/19 11:12:53 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:00:41 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_color
 	int	g;
 	int	b;
 	int	full;
-}	t_color;
+}	t_color; // has to look like OxFF0000
 
 typedef struct s_data
 {
@@ -52,6 +52,7 @@ typedef struct s_data
 	char	*ea; // path to east texture
 	t_color	c_floor; // floor color
 	t_color	c_ceiling;
+	t_point player_pos;
 	double	plane_dist;
 } 	t_data;
 
@@ -70,8 +71,12 @@ void	store_path_we(char *path, t_data *data);
 void	store_path_ea(char *path, t_data *data);
 void	store_and_check_color_c(char *info, t_data *data);
 void	store_and_check_color_f(char *info, t_data *data);
-void 	flood_fill_check(t_data *data);
+void 	flood_fill_wall_check(t_data *data);
+void 	flood_fill_space_check(t_data *data);
 char	*ft_strcpy(char *dest, char *src);
+void	player_check(t_data *data, int fd);
+void 	space_check(t_data *data);
+
 
 // errors
 void	color_error(char **colors);

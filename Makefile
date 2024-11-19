@@ -6,7 +6,7 @@
 #    By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/31 15:17:42 by lde-taey          #+#    #+#              #
-#    Updated: 2024/11/18 15:35:15 by lde-taey         ###   ########.fr        #
+#    Updated: 2024/11/19 12:18:51 by lde-taey         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS = cleanup.c \
 	errors.c \
 	init.c \
 	main.c \
+	parse_checks.c \
 	parse_colors.c \
 	parse_floodfill.c \
 	parse_input.c \

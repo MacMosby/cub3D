@@ -4,3 +4,4 @@ a.out
 .gitignore
 cub3D
 test.cub
+*.o
