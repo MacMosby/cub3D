@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:54:01 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/07 14:24:39 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:27:42 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int	check_struct(t_data *data)
 	return (1);
 }
 
-void	parse_firstpart(int fd, char *input, t_data *data)
+void	parse_firstpart(int fd, t_data *data)
 {
 	char	*line;
 	int 	i;
 
 	line = get_next_line(fd);
-	if (!line || line[0] == '\0')
+	if (!line || line[0] == '\0') // check null terminator thing
 	{
 		printf("Error. Could not find expected object information in file\n");
 		close(fd);
@@ -52,7 +52,7 @@ void	parse_firstpart(int fd, char *input, t_data *data)
 			while (line[i] == ' ')
 				i++;
 			if (!ft_strncmp(line + i, "NO", 2))
-				store_path_no(line + i + 2, data);
+				store_path_no(line + i + 2, data); // clean up // use data->path_no =
 			else if (!ft_strncmp(line + i, "SO", 2))
 				store_path_so(line + i + 2, data);
 			else if (!ft_strncmp(line + i, "WE", 2))

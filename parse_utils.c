@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 16:40:45 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/19 11:09:33 by lde-taey         ###   ########.fr       */
+/*   Created: 2024/11/18 13:00:58 by lde-taey          #+#    #+#             */
+/*   Updated: 2024/11/18 13:02:13 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void free_array(char **array)
+char	*ft_strcpy(char *dest, char *src)
 {
 	int	i;
 
 	i = 0;
-	if (array == NULL)
-		return ;
-	while(array[i] != NULL)
+	while (src[i] != '\0')
 	{
-		free(array[i]);
-		array[i] = NULL;
+		dest[i] = src[i];
 		i++;
 	}
-	free(array);
-	array = NULL;
-}
-
-void free_everything(t_data *data)
-{
-	free_array(data->map);
-}
+	dest[i] = '\0';
+	return (dest);
+} 

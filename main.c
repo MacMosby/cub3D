@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:58 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/07 13:18:45 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/19 11:13:23 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int check_args(int argc, char **argv)
 {
 	if (argc == 1 || argc > 2)
 	{
-		printf("This program needs one (and only one) argument.\n");
+		printf("This program takes one (and only one) argument.\n");
 		return (1);
 	}
 	if (check_ext(argv[1]))
@@ -29,14 +29,16 @@ int check_args(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
+	t_data	data;
+	
 	if (check_args(argc, argv))
 		return (1);
-	if (init_everything(argv[1]))
+	if (init_everything(argv[1], &data))
 		return (1);
-	while (1)
-	{
-		render_update();
-	}
-	cleanup();
+	// while (1)
+	// {
+	// 	render_update();
+	// }
+	free_everything(&data);
 	return (0);
 }

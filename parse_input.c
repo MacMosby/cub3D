@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:10:27 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/06 14:10:59 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:36:04 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ void	parse_input(char *inputfile, t_data *data)
 {
 	int	fd;
 	
-	open(inputfile, O_RDONLY);
+	fd = open(inputfile, O_RDONLY);
 	if (fd < 0)
 	{
 		printf("Error opening file. Please check your input.\n");
 		close(fd);
 		exit(EXIT_FAILURE);
 	}
-	parse_firstpart(fd, inputfile, data);
-	check_map(fd, inputfile, data);
+	// parse_firstpart(fd, data);
+	parse_map(fd, inputfile, data);
 	close(fd);
 }
 

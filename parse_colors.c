@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:20:17 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/07 14:52:44 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:33:45 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	color_check_loop(char **colors)
 	}
 }
 
-void	store_and_check_color_c(char *info, t_data *data)
+void	store_and_check_color_c(char *info, t_data *data) // add color struct to make it one function
 {
 	char 	**colors;
 
@@ -73,7 +73,7 @@ void	store_and_check_color_f(char *info, t_data *data)
 	color_check_loop(colors);
 	if (colors[3] != NULL)
 		color_error(colors);
-	data->c_floor.r = ft_atoi(colors[0]);
+	data->c_floor.r = ft_atoi(colors[0]); // check for integer overflow
 	data->c_floor.g = ft_atoi(colors[1]);
 	data->c_floor.b = ft_atoi(colors[2]);
 	free_array(colors);

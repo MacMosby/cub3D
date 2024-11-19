@@ -6,7 +6,7 @@
 #    By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/31 15:17:42 by lde-taey          #+#    #+#              #
-#    Updated: 2024/11/06 14:50:41 by lde-taey         ###   ########.fr        #
+#    Updated: 2024/11/18 15:35:15 by lde-taey         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,18 @@ CC = gcc
 
 MLX = minilibx-linux/libmlx.a
 
-SRCS = main.c \
+SRCS = cleanup.c \
+	errors.c \
+	init.c \
+	main.c \
+	parse_colors.c \
+	parse_floodfill.c \
 	parse_input.c \
 	parse_map.c \
-	parse_texture.c \
-	errors.c \
-	ray_caster.c
+	parse_textures.c \
+	parse_utils.c \
+	ray_caster.c \
+	store_paths.c
 
 OBJS = $(SRCS:.c=.o)
 

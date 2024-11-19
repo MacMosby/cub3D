@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/07 14:24:18 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/19 11:12:53 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_color
 typedef struct s_data
 {
 	char	**map;
+	int		rows;
+	int		cols;
 	char	*we; // path to west texture
 	char	*no; // path to north texture
 	char 	*so; // path to south texture
@@ -55,24 +57,30 @@ typedef struct s_data
 
 // setup
 void	init_struct(t_data *data);
+int		init_everything(char *input, t_data *data);
 
 // parsing
 int		check_ext(char *mapfile);
-void	parse_firstpart(int fd, char *input, t_data *data);
-void	parse_map(char *mapfile);
+void	parse_input(char *inputfile, t_data *data);
+void	parse_firstpart(int fd, t_data *data);
+void 	parse_map(int fd, char *inputfile, t_data *data);
 void	store_path_no(char *path, t_data *data);
 void	store_path_so(char *path, t_data *data);
 void	store_path_we(char *path, t_data *data);
 void	store_path_ea(char *path, t_data *data);
+void	store_and_check_color_c(char *info, t_data *data);
 void	store_and_check_color_f(char *info, t_data *data);
+void 	flood_fill_check(t_data *data);
+char	*ft_strcpy(char *dest, char *src);
 
 // errors
 void	color_error(char **colors);
 void	malloc_error(void);
+void	map_error(int fd);
 
 // cleanup
 void	free_array(char **array);
-
+void	free_everything(t_data *data);
 
 
 #endif
