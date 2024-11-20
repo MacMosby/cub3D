@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/20 14:51:58 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:07:47 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,21 @@
 # include "minilibx-linux/mlx_int.h"
 # include "libft/libft.h"
 
-# define GRID_SIZE 64
+# define CUBE_SIZE 64
 # define FOV 60
 # define WIDTH 320
 # define HEIGTH 200
+# define PLANE_DIST 277
+# define MOVE_SPEED 10
+# define TURN_SPEED 1
+
+typedef struct s_point t_point;
+
+typedef struct s_player
+{
+	t_point	position;
+	double	angle;
+}	t_player;
 
 typedef struct s_point
 {
@@ -52,8 +63,8 @@ typedef struct s_data
 	char	*ea; // path to east texture
 	t_color	c_floor; // floor color
 	t_color	c_ceiling;
-	t_point player_pos;
-	double	plane_dist;
+	//double	plane_dist;
+	t_player	player;
 } 	t_data;
 
 // setup
