@@ -20,3 +20,24 @@ void	cleanup(t_data *data)
 	free(data->mlx_ptr); // not sure if this is necessary - needs to be tested
 }
 
+void free_array(char **array)
+{
+	int	i;
+
+	i = 0;
+	if (array == NULL)
+		return ;
+	while(array[i] != NULL)
+	{
+		free(array[i]);
+		array[i] = NULL;
+		i++;
+	}
+	free(array);
+	array = NULL;
+}
+
+void free_everything(t_data *data)
+{
+	free_array(data->map);
+}

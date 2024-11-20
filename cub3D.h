@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/05 18:36:33 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:07:47 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <X11/keysym.h>
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
+# include "libft/libft.h"
 
 # define CUBE_SIZE 64
 # define FOV 60
@@ -50,14 +51,15 @@ typedef struct s_point
 
 typedef struct s_color
 {
-	float	r;
-	float	g;
-	float	b;
-}	t_color;
+	int	r;
+	int	g;
+	int	b;
+	int	full;
+}	t_color; // has to look like OxFF0000
 
 typedef struct s_data
 {
-	int		**map;
+	char	**map;
 	int		rows;
 	int		cols;
 	char	*we; // path to west texture
@@ -83,7 +85,6 @@ int		init_mlx(t_data *data);
 
 // parsing
 int		check_ext(char *mapfile);
-void	parse_map(char *mapfile);
 
 // player_movement.c
 void	move_backward(t_data *data);
@@ -95,11 +96,40 @@ void	turn_right(t_data *data);
 
 // ray_caster.c
 void	ray_caster(t_data *data);
-
-int	init_everything(t_data *data, char *map);
 double	find_horizontal_wall(t_data *data, double viewing_angle, int direction);
 double	find_vertical_wall(t_data *data, double viewing_angle, int direction);
 double	get_correct_distance(double hori_dist, double vert_dist, double angle);
 void	cast_slice(t_data *data, double wall_distance, int col);
+// setup
+void	init_struct(t_data *data);
+int		init_everything(char *input, t_data *data);
+
+// parsing
+int		check_ext(char *mapfile);
+void	parse_input(char *inputfile, t_data *data);
+char	*parse_firstpart(int fd, t_data *data);
+void 	parse_map(int fd, char *inputfile, t_data *data, char **oldline);
+void	store_path_no(char *path, t_data *data);
+void	store_path_so(char *path, t_data *data);
+void	store_path_we(char *path, t_data *data);
+void	store_path_ea(char *path, t_data *data);
+void	store_and_check_color_c(char *info, t_data *data);
+void	store_and_check_color_f(char *info, t_data *data);
+void 	flood_fill_wall_check(t_data *data);
+void 	flood_fill_space_check(t_data *data);
+char	*ft_strcpy(char *dest, char *src);
+void	player_check(t_data *data, int fd);
+void 	space_check(t_data *data);
+
+
+// errors
+void	color_error(char **colors);
+void	malloc_error(void);
+void	map_error(int fd);
+
+// cleanup
+void	free_array(char **array);
+void	free_everything(t_data *data);
+
 
 #endif

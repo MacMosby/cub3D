@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 17:54:01 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/05 18:15:13 by lde-taey         ###   ########.fr       */
+/*   Created: 2024/11/18 13:00:58 by lde-taey          #+#    #+#             */
+/*   Updated: 2024/11/18 13:02:13 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	parse_map(char *mapfile)
-{
-	printf("filename: %s\n", mapfile);
-}
-
-int		check_ext(char *mapfile)
+char	*ft_strcpy(char *dest, char *src)
 {
 	int	i;
 
 	i = 0;
-	while(mapfile[i] != 0)
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
 		i++;
-	if (mapfile[--i] != 'b')
-		return (1);
-	if (mapfile[--i] != 'u')
-		return (1);
-	if (mapfile[--i] != 'c')
-		return (1);
-	if (mapfile[--i] != '.')
-		return (1);
-	return (0);
-}
+	}
+	dest[i] = '\0';
+	return (dest);
+} 
