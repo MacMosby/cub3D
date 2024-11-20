@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:40:56 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/19 16:33:18 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:58:17 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,25 @@ void store_map(t_data *data, char *inputfile)
 	char	*line;
 	int 	i;
 
-	fd = open(inputfile, O_RDONLY);
+	fd = open(inputfile, O_RDONLY); // problem here
 	data->map = (char**)malloc((data->rows + 1) * sizeof(char *));
 	if (!data->map)
 		malloc_error();
 	i = 0;
 	line = get_next_line(fd);
+	while(line[0] != '1')
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
 	data->map[i] = handle_line(line, data, fd);
-	while (i < (data->rows - 1))
+	while (i < (data->rows - 1)) // sth wrong here with the count?
 	{
 		if (line)
 			free(line);
 		line = get_next_line(fd);
+		if (!line)
+			break ;
 		data->map[++i] = handle_line(line, data, fd);
 	}
 	data->map[++i] = NULL;
@@ -86,13 +93,15 @@ void store_map(t_data *data, char *inputfile)
 	// print_map(data);
 }
 
-void parse_map(int fd, char *inputfile, t_data *data)
+void parse_map(int fd, char *inputfile, t_data *data, char **oldline)
 {
-	char	*line;
 	int		len;
+	char 	*line;
+
+	line = *oldline;
 
 	// 1. get_dimensions
-	line = get_next_line(fd);
+	// line = get_next_line(fd);
 	if (!line || line[0] == '\0')
 		map_error(fd);
 	data->rows++;

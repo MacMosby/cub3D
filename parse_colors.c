@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:20:17 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/07 16:33:45 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/20 14:31:31 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	color_check_loop(char **colors)
 		j = 0;
 		while(colors[i][j] != '\0')
 		{
-			if(!ft_isdigit(colors[i][j]) && colors[i][j] != ' ')
+			if(!ft_isdigit(colors[i][j]) && colors[i][j] != ' ' && colors[i][j] != '\n')
 				color_error(colors);
 			j++;
 		}

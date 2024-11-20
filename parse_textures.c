@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:54:01 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/18 15:27:42 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:29:10 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_struct(t_data *data)
 	return (1);
 }
 
-void	parse_firstpart(int fd, t_data *data)
+char	*parse_firstpart(int fd, t_data *data)
 {
 	char	*line;
 	int 	i;
@@ -43,16 +43,13 @@ void	parse_firstpart(int fd, t_data *data)
 	}	
 	while (check_struct(data) == 0)
 	{
-		if (line)
-			free(line);
-		line = get_next_line(fd);
 		if (ft_strncmp(line, "\n", 1)) // if line is not an empty line
 		{
 			i = 0;
 			while (line[i] == ' ')
 				i++;
 			if (!ft_strncmp(line + i, "NO", 2))
-				store_path_no(line + i + 2, data); // clean up // use data->path_no =
+				store_path_no(line + i + 2, data); // use data->path_no =
 			else if (!ft_strncmp(line + i, "SO", 2))
 				store_path_so(line + i + 2, data);
 			else if (!ft_strncmp(line + i, "WE", 2))
@@ -65,13 +62,25 @@ void	parse_firstpart(int fd, t_data *data)
 				store_and_check_color_c(line + i + 1, data);
 			else
 			{
+				if (check_struct(data) == 1)
+					break ;
 				printf("Error. Could not find expected object information in file\n");
 				free(line);
 				close(fd);
 				exit(EXIT_FAILURE);
 			}
 		}
-		free(line);
+		if (line)
+			free(line);
+		line = get_next_line(fd);
 	}
+	free(line);
+	line = get_next_line(fd);
+	while (!ft_strncmp(line, "\n", 1))
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (line);
 }
 
