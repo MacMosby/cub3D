@@ -5,134 +5,146 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrodenbu <mrodenbu@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 14:14:00 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/05 14:14:02 by mrodenbu         ###   ########.fr       */
+/*   Created: 2024/11/17 13:03:02 by mrodenbu          #+#    #+#             */
+/*   Updated: 2024/11/17 13:03:03 by mrodenbu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-/* calculates and returns the distance to the next wall based on the
-x-coordinate of the player, the x-coordinate of the next wall and the player's
-viewing angle */
-double	calculate_distance(t_point *player, t_point *wall)
-{
-	return (fabs(data->player->position->x - wall->x) / cos(ALPHA));
-}
-
-void	find_vertical_wall(t_data *data)
-{
-	t_point	border;
-	t_point	cube;
-	// getting x coordinate of Point B
-	// if ray is facing right
-	border.x = rounded_down(data->player->position->x/CUBE_SIZE) * (CUBE_SIZE) + 64;
-	// if ray is facing left
-	border.x = rounded_down(data->player->position->x/CUBE_SIZE) * (CUBE_SIZE) + CUBE_SIZE;
-	// getting x coordinate of the grid it belongs to
-	cube.x = border.x / CUBE_SIZE;
-	// getting y coordinate of Point B
-	border.y = data->player->position->y + ((data->player->position->x - border.x)/tan(ALPHA));
-	// getting y coordinate of the grid it belongs to
-	cube.x = border.x / CUBE_SIZE;
-	while (map[cube.y][cube.x] != 1)
-	{
-		// go for next point
-		// finding dX which is always the size of a cube and dY
-		///path_ if ray is facing right it is positive
-		dX = CUBE_SIZE;
-		// if ray is facing left it is negative
-		dX = CUBE_SIZE * -1;
-		// finding dY
-		dY = CUBE_SIZE/tan(ALPHA);
-		border.x += dX;
-		cube.x = border.x / CUBE_SIZE;
-		border.y += dY;
-		cube.y = border.y / CUBE_SIZE;
-	}
-	return (calculate_distance(data->player, border));
-}
-
-void	find_horizontal_wall(t_data *data)
-{
-	t_point	border;
-	t_point	cube;
-	int		dX;
-	int		dY;
-
-	// getting y coordinate of Point A
-	// if ray is facing up
-	border.y = rounded_down(data->player->position->y/CUBE_SIZE) * (CUBE_SIZE) - 1;
-	// if ray is facing down
-	border.y = rounded_down(data->player->position->y/CUBE_SIZE) (CUBE_SIZE) + CUBE_SIZE;
-	// getting y coordinate of the grid it belongs to
-	cube.y = border.y / CUBE_SIZE;
-	// getting x coordinate of Point A
-	border.x = data->player->position->x + ((data->player->position->y - border.y)/tan(ALPHA));
-	// getting x coordinate of the grid it belongs to
-	cube.x = border.x / CUBE_SIZE;
-	// checking if grid of A if a wall
-	while (map[cube.y][cube.x] != 1)
-	{
-		// go for next point
-		// finding dY which is always the size of a cube and dX
-		// if ray is facing up it is negative
-		dY = CUBE_SIZE * -1;
-		// if ray is facing down it is positive
-		dY = CUBE_SIZE;
-		// finding dX
-		dX = CUBE_SIZE/tan(data->player->angle);
-		border.x += dX;
-		cube.x = border.x / CUBE_SIZE;
-		border.y += dY;
-		cube.y = border.y / CUBE_SIZE;
-	}
-	return (calculate_distance(data->player, border));
-}
-
-double	get_correct_distance(double hori_dist, double vert_dist)
-{
-	if (hori_dist < vert_dist)
-		return (hori_dist * cos(BETA));
-	else
-		return (vert_dist * cos(BETA));
-}
-
-void	cast_slice(t_data *data, double wall_distance)
-{
-	int	slice_height;
-
-	slice_height = CUBE_SIZE * (PLANE_DIST / wall_distance);
-	// middle of slice should be in the the middle of the screen
-		// (window height/2) - (slice height/2)
-	// finding the offset of the bitmap to find the
-	// right slice to shoot onto the wall
-		// if slice on vertical grid boundary
-			// offset = P.y % CUBE_SIZE
-		// if slice on horizontal grid boundary
-			// offset = P.x % CUBE_SIZE
-}
-
-void	cast_ray(void)
+void	ne_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
 {
 	double	vert_dist;
 	double	hori_dist;
 	double	real_dist;
 
-	hori_dist = find_horizontal_wall();
-	vert_dist = find_vertical_wall();
-	real_dist = get_correct_distance(hori_dist, vert_dist);
-	cast_slice(real_dist);
+	hori_dist = find_horizontal_wall(data, viewing_angle, UP);
+	vert_dist = find_vertical_wall(data, viewing_angle, RIGHT);
+	if (hori_dist < 0 && vert_dist < 0)
+		printf("NORTH EAST - NO WALL FOUND!\n");
+	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
+	cast_slice(data, real_dist, col);
 }
 
-void	ray_caster(void)
+void	nw_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
 {
-	int i = 0;
+	double	vert_dist;
+	double	hori_dist;
+	double	real_dist;
 
-	// How to point to the first column??
-	while (i < SCREEN_WIDTH)
+	hori_dist = find_horizontal_wall(data, viewing_angle, UP);
+	vert_dist = find_vertical_wall(data, viewing_angle, LEFT);
+	if (hori_dist < 0 && vert_dist < 0)
+		printf("NO WALL FOUND!\n");
+	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
+	cast_slice(data, real_dist, col);
+}
+
+void	sw_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
+{
+	double	vert_dist;
+	double	hori_dist;
+	double	real_dist;
+
+	hori_dist = find_horizontal_wall(data, viewing_angle, DOWN);
+	vert_dist = find_vertical_wall(data, viewing_angle, LEFT);
+	if (hori_dist < 0 && vert_dist < 0)
+		printf("NO WALL FOUND!\n");
+	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
+	cast_slice(data, real_dist, col);
+}
+
+void	se_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
+{
+	double	vert_dist;
+	double	hori_dist;
+	double	real_dist;
+
+	hori_dist = find_horizontal_wall(data, viewing_angle, DOWN);
+	vert_dist = find_vertical_wall(data, viewing_angle, RIGHT);
+	if (hori_dist < 0 && vert_dist < 0)
+		printf("NO WALL FOUND!\n");
+	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
+	cast_slice(data, real_dist, col);
+}
+
+void	n_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
+{
+	double	hori_dist;
+	double	real_dist;
+
+	hori_dist = find_horizontal_wall(data, viewing_angle, UP);
+	if (hori_dist < 0)
+		printf("NORTH no wall found\n");
+	real_dist = hori_dist * cos(plane_angle / (double)180 * M_PI);
+	cast_slice(data, real_dist, col);
+}
+
+void	s_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
+{
+	double	hori_dist;
+	double	real_dist;
+
+	hori_dist = find_horizontal_wall(data, viewing_angle, DOWN);
+	real_dist = hori_dist * cos(plane_angle / (double)180 * M_PI);
+	cast_slice(data, real_dist, col);
+}
+
+void	e_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
+{
+	double	vert_dist;
+	double	real_dist;
+
+	vert_dist = find_vertical_wall(data, viewing_angle, RIGHT);
+	real_dist = vert_dist * cos(plane_angle / (double)180 * M_PI);
+	cast_slice(data, real_dist, col);
+}
+
+void	w_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
+{
+	double	vert_dist;
+	double	real_dist;
+
+	vert_dist = find_vertical_wall(data, viewing_angle, LEFT);
+	real_dist = vert_dist * cos(plane_angle / (double)180 * M_PI);
+	cast_slice(data, real_dist, col);
+}
+
+void	cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
+{
+	if (viewing_angle == 0)
+		e_cast_ray(data, plane_angle, viewing_angle, col);
+	else if (viewing_angle == 90)
+		n_cast_ray(data, plane_angle, viewing_angle, col);
+	else if (viewing_angle == 180)
+		w_cast_ray(data, plane_angle, viewing_angle, col);
+	else if (viewing_angle == 270)
+		s_cast_ray(data, plane_angle, viewing_angle, col);
+	else if (viewing_angle > 0 && viewing_angle < 90)
+		ne_cast_ray(data, plane_angle, viewing_angle, col);
+	else if (viewing_angle > 90 && viewing_angle < 180)
+		nw_cast_ray(data, plane_angle, viewing_angle, col);
+	else if (viewing_angle > 180 && viewing_angle < 270)
+		sw_cast_ray(data, plane_angle, viewing_angle, col);
+	else if (viewing_angle > 270 && viewing_angle < 360)
+		se_cast_ray(data, plane_angle, viewing_angle, col);
+}
+
+void	ray_caster(t_data *data)
+{
+	double	col;
+	double	min_angle;
+	double	plane_angle;
+	double	viewing_angle;
+
+	min_angle = (double)FOV/(double)WIDTH;
+	col = 0;
+	while (col < WIDTH)
 	{
-		cast_ray();
-		i++;
+		plane_angle = fabs(-30 + min_angle * col);
+		viewing_angle = data->player->angle + 30 - min_angle * col;
+		cast_ray(data, plane_angle, viewing_angle, col);
+		col++;
+		//usleep(200000);
 	}
 }

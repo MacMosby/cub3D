@@ -14,16 +14,26 @@ NAME = cub3D
 
 CFLAGS = -Werror -Wall -Wextra -g
 
-CC = gcc
+CC = cc
 
-MLX = minilibx-linux/libmlx.a
+MLX =  -Lminilibx-linux -lmlx_Linux #minilibx-linux/libmlx.a
 
 SRCS = main.c \
-	parse.c
+	calculate_distance.c \
+	cleanup.c \
+	init.c \
+	init_mlx.c \
+	parse.c \
+	player_movement.c \
+	ray_caster.c \
+	casting.c \
+	find_horizontal_wall.c \
+	find_vertical_wall.c
 
 OBJS = $(SRCS:.c=.o)
 
 $(NAME) : $(OBJS)
+	make -C minilibx-linux
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(MLX) -lX11 -lXext -lm
 
 all : $(NAME)

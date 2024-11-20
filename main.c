@@ -12,18 +12,6 @@
 
 #include "cub3D.h"
 
-int	init_everything(char *map)
-{
-	parse_map(map);
-	if (!init_mlx())
-		return (1);
-	if (!init_hooks())
-		return (1);
-	if (!init_render())
-		return (1);
-	return (0);
-}
-
 int check_args(int argc, char **argv)
 {
 	if (argc == 1 || argc > 2)
@@ -41,14 +29,16 @@ int check_args(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
+	t_data	data;
+
 	if (check_args(argc, argv))
 		return (1);
-	if (init_everything(argv[1]))
+	if (init_everything(&data, argv[1]))
 		return (1);
-	while (1)
+	/* while (1)
 	{
 		render_update();
-	}
-	cleanup();
+	} */
+	cleanup(&data);
 	return (0);
 }

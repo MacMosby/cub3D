@@ -14,7 +14,7 @@
 
 void	parse_map(char *mapfile)
 {
-	
+	printf("filename: %s\n", mapfile);
 }
 
 int		check_ext(char *mapfile)
