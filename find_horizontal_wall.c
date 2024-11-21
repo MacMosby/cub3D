@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_horizontal_wall.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrodenbu <mrodenbu@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:19:36 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/17 15:19:38 by mrodenbu         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:28:45 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ double	find_horizontal_wall(t_data *data, double viewing_angle, int direction)
 	cube.x = floor(border.x / (double)CUBE_SIZE);
 	if (cube.x < 0 || cube.x >= data->cols || cube.y < 0 || cube.y >= data->rows)
 		return (-1);
-	while (data->map[(int)cube.y][(int)cube.x] != 1)
+	while (data->map[(int)cube.y][(int)cube.x] != '1')
 	{
 		// go for next point
 		// finding dY which is always the size of a cube and dX

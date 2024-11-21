@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:58 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/19 11:13:23 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:27:46 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (init_everything(argv[1], &data))
 		return (1);
-	// while (1)
-	// {
-	// 	render_update();
-	// }
 	free_everything(&data);
-	cleanup(&data);
+	// cleanup(&data);
 	return (0);
 }

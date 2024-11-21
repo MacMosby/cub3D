@@ -6,7 +6,7 @@
 #    By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/31 15:17:42 by lde-taey          #+#    #+#              #
-#    Updated: 2024/11/19 12:18:51 by lde-taey         ###   ########.fr        #
+#    Updated: 2024/11/21 14:53:43 by lde-taey         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SRCS = main.c \
 	parse_map.c \
 	parse_textures.c \
 	parse_utils.c \
-	store_paths.c
+	store_paths.c \
+	testing.c #remove
 
 OBJS = $(SRCS:.c=.o)
 

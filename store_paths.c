@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:31:12 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/07 14:23:38 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:39:49 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	store_path_no(char *path, t_data *data)
 	while (*path == ' ')
 		path++;
 	i = 0;
-	while (path[i] != '\0')
+	while (path[i] != '\0' && path[i] != '\n')
 		i++;
 	i--;
 	while(path[i] == ' ')
@@ -34,7 +34,7 @@ void	store_path_so(char *path, t_data *data)
 	while (*path == ' ')
 		path++;
 	i = 0;
-	while (path[i] != '\0')
+	while (path[i] != '\0' && path[i] != '\n')
 		i++;
 	i--;
 	while(path[i] == ' ')
@@ -49,7 +49,7 @@ void	store_path_ea(char *path, t_data *data)
 	while (*path == ' ')
 		path++;
 	i = 0;
-	while (path[i] != '\0')
+	while (path[i] != '\0' && path[i] != '\n')
 		i++;
 	i--;
 	while(path[i] == ' ')
@@ -64,7 +64,7 @@ void	store_path_we(char *path, t_data *data)
 	while (*path == ' ')
 		path++;
 	i = 0;
-	while (path[i] != '\0')
+	while (path[i] != '\0' && path[i] != '\n')
 		i++;
 	i--;
 	while(path[i] == ' ')

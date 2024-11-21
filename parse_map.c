@@ -6,23 +6,11 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:40:56 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/20 15:58:17 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:35:35 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-void print_map(t_data *data)
-{
-	printf("\n\nHere is the map\n\n\n");
-	int i = 0;
-	while(data->map[i] != NULL)
-	{
-		printf("%s\n", data->map[i]);
-		i++;
-	}
-	printf("\n\n");
-}
 
 char *handle_line(char *line, t_data *data, int fd)
 {
@@ -37,7 +25,7 @@ char *handle_line(char *line, t_data *data, int fd)
 		line[i] = '*';
 		i++;
 	}
-	if (line[i] == '\n') // check with flood fill
+	if (line[i] == '\n')
 		map_error(fd);
 	while(line[i] != '\0' && line[i] != '\n')
 	{
@@ -60,7 +48,7 @@ char *handle_line(char *line, t_data *data, int fd)
 	return (newrow);
 }
 
-void store_map(t_data *data, char *inputfile)
+void store_map(t_data *data, char *inputfile, char **oldline)
 {
 	int		fd;
 	char	*line;
@@ -72,13 +60,13 @@ void store_map(t_data *data, char *inputfile)
 		malloc_error();
 	i = 0;
 	line = get_next_line(fd);
-	while(line[0] != '1')
+	while(ft_strncmp(line, *oldline, data->cols))
 	{
 		free(line);
 		line = get_next_line(fd);
 	}
 	data->map[i] = handle_line(line, data, fd);
-	while (i < (data->rows - 1)) // sth wrong here with the count?
+	while (i < (data->rows - 1))
 	{
 		if (line)
 			free(line);
@@ -98,10 +86,8 @@ void parse_map(int fd, char *inputfile, t_data *data, char **oldline)
 	int		len;
 	char 	*line;
 
-	line = *oldline;
-
 	// 1. get_dimensions
-	// line = get_next_line(fd);
+	line = *oldline;
 	if (!line || line[0] == '\0')
 		map_error(fd);
 	data->rows++;
@@ -125,12 +111,12 @@ void parse_map(int fd, char *inputfile, t_data *data, char **oldline)
 	// printf("This is the file: %s\n", inputfile);
 		
 	// 2. store map
-	store_map(data, inputfile);
+	store_map(data, inputfile, oldline);
 	
 	// 3. checks
 	player_check(data, fd);
 	flood_fill_wall_check(data);
 	flood_fill_space_check(data);
 	space_check(data);
-	// print_map(data);
+	print_map(data);
 }

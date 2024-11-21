@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/20 16:07:47 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:51:27 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ typedef struct s_point
 
 typedef struct s_color
 {
-	int	r;
-	int	g;
-	int	b;
-	int	full;
+	int		r;
+	int		g;
+	int		b;
+	int		full;
+	int		hexa;
 }	t_color; // has to look like OxFF0000
 
 typedef struct s_data
@@ -120,6 +121,10 @@ void 	flood_fill_space_check(t_data *data);
 char	*ft_strcpy(char *dest, char *src);
 void	player_check(t_data *data, int fd);
 void 	space_check(t_data *data);
+
+//testing
+void	print_map(t_data *data);
+void 	print_struct(t_data *data);
 
 
 // errors

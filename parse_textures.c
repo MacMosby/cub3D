@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:54:01 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/20 15:29:10 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:18:29 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ char	*parse_firstpart(int fd, t_data *data)
 		free(line);
 		line = get_next_line(fd);
 	}
+	print_struct(data);
+	// printf("This is the line in the buffer: %s\n.", line);
 	return (line);
 }
 
