@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:10:27 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/20 14:51:03 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:47:59 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ void	parse_input(char *inputfile, t_data *data)
 	}
 	line = parse_firstpart(fd, data);
 	parse_map(fd, inputfile, data, &line);
-	close(fd);
+	print_struct(data);
+	print_map(data);
+	// close(fd);
 }
 
 int		check_ext(char *mapfile)

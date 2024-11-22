@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/21 16:51:27 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:15:41 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_color
 	int		g;
 	int		b;
 	int		full;
-	int		hexa;
+	long		hexa;
 }	t_color; // has to look like OxFF0000
 
 typedef struct s_data
@@ -119,6 +119,7 @@ void	store_and_check_color_f(char *info, t_data *data);
 void 	flood_fill_wall_check(t_data *data);
 void 	flood_fill_space_check(t_data *data);
 char	*ft_strcpy(char *dest, char *src);
+int		ft_strcmp(char *s1, char *s2);
 void	player_check(t_data *data, int fd);
 void 	space_check(t_data *data);
 

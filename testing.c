@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:39:29 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/21 17:07:26 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:06:47 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void print_struct(t_data *data)
 	printf("This is the path to the south texture: %s\n", data->so);	
 	printf("This is the path to the east texture: %s\n\n", data->ea);
 	printf("These are the colors of the floor: %i, %i, %i\n", data->c_floor.r, data->c_floor.g, data->c_floor.b);
-	printf("This is the hexadecimal for the floor: %i\n", data->c_floor.hexa);
+	printf("This is the hexadecimal for the floor: %li\n", data->c_floor.hexa);
 	printf("These are the colors of the ceiling: %i, %i, %i\n", data->c_ceiling.r, data->c_ceiling.g, data->c_ceiling.b);
-	printf("This is the hexadecimal for the ceiling: %i\n\n\n", data->c_ceiling.hexa);
+	printf("This is the hexadecimal for the ceiling: %li\n\n", data->c_ceiling.hexa);
+	printf("This is the position of the player: \nx = %f\ny = %f\n", data->player->position->x, data->player->position->y);
+	printf("This is the angle of the player:\n%f\n\n\n", data->player->angle);
 }

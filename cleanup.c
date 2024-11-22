@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrodenbu <mrodenbu@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:34:21 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/12 16:34:22 by mrodenbu         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:12:48 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,9 @@ void free_array(char **array)
 void free_everything(t_data *data)
 {
 	free_array(data->map);
+	free(data->player);
+	free(data->we);
+	free(data->no);
+	free(data->so);
+	free(data->ea);
 }

@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:17:25 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/21 16:54:21 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:54:33 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ void init_struct(t_data *data)
 	t_point		player_pos;
 
 	data->player = player;
-	data->player->angle = 45; // initialize to 0
+	data->player->angle = 0;
 	data->player->position = &player_pos;
-	data->player->position->x = 160; // initialize to 0
-	data->player->position->y = 224; // initialize to 0
+	data->player->position->x = 0; 
+	data->player->position->y = 0;
 
 	data->ea = NULL;
 	data->no = NULL;
@@ -72,7 +72,7 @@ void init_struct(t_data *data)
 	data->c_ceiling.b = 0;
 	data->c_ceiling.full = 0;
 	data->c_ceiling.hexa = 0;
-	data->c_floor.r = 0; // change colors
+	data->c_floor.r = 0;
 	data->c_floor.g = 0;
 	data->c_floor.b = 0;
 	data->c_floor.full = 0;

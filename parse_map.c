@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:40:56 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/21 15:35:35 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:48:10 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,19 @@ void store_map(t_data *data, char *inputfile, char **oldline)
 	char	*line;
 	int 	i;
 
-	fd = open(inputfile, O_RDONLY); // problem here
+	fd = open(inputfile, O_RDONLY);
 	data->map = (char**)malloc((data->rows + 1) * sizeof(char *));
 	if (!data->map)
 		malloc_error();
 	i = 0;
 	line = get_next_line(fd);
-	while(ft_strncmp(line, *oldline, data->cols))
+	while(ft_strcmp(line, *oldline))
 	{
 		free(line);
 		line = get_next_line(fd);
 	}
+	free(*oldline);
+	*oldline = NULL;
 	data->map[i] = handle_line(line, data, fd);
 	while (i < (data->rows - 1))
 	{
@@ -87,7 +89,7 @@ void parse_map(int fd, char *inputfile, t_data *data, char **oldline)
 	char 	*line;
 
 	// 1. get_dimensions
-	line = *oldline;
+	line = ft_strdup(*oldline);
 	if (!line || line[0] == '\0')
 		map_error(fd);
 	data->rows++;
@@ -118,5 +120,4 @@ void parse_map(int fd, char *inputfile, t_data *data, char **oldline)
 	flood_fill_wall_check(data);
 	flood_fill_space_check(data);
 	space_check(data);
-	print_map(data);
 }

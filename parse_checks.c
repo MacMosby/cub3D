@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:08:14 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/19 15:54:35 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:49:36 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,16 @@ void player_check(t_data *data, int fd)
 		{
 			if (data->map[i][j] == 'N' || data->map[i][j] == 'E' || data->map[i][j] == 'S' || data->map[i][j] == 'W')
 			{
-				// data->player_pos.x = i;
-				// data->player_pos.y = j;
+				data->player->position->x = i * CUBE_SIZE + CUBE_SIZE/2;
+				data->player->position->y = j * CUBE_SIZE + CUBE_SIZE/2;
+				if (data->map[i][j] == 'N')
+					data->player->angle = 90;
+				else if (data->map[i][j] == 'E')
+					data->player->angle = 0;
+				else if (data->map[i][j] == 'S')
+					data->player->angle = 270;
+				else if (data->map[i][j] == 'W')
+					data->player->angle = 180;
 				player++;
 			}
 			j++;
