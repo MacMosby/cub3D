@@ -6,19 +6,19 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:17:25 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/22 12:54:33 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:15:14 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-/* void	build_map(t_data *data)
+void	build_map(t_data *data)
 {
-	int	**map;
+	char	**map;
 	int i = 0;
 	int j = 0;
 
-	map = malloc(6 * sizeof(int *));
+	map = malloc(6 * sizeof(char *));
 	while (i < 6)
 	{
 		map[i] = malloc(6 * sizeof(int));
@@ -29,7 +29,7 @@
 	{
 		while (j < 6)
 		{
-			map[i][j] = 0;
+			map[i][j] = '0';
 			j++;
 		}
 		i++;
@@ -38,19 +38,19 @@
 	j = 0;
 	while (i < 6)
 	{
-		map[i][0] = 1;
-		map[i][5] = 1;
+		map[i][0] = '1';
+		map[i][5] = '1';
 		i++;
 	}
 	while (j < 6)
 	{
-		map[0][j] = 1;
-		map[5][j] = 1;
+		map[0][j] = '1';
+		map[5][j] = '1';
 		j++;
 	}
 	//map[4][1] = 1;
 	data->map = map;
-} */
+}
 
 void init_struct(t_data *data)
 {
@@ -58,10 +58,10 @@ void init_struct(t_data *data)
 	t_point		player_pos;
 
 	data->player = player;
-	data->player->angle = 0;
+	data->player->angle = 45; // 0;
 	data->player->position = &player_pos;
-	data->player->position->x = 0; 
-	data->player->position->y = 0;
+	data->player->position->x = 160; // 0; 
+	data->player->position->y = 224; // 0;
 
 	data->ea = NULL;
 	data->no = NULL;
@@ -83,9 +83,11 @@ void init_struct(t_data *data)
 
 int	init_everything(char *input, t_data *data)
 {
+	// printf("This is the input: %s", input);
 	init_struct(data);
+	// build_map(data);
 	parse_input(input, data);
-	// if (!init_mlx(data))
-	// 	return (1);
+	if (!init_mlx(data))
+	 	return (1);
 	return (0);
 }

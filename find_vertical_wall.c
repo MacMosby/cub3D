@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_vertical_wall.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrodenbu <mrodenbu@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:20:16 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/17 15:20:17 by mrodenbu         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:14:47 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ double	find_vertical_wall(t_data *data, double viewing_angle, int direction)
 	cube.y = floor(border.y / CUBE_SIZE);
 	if (cube.x < 0 || cube.x >= data->cols || cube.y < 0 || cube.y >= data->rows)
 		return (-1);
-	while (data->map[(int)cube.y][(int)cube.x] != 1)
+	while (data->map[(int)cube.y][(int)cube.x] != '1')
 	{
 		if (direction == RIGHT)
 			dX = CUBE_SIZE;
@@ -48,5 +48,5 @@ double	find_vertical_wall(t_data *data, double viewing_angle, int direction)
 		if (cube.x < 0 || cube.x >= data->cols || cube.y < 0 || cube.y >= data->rows)
 			return (-1);
 	}
-	return (calculate_distance(data->player->position, &border, viewing_angle));
+	return (calculate_distance(data->player->position, &border, viewing_angle)); // problem here with y values for vertical distance?
 }

@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/22 13:15:41 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:05:01 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_data
 
 // calculate_distance.c
 double	calculate_distance(t_point *p1, t_point *p2, double angle);
+// double	calculate_vert_distance(t_point *p1, t_point *p2, double angle);
 
 // cleanup.c
 void	cleanup(t_data *data);
@@ -114,8 +115,9 @@ void	store_path_no(char *path, t_data *data);
 void	store_path_so(char *path, t_data *data);
 void	store_path_we(char *path, t_data *data);
 void	store_path_ea(char *path, t_data *data);
-void	store_and_check_color_c(char *info, t_data *data);
-void	store_and_check_color_f(char *info, t_data *data);
+void	store_and_check_color(char *info, t_color *place);
+// void	store_and_check_color_c(char *info, t_data *data);
+// void	store_and_check_color_f(char *info, t_data *data);
 void 	flood_fill_wall_check(t_data *data);
 void 	flood_fill_space_check(t_data *data);
 char	*ft_strcpy(char *dest, char *src);

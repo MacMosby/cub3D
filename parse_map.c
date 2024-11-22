@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:40:56 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/22 13:48:10 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/22 13:57:38 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void store_map(t_data *data, char *inputfile, char **oldline)
 	data->map[++i] = NULL;
 	free(line);
 	close(fd);
-	// print_map(data);
 }
 
 void parse_map(int fd, char *inputfile, t_data *data, char **oldline)

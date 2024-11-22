@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_caster.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrodenbu <mrodenbu@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 13:03:02 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/17 13:03:03 by mrodenbu         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:08:07 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ne_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col
 
 	hori_dist = find_horizontal_wall(data, viewing_angle, UP);
 	vert_dist = find_vertical_wall(data, viewing_angle, RIGHT);
-	if (hori_dist < 0 && vert_dist < 0)
-		printf("NORTH EAST - NO WALL FOUND!\n");
+	if (hori_dist < 0 && vert_dist < 0) // problems both with horizontal and vertical
+		printf("NORTH EAST - NO WALL FOUND! \n"); 
 	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
 	cast_slice(data, real_dist, col);
 }
@@ -35,7 +35,7 @@ void	nw_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col
 	hori_dist = find_horizontal_wall(data, viewing_angle, UP);
 	vert_dist = find_vertical_wall(data, viewing_angle, LEFT);
 	if (hori_dist < 0 && vert_dist < 0)
-		printf("NO WALL FOUND!\n");
+		printf("NORTH WEST - NO WALL FOUND!\n");
 	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
 	cast_slice(data, real_dist, col);
 }
@@ -49,7 +49,7 @@ void	sw_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col
 	hori_dist = find_horizontal_wall(data, viewing_angle, DOWN);
 	vert_dist = find_vertical_wall(data, viewing_angle, LEFT);
 	if (hori_dist < 0 && vert_dist < 0)
-		printf("NO WALL FOUND!\n");
+		printf("SOUTH WEST - NO WALL FOUND!\n");
 	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
 	cast_slice(data, real_dist, col);
 }
@@ -63,7 +63,7 @@ void	se_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col
 	hori_dist = find_horizontal_wall(data, viewing_angle, DOWN);
 	vert_dist = find_vertical_wall(data, viewing_angle, RIGHT);
 	if (hori_dist < 0 && vert_dist < 0)
-		printf("NO WALL FOUND!\n");
+		printf("SOUTH EAST - NO WALL FOUND!\n");
 	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
 	cast_slice(data, real_dist, col);
 }
@@ -141,7 +141,7 @@ void	ray_caster(t_data *data)
 	col = 0;
 	while (col < WIDTH)
 	{
-		plane_angle = fabs(-30 + min_angle * col);
+		plane_angle = fabs(-30 + min_angle * col); // fabs(min_angle * (col - WIDTH / 2));
 		viewing_angle = data->player->angle + 30 - min_angle * col;
 		cast_ray(data, plane_angle, viewing_angle, col);
 		col++;
