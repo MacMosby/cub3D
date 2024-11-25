@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:40:56 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/22 13:57:38 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:54:41 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,9 @@ void parse_map(int fd, char *inputfile, t_data *data, char **oldline)
 			data->cols = len;
 	}
 	close(fd);
-	// printf("This is the amount of columns: %i\n", data->cols);
-	// printf("This is the amount of rows: %i\n", data->rows);
-	// printf("This is the file: %s\n", inputfile);
+	printf("This is the amount of columns: %i\n", data->cols);
+	printf("This is the amount of rows: %i\n", data->rows);
+	printf("This is the file: %s\n", inputfile);
 		
 	// 2. store map
 	store_map(data, inputfile, oldline);

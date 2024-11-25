@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:39:29 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/22 14:44:28 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:57:08 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void print_map(t_data *data)
 
 void print_struct(t_data *data)
 {
+	printf("This is the position of the player: \nx = %f\ny = %f\n", data->player->position->x, data->player->position->y);
 	printf("\n\nThis is the path to the west texture: %s\n", data->we);
 	printf("This is the path to the north texture: %s\n", data->no);
 	printf("This is the path to the south texture: %s\n", data->so);	

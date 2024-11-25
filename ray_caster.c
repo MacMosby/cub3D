@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 13:03:02 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/22 16:08:07 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:23:48 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ne_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col
 
 	hori_dist = find_horizontal_wall(data, viewing_angle, UP);
 	vert_dist = find_vertical_wall(data, viewing_angle, RIGHT);
-	if (hori_dist < 0 && vert_dist < 0) // problems both with horizontal and vertical
+	if (hori_dist < 0 && vert_dist < 0)
 		printf("NORTH EAST - NO WALL FOUND! \n"); 
 	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
 	cast_slice(data, real_dist, col);

@@ -6,13 +6,13 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:17:25 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/22 16:15:14 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:12:38 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	build_map(t_data *data)
+/* void	build_map(t_data *data)
 {
 	char	**map;
 	int i = 0;
@@ -50,18 +50,18 @@ void	build_map(t_data *data)
 	}
 	//map[4][1] = 1;
 	data->map = map;
-}
+} */
 
 void init_struct(t_data *data)
 {
 	t_player	*player = malloc(sizeof(t_player));
-	t_point		player_pos;
+	t_point		*player_pos = malloc(sizeof(t_point)); // there was a problem with malloc here
 
 	data->player = player;
-	data->player->angle = 45; // 0;
-	data->player->position = &player_pos;
-	data->player->position->x = 160; // 0; 
-	data->player->position->y = 224; // 0;
+	data->player->angle = 0;  // 45;
+	data->player->position = player_pos;
+	data->player->position->x = 0; // 160;
+	data->player->position->y = 0; // 224;
 
 	data->ea = NULL;
 	data->no = NULL;

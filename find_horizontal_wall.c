@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:19:36 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/21 14:28:45 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:47:25 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ double	find_horizontal_wall(t_data *data, double viewing_angle, int direction)
 	double		dX;
 	double		dY;
 
+	// data->player->position->x = 160;
+	// data->player->position->y = 160;
 	if (direction == UP)
 		border.y = floor(data->player->position->y/CUBE_SIZE) * (CUBE_SIZE) - 1;
 	else if (direction == DOWN)
@@ -30,7 +32,16 @@ double	find_horizontal_wall(t_data *data, double viewing_angle, int direction)
 	cube.y = floor(border.y / (double)CUBE_SIZE);
 	cube.x = floor(border.x / (double)CUBE_SIZE);
 	if (cube.x < 0 || cube.x >= data->cols || cube.y < 0 || cube.y >= data->rows)
+		// return (-1);
+	{
+		printf("returned before while loop in horizontal part.\n");
+		printf("border: x=%f, y=%f\n", border.x, border.y);
+		printf("cube: x=%d, y=%d\n", (int)cube.x, (int)cube.y);
+		printf("value of viewing angle: %f.\n", viewing_angle);
+		printf("value of player position x: %f.\n", data->player->position->x);
+		printf("value of player position y: %f\n", data->player->position->y);
 		return (-1);
+	}
 	while (data->map[(int)cube.y][(int)cube.x] != '1')
 	{
 		// go for next point
@@ -53,6 +64,6 @@ double	find_horizontal_wall(t_data *data, double viewing_angle, int direction)
 		if (cube.x < 0 || cube.x >= data->cols || cube.y < 0 || cube.y >= data->rows)
 			return (-1);
 	}
-	printf("horizontal - x: %d\ny: %d\n", (int)floor(cube.x), (int)floor(cube.y));
+	// printf("horizontal - x: %d\ny: %d\n", (int)floor(cube.x), (int)floor(cube.y));
 	return (calculate_distance(data->player->position, &border, viewing_angle));
 }

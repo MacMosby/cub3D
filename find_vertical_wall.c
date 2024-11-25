@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:20:16 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/22 16:14:47 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:48:16 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,15 @@ double	find_vertical_wall(t_data *data, double viewing_angle, int direction)
 	cube.x = floor(border.x / CUBE_SIZE);
 	cube.y = floor(border.y / CUBE_SIZE);
 	if (cube.x < 0 || cube.x >= data->cols || cube.y < 0 || cube.y >= data->rows)
+	{
+		printf("returned before while loop in vertical part.\n");
+		printf("border: x=%f, y=%f\n", border.x, border.y);
+		printf("cube: x=%d, y=%d\n", (int)cube.x, (int)cube.y);
+		printf("value of viewing angle: %f.\n", viewing_angle);
+		printf("value of player position x: %f.\n", data->player->position->x);
+		printf("value of player position y: %f\n", data->player->position->y);
 		return (-1);
+	}
 	while (data->map[(int)cube.y][(int)cube.x] != '1')
 	{
 		if (direction == RIGHT)
@@ -48,5 +56,5 @@ double	find_vertical_wall(t_data *data, double viewing_angle, int direction)
 		if (cube.x < 0 || cube.x >= data->cols || cube.y < 0 || cube.y >= data->rows)
 			return (-1);
 	}
-	return (calculate_distance(data->player->position, &border, viewing_angle)); // problem here with y values for vertical distance?
+	return (calculate_distance(data->player->position, &border, viewing_angle));
 }
