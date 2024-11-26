@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_caster.c                                       :+:      :+:    :+:   */
+/*   casting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrodenbu <mrodenbu@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:14:00 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/05 14:14:02 by mrodenbu         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:30:30 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 double	get_correct_distance(double hori_dist, double vert_dist, double angle)
 {
+	if (hori_dist < 0)
+		return (vert_dist * cos(angle / (double)180 * M_PI));
+	if (vert_dist < 0)
+		return (hori_dist * cos(angle / (double)180 * M_PI));
 	if (hori_dist < vert_dist)
 		return (hori_dist * cos(angle / (double)180 * M_PI));
 	else

@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/25 15:17:00 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:49:48 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 
 # define CUBE_SIZE 64
 # define FOV 60
-# define WIDTH 320
-# define HEIGTH 200
-# define PLANE_DIST 277
+# define WIDTH 800
+# define HEIGTH 600
+# define PLANE_DIST 627
 # define MOVE_SPEED 10
 # define TURN_SPEED 1
 # define UP 1
@@ -76,7 +76,8 @@ typedef struct s_data
 } 	t_data;
 
 // calculate_distance.c
-double	calculate_distance(t_point *p1, t_point *p2, double angle);
+// double	calculate_distance(t_point *p1, t_point *p2, double angle);
+double	calculate_distance(t_data *data, t_point *p2, double angle);
 // double	calculate_vert_distance(t_point *p1, t_point *p2, double angle);
 
 // cleanup.c

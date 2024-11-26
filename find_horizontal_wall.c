@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:19:36 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/26 13:57:48 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:46:27 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 double	find_horizontal_wall(t_data *data, double viewing_angle, int direction)
 {
-	t_point	border; // should this be malloced if information is passed?
-	t_point next;
+	t_point	border;
 	t_point	cube;
-	t_point next_cube;
 	double		dX;
 	double		dY;
 
@@ -29,27 +27,15 @@ double	find_horizontal_wall(t_data *data, double viewing_angle, int direction)
 		border.x = data->player->position->x;
 	else
 		border.x = data->player->position->x + (data->player->position->y - border.y)/tan(viewing_angle / (double)180 * M_PI);
-	// {
-	// 	printf("\nreturned before while loop in horizontal part.\n");
-	// 	printf("value of viewing angle: %f.\n", viewing_angle);
-	// 	printf("direction: %i\n", direction);
-	// 	printf("border found: x=%f, y=%f\n", border.x, border.y);
-	// 	printf("cube: x=%d, y=%d\n", (int)cube.x, (int)cube.y);
-	// 	printf("value of player position x: %f.\n", data->player->position->x);
-	// 	printf("value of player position y: %f\n", data->player->position->y);
-	// 	return (-1);
-	// }
-	while (1)
+	cube.y = floor(border.y / (double)CUBE_SIZE);
+	cube.x = floor(border.x / (double)CUBE_SIZE);
+	if (cube.x < 0 || cube.x >= data->cols || cube.y < 0 || cube.y >= data->rows)
+		return (-1);
+	while (data->map[(int)cube.y][(int)cube.x] != '1')
 	{
 		// go for next point
 		// finding dY which is always the size of a cube and dX
 		// if ray is facing up it is negative
-		cube.y = floor(border.y / (double)CUBE_SIZE);
-		cube.x = floor(border.x / (double)CUBE_SIZE);
-		if (cube.x < 0 || cube.x >= data->cols || cube.y < 0 || cube.y >= data->rows)
-			return (-1);
-		if (data->map[(int)cube.y][(int)cube.x] == '1')
-			break;
 		if (direction == UP)
 			dY = (double)(CUBE_SIZE * -1);
 		// if ray is facing down it is positive
@@ -60,26 +46,23 @@ double	find_horizontal_wall(t_data *data, double viewing_angle, int direction)
 			dX = 0;
 		else
 			dX = (double)CUBE_SIZE/tan(viewing_angle / (double)180 * M_PI);
-		
-		next.x = border.x + dX;
-		next.y = border.y + dY;
-		next_cube.x = floor(next.x / (double)CUBE_SIZE);
-		next_cube.y = floor(next.y / (double)CUBE_SIZE);
-		if (next_cube.x < 0 || next_cube.x >= data->cols || next_cube.y < 0 || next_cube.y >= data->rows)
+		border.x += dX;
+		border.y += dY;
+		cube.x = floor(border.x / (double)CUBE_SIZE);
+		cube.y = floor(border.y / (double)CUBE_SIZE);
+		if (cube.x < 0 || cube.x >= data->cols || cube.y < 0 || cube.y >= data->rows)
 		{
-			// printf("\nreturned in while loop in horizontal part.\n");
-			// printf("value of viewing angle: %f.\n", viewing_angle);
-			// printf("direction: %i\n", direction);
-			// printf("border found: x=%f, y=%f\n", border.x, border.y);
-			// printf("difference: dX=%f, dY=%f\n", dX, dY);
-			// printf("cube: x=%d, y=%d\n", (int)cube.x, (int)cube.y);
-			// printf("value of player position x: %f.\n", data->player->position->x);
-			// printf("value of player position y: %f\n", data->player->position->y);
+			printf("horizontal: exited in while loop");
+			printf("\n\nhorizontal - x: %d\ny: %d\n", (int)floor(cube.x), (int)floor(cube.y));
+			printf("border: x=%f, y=%f\n", border.x, border.y);
+			printf("dX: %f\n", dX);
+			printf("dY: %f\n", dY);
+			printf("value of viewing angle: %f.\n\n", viewing_angle);
 			return (-1);
 		}
-		border.x = next.x;
-		border.y = next.y;
 	}
-	// printf("horizontal - x: %d\ny: %d\n", (int)floor(cube.x), (int)floor(cube.y));
-	return (calculate_distance(data->player->position, &border, viewing_angle));
+	// printf("\n\nhorizontal - x: %d\ny: %d\n", (int)floor(cube.x), (int)floor(cube.y));
+	// printf("border: x=%f, y=%f\n", border.x, border.y);
+	// printf("value of viewing angle: %f.\n\n", viewing_angle);
+	return (calculate_distance(data, &border, viewing_angle));
 }

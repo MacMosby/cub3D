@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 13:03:02 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/26 13:58:20 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/26 17:11:32 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	s_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
 	double	real_dist;
 
 	hori_dist = find_horizontal_wall(data, viewing_angle, DOWN);
+	if (hori_dist < 0)
+		printf("SOUTH no wall found\n");
 	real_dist = hori_dist * cos(plane_angle / (double)180 * M_PI);
 	cast_slice(data, real_dist, col);
 }
@@ -96,6 +98,8 @@ void	e_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
 	double	real_dist;
 
 	vert_dist = find_vertical_wall(data, viewing_angle, RIGHT);
+	if (vert_dist < 0)
+		printf("EAST no wall found\n");
 	real_dist = vert_dist * cos(plane_angle / (double)180 * M_PI);
 	cast_slice(data, real_dist, col);
 }
@@ -106,6 +110,8 @@ void	w_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
 	double	real_dist;
 
 	vert_dist = find_vertical_wall(data, viewing_angle, LEFT);
+	if (vert_dist < 0)
+		printf("EAST no wall found\n");
 	real_dist = vert_dist * cos(plane_angle / (double)180 * M_PI);
 	cast_slice(data, real_dist, col);
 }
@@ -138,7 +144,7 @@ void	ray_caster(t_data *data)
 	double	viewing_angle;
 
 	min_angle = (double)FOV/(double)WIDTH;
-	printf("min_angle: %f\n", min_angle);
+	// printf("min_angle: %f\n", min_angle);
 	col = 0;
 	while (col < WIDTH)
 	{
@@ -149,6 +155,6 @@ void	ray_caster(t_data *data)
 		// printf("viewing_angle: %f\n", viewing_angle);
 		cast_ray(data, plane_angle, viewing_angle, col);
 		col++;
-		// usleep(200000);
+		//usleep(20000);
 	}
 }
