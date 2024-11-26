@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:08:14 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/22 15:38:48 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/26 12:33:54 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void player_check(t_data *data, int fd)
 		{
 			if (data->map[i][j] == 'N' || data->map[i][j] == 'E' || data->map[i][j] == 'S' || data->map[i][j] == 'W')
 			{
-				data->player->position->x = i * CUBE_SIZE + CUBE_SIZE/2;
-				data->player->position->y = j * CUBE_SIZE + CUBE_SIZE/2;
+				data->player->position->x = j * CUBE_SIZE + CUBE_SIZE/2; // where is the null center in the map?
+				data->player->position->y = i * CUBE_SIZE + CUBE_SIZE/2;
 				if (data->map[i][j] == 'N')
-					data->player->angle = 90; // check if these are right
+					data->player->angle = 90;
 				else if (data->map[i][j] == 'E')
 					data->player->angle = 0;
 				else if (data->map[i][j] == 'S')

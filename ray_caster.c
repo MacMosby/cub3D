@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 13:03:02 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/25 15:23:48 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:58:20 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,13 +138,17 @@ void	ray_caster(t_data *data)
 	double	viewing_angle;
 
 	min_angle = (double)FOV/(double)WIDTH;
+	printf("min_angle: %f\n", min_angle);
 	col = 0;
 	while (col < WIDTH)
 	{
-		plane_angle = fabs(-30 + min_angle * col); // fabs(min_angle * (col - WIDTH / 2));
-		viewing_angle = data->player->angle + 30 - min_angle * col;
+		plane_angle = fabs(min_angle * (col - WIDTH / 2)); // fabs(-30 + min_angle * col);
+		viewing_angle = data->player->angle + FOV/2 - min_angle * col; // data->player->angle + 30 - min_angle * col;
+		if (viewing_angle < 0)
+			viewing_angle += 360;
+		// printf("viewing_angle: %f\n", viewing_angle);
 		cast_ray(data, plane_angle, viewing_angle, col);
 		col++;
-		//usleep(200000);
+		// usleep(200000);
 	}
 }
