@@ -12,7 +12,7 @@
 
 #include "cub3D.h"
 
-double	find_vertical_wall(t_data *data, double viewing_angle, int direction)
+t_point	find_vertical_wall(t_data *data, double viewing_angle, int direction, double *dist)
 {
 	t_point	border;
 	t_point	cube;
@@ -30,7 +30,10 @@ double	find_vertical_wall(t_data *data, double viewing_angle, int direction)
 	cube.x = floor(border.x / CUBE_SIZE);
 	cube.y = floor(border.y / CUBE_SIZE);
 	if (cube.x < 0 || cube.x >= data->cols || cube.y < 0 || cube.y >= data->rows)
-		return (-1);
+	{
+		*dist = -1;
+		return border;
+	}
 	while (data->map[(int)cube.y][(int)cube.x] != '1')
 	{
 		if (direction == RIGHT)
@@ -41,7 +44,7 @@ double	find_vertical_wall(t_data *data, double viewing_angle, int direction)
 			dY = 0;
 		else
 			dY = CUBE_SIZE * tan(viewing_angle / (double)180 * M_PI);
-		border.x += dX; 
+		border.x += dX;
 		border.y += dY;
 		cube.x = floor(border.x / (double)CUBE_SIZE);
 		cube.y = floor(border.y / (double)CUBE_SIZE);
@@ -51,11 +54,13 @@ double	find_vertical_wall(t_data *data, double viewing_angle, int direction)
 			printf("\n\nvertical - x: %d\ny: %d\n", (int)floor(cube.x), (int)floor(cube.y));
 			printf("border: x=%f, y=%f\n", border.x, border.y);
 			printf("value of viewing angle: %f.\n\n", viewing_angle);
-			return (-1);
+			*dist = -1;
+			return border;
 		}
 	}
 	// printf("\n\nvertical - x: %d\ny: %d\n", (int)floor(cube.x), (int)floor(cube.y));
 	// printf("border: x=%f, y=%f\n", border.x, border.y);
 	// printf("value of viewing angle: %f.\n\n", viewing_angle);
-	return (calculate_distance(data, &border, viewing_angle));
+	*dist = calculate_distance(data, &border, viewing_angle);
+	return (border);
 }

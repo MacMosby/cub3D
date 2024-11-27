@@ -17,13 +17,24 @@ void	ne_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col
 	double	vert_dist;
 	double	hori_dist;
 	double	real_dist;
+	t_point	hori_p;
+	t_point vert_p;
+	int		offset;
 
-	hori_dist = find_horizontal_wall(data, viewing_angle, UP);
-	vert_dist = find_vertical_wall(data, viewing_angle, RIGHT);
+	hori_p = find_horizontal_wall(data, viewing_angle, UP, &hori_dist);
+	vert_p = find_vertical_wall(data, viewing_angle, RIGHT, &vert_dist);
 	if (hori_dist < 0 && vert_dist < 0)
-		printf("NORTH EAST - NO WALL FOUND! \n"); 
+		printf("NORTH EAST - NO WALL FOUND! \n");
 	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
-	cast_slice(data, real_dist, col);
+	if (hori_dist < 0)
+		offset = (int)floor(vert_p.y) % CUBE_SIZE;
+	else if (vert_dist < 0)
+		offset = (int)floor(hori_p.x) % CUBE_SIZE;
+	else if (hori_dist < vert_dist)
+		offset = (int)floor(hori_p.x) % CUBE_SIZE;
+	else
+		offset = (int)floor(vert_p.y) % CUBE_SIZE;
+	cast_slice(data, real_dist, col, offset);
 }
 
 void	nw_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
@@ -31,13 +42,24 @@ void	nw_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col
 	double	vert_dist;
 	double	hori_dist;
 	double	real_dist;
+	t_point	hori_p;
+	t_point vert_p;
+	int		offset;
 
-	hori_dist = find_horizontal_wall(data, viewing_angle, UP);
-	vert_dist = find_vertical_wall(data, viewing_angle, LEFT);
+	hori_p = find_horizontal_wall(data, viewing_angle, UP, &hori_dist);
+	vert_p = find_vertical_wall(data, viewing_angle, LEFT, &vert_dist);
 	if (hori_dist < 0 && vert_dist < 0)
 		printf("NORTH WEST - NO WALL FOUND!\n");
 	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
-	cast_slice(data, real_dist, col);
+	if (hori_dist < 0)
+		offset = (int)floor(vert_p.y) % CUBE_SIZE;
+	else if (vert_dist < 0)
+		offset = (int)floor(hori_p.x) % CUBE_SIZE;
+	else if (hori_dist < vert_dist)
+		offset = (int)floor(hori_p.x) % CUBE_SIZE;
+	else
+		offset = (int)floor(vert_p.y) % CUBE_SIZE;
+	cast_slice(data, real_dist, col, offset);
 }
 
 void	sw_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
@@ -45,13 +67,24 @@ void	sw_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col
 	double	vert_dist;
 	double	hori_dist;
 	double	real_dist;
+	t_point	hori_p;
+	t_point vert_p;
+	int		offset;
 
-	hori_dist = find_horizontal_wall(data, viewing_angle, DOWN);
-	vert_dist = find_vertical_wall(data, viewing_angle, LEFT);
+	hori_p = find_horizontal_wall(data, viewing_angle, DOWN, &hori_dist);
+	vert_p = find_vertical_wall(data, viewing_angle, LEFT, &vert_dist);
 	if (hori_dist < 0 && vert_dist < 0)
 		printf("SOUTH WEST - NO WALL FOUND!\n");
 	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
-	cast_slice(data, real_dist, col);
+	if (hori_dist < 0)
+		offset = (int)floor(vert_p.y) % CUBE_SIZE;
+	else if (vert_dist < 0)
+		offset = (int)floor(hori_p.x) % CUBE_SIZE;
+	else if (hori_dist < vert_dist)
+		offset = (int)floor(hori_p.x) % CUBE_SIZE;
+	else
+		offset = (int)floor(vert_p.y) % CUBE_SIZE;
+	cast_slice(data, real_dist, col, offset);
 }
 
 void	se_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
@@ -59,61 +92,84 @@ void	se_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col
 	double	vert_dist;
 	double	hori_dist;
 	double	real_dist;
+	t_point	hori_p;
+	t_point vert_p;
+	int		offset;
 
-	hori_dist = find_horizontal_wall(data, viewing_angle, DOWN);
-	vert_dist = find_vertical_wall(data, viewing_angle, RIGHT);
+	hori_p = find_horizontal_wall(data, viewing_angle, DOWN, &hori_dist);
+	vert_p = find_vertical_wall(data, viewing_angle, RIGHT, &vert_dist);
 	if (hori_dist < 0 && vert_dist < 0)
 		printf("SOUTH EAST - NO WALL FOUND!\n");
 	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
-	cast_slice(data, real_dist, col);
+	if (hori_dist < 0)
+		offset = (int)floor(vert_p.y) % CUBE_SIZE;
+	else if (vert_dist < 0)
+		offset = (int)floor(hori_p.x) % CUBE_SIZE;
+	else if (hori_dist < vert_dist)
+		offset = (int)floor(hori_p.x) % CUBE_SIZE;
+	else
+		offset = (int)floor(vert_p.y) % CUBE_SIZE;
+	cast_slice(data, real_dist, col, offset);
 }
 
 void	n_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
 {
 	double	hori_dist;
 	double	real_dist;
+	t_point	hori_p;
+	int		offset;
 
-	hori_dist = find_horizontal_wall(data, viewing_angle, UP);
+	hori_p = find_horizontal_wall(data, viewing_angle, UP, &hori_dist);
 	if (hori_dist < 0)
 		printf("NORTH no wall found\n");
 	real_dist = hori_dist * cos(plane_angle / (double)180 * M_PI);
-	cast_slice(data, real_dist, col);
+	offset = (int)floor(hori_p.x) % CUBE_SIZE;
+	cast_slice(data, real_dist, col, offset);
 }
 
 void	s_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
 {
 	double	hori_dist;
 	double	real_dist;
+	t_point	hori_p;
+	int		offset;
 
-	hori_dist = find_horizontal_wall(data, viewing_angle, DOWN);
+	hori_p = find_horizontal_wall(data, viewing_angle, DOWN, &hori_dist);
 	if (hori_dist < 0)
 		printf("SOUTH no wall found\n");
 	real_dist = hori_dist * cos(plane_angle / (double)180 * M_PI);
-	cast_slice(data, real_dist, col);
+	offset = (int)floor(hori_p.x) % CUBE_SIZE;
+	cast_slice(data, real_dist, col, offset);
 }
 
 void	e_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
 {
 	double	vert_dist;
 	double	real_dist;
+	t_point vert_p;
+	int		offset;
 
-	vert_dist = find_vertical_wall(data, viewing_angle, RIGHT);
+	vert_p = find_vertical_wall(data, viewing_angle, RIGHT, &vert_dist);
 	if (vert_dist < 0)
 		printf("EAST no wall found\n");
 	real_dist = vert_dist * cos(plane_angle / (double)180 * M_PI);
-	cast_slice(data, real_dist, col);
+	offset = (int)floor(vert_p.y) % CUBE_SIZE;
+	cast_slice(data, real_dist, col, offset);
 }
 
 void	w_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
 {
 	double	vert_dist;
 	double	real_dist;
+	t_point vert_p;
+	int		offset;
 
-	vert_dist = find_vertical_wall(data, viewing_angle, LEFT);
+	vert_p = find_vertical_wall(data, viewing_angle, LEFT, &vert_dist);
 	if (vert_dist < 0)
 		printf("EAST no wall found\n");
 	real_dist = vert_dist * cos(plane_angle / (double)180 * M_PI);
-	cast_slice(data, real_dist, col);
+	offset = (int)floor(vert_p.y) % CUBE_SIZE;
+	cast_slice(data, real_dist, col, offset);
 }
 
 void	cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)

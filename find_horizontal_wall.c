@@ -12,7 +12,7 @@
 
 #include "cub3D.h"
 
-double	find_horizontal_wall(t_data *data, double viewing_angle, int direction)
+t_point	find_horizontal_wall(t_data *data, double viewing_angle, int direction, double *dist)
 {
 	t_point	border;
 	t_point	cube;
@@ -30,7 +30,10 @@ double	find_horizontal_wall(t_data *data, double viewing_angle, int direction)
 	cube.y = floor(border.y / (double)CUBE_SIZE);
 	cube.x = floor(border.x / (double)CUBE_SIZE);
 	if (cube.x < 0 || cube.x >= data->cols || cube.y < 0 || cube.y >= data->rows)
-		return (-1);
+	{
+		*dist = -1;
+		return border;
+	}
 	while (data->map[(int)cube.y][(int)cube.x] != '1')
 	{
 		// go for next point
@@ -58,11 +61,13 @@ double	find_horizontal_wall(t_data *data, double viewing_angle, int direction)
 			printf("dX: %f\n", dX);
 			printf("dY: %f\n", dY);
 			printf("value of viewing angle: %f.\n\n", viewing_angle);
-			return (-1);
+			*dist = -1;
+			return border;
 		}
 	}
 	// printf("\n\nhorizontal - x: %d\ny: %d\n", (int)floor(cube.x), (int)floor(cube.y));
 	// printf("border: x=%f, y=%f\n", border.x, border.y);
 	// printf("value of viewing angle: %f.\n\n", viewing_angle);
-	return (calculate_distance(data, &border, viewing_angle));
+	*dist = calculate_distance(data, &border, viewing_angle);
+	return (border);
 }

@@ -53,10 +53,24 @@ int	key_handler(int key, void *param)
 	return (0);
 }
 
+void	init_textures(t_data *data)
+{
+	int	i;
+
+	data->textures = malloc(NUM_TEXTURES * sizeof(int*));
+	i = 0;
+	while (i < NUM_TEXTURES)
+	{
+		data->textures[i] = malloc(CUBE_SIZE * CUBE_SIZE * sizeof(int));
+		i++;
+	}
+}
+
 int	init_mlx(t_data *data)
 {
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGTH, "cub3D");
+	//init_textures(data);
 	ray_caster(data);
 	mlx_key_hook(data->win_ptr, key_handler, data);
 	mlx_hook(data->win_ptr, 17, 1L << 17, close_window, &data);

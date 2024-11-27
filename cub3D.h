@@ -29,11 +29,12 @@
 # define HEIGTH 600
 # define PLANE_DIST 627
 # define MOVE_SPEED 10
-# define TURN_SPEED 1
+# define TURN_SPEED 10
 # define UP 1
 # define DOWN 2
 # define LEFT 3
 # define RIGHT 4
+# define NUM_TEXTURES 4
 
 typedef struct s_point t_point;
 
@@ -71,7 +72,7 @@ typedef struct s_data
 	t_color	c_ceiling;
 	void	*mlx_ptr;
 	void	*win_ptr;
-	//double	plane_dist;
+	int		**textures;
 	t_player	*player;
 } 	t_data;
 
@@ -99,10 +100,10 @@ void	turn_right(t_data *data);
 
 // ray_caster.c
 void	ray_caster(t_data *data);
-double	find_horizontal_wall(t_data *data, double viewing_angle, int direction);
-double	find_vertical_wall(t_data *data, double viewing_angle, int direction);
+t_point	find_horizontal_wall(t_data *data, double viewing_angle, int direction, double *dist);
+t_point	find_vertical_wall(t_data *data, double viewing_angle, int direction, double *dist);
 double	get_correct_distance(double hori_dist, double vert_dist, double angle);
-void	cast_slice(t_data *data, double wall_distance, int col);
+void	cast_slice(t_data *data, double wall_distance, int col, int offset);
 // setup
 void	init_struct(t_data *data);
 int		init_everything(char *input, t_data *data);
