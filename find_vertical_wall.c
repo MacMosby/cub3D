@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:20:16 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/26 16:28:36 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:31:08 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ double	find_vertical_wall(t_data *data, double viewing_angle, int direction)
 		cube.y = floor(border.y / (double)CUBE_SIZE);
 		if (cube.x < 0 || cube.x >= data->cols || cube.y < 0 || cube.y >= data->rows)
 		{
-			printf("vertical: exited in while loop\n");
-			printf("\n\nvertical - x: %d\ny: %d\n", (int)floor(cube.x), (int)floor(cube.y));
-			printf("border: x=%f, y=%f\n", border.x, border.y);
-			printf("value of viewing angle: %f.\n\n", viewing_angle);
+			// printf("vertical: exited in while loop\n");
+			// printf("\n\nvertical - x: %d\ny: %d\n", (int)floor(cube.x), (int)floor(cube.y));
+			// printf("border: x=%f, y=%f\n", border.x, border.y);
+			// printf("value of viewing angle: %f.\n\n", viewing_angle);
 			return (-1);
 		}
 	}

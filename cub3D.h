@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/26 17:49:48 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/28 17:46:28 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "libft/libft.h"
 
 # define CUBE_SIZE 64
+# define MAP_CELL 20
 # define FOV 60
 # define WIDTH 800
 # define HEIGTH 600
@@ -71,6 +72,8 @@ typedef struct s_data
 	t_color	c_ceiling;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	void	*mlx_ptr_map;
+	void	*win_ptr_map;
 	//double	plane_dist;
 	t_player	*player;
 } 	t_data;
@@ -103,9 +106,11 @@ double	find_horizontal_wall(t_data *data, double viewing_angle, int direction);
 double	find_vertical_wall(t_data *data, double viewing_angle, int direction);
 double	get_correct_distance(double hori_dist, double vert_dist, double angle);
 void	cast_slice(t_data *data, double wall_distance, int col);
+
 // setup
 void	init_struct(t_data *data);
 int		init_everything(char *input, t_data *data);
+int		close_window(t_data *data);
 
 // parsing
 int		check_ext(char *mapfile);
@@ -125,6 +130,12 @@ char	*ft_strcpy(char *dest, char *src);
 int		ft_strcmp(char *s1, char *s2);
 void	player_check(t_data *data, int fd);
 void 	space_check(t_data *data);
+
+// minimap
+void	draw_minimap(t_data *data);
+void 	init_minimap(t_data *data);
+void	draw_player(t_data *data);
+
 
 //testing
 void	print_map(t_data *data);

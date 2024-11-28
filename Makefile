@@ -6,7 +6,7 @@
 #    By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/31 15:17:42 by lde-taey          #+#    #+#              #
-#    Updated: 2024/11/22 14:13:42 by lde-taey         ###   ########.fr        #
+#    Updated: 2024/11/28 14:07:16 by lde-taey         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS = main.c \
 	find_horizontal_wall.c \
 	find_vertical_wall.c \
 	errors.c \
+	minimap.c \
 	parse_checks.c \
 	parse_colors.c \
 	parse_floodfill.c \
