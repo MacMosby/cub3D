@@ -29,11 +29,15 @@
 # define HEIGTH 600
 # define PLANE_DIST 627
 # define MOVE_SPEED 10
-# define TURN_SPEED 1
-# define UP 1
-# define DOWN 2
-# define LEFT 3
-# define RIGHT 4
+# define TURN_SPEED 10
+# define NE 1
+# define NW 2
+# define SW 3
+# define SE 4
+# define N 5
+# define W 6
+# define S 7
+# define E 8
 
 typedef struct s_point t_point;
 
@@ -140,5 +144,7 @@ void	map_error(int fd);
 void	free_array(char **array);
 void	free_everything(t_data *data);
 
+
+t_point	get_grid_position(t_point point);
 
 #endif
