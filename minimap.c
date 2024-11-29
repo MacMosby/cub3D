@@ -6,23 +6,12 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:28:59 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/29 14:58:34 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:32:20 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-float normalize_angle(float angle)
-{
-	if(angle < 0)
-		angle = angle + 2 * M_PI;
-	else if (angle > 2 * M_PI)
-		angle = angle - 2 * M_PI;
-	return (angle);
-}
-
-// turns are in the wrong direction
-// debug with statements
 void draw_rays(t_data *data)
 {
 	float rayX;
@@ -34,10 +23,8 @@ void draw_rays(t_data *data)
 	fovend = (data->player->angle) * (M_PI / 180) + (FOV / 2) * (M_PI / 180);
 	while(fovstart < fovend)
 	{
-		rayX = data->player->position->x / CUBE_SIZE * MAP_CELL - 0.5;
-		rayY = data->player->position->y / CUBE_SIZE * MAP_CELL - 0.5;
-		// printf("This is rayX: %f\n", rayX);
-		// printf("This is rayY: %f\n", rayY);
+		rayX = data->player->position->x / CUBE_SIZE * MAP_CELL;
+		rayY = data->player->position->y / CUBE_SIZE * MAP_CELL;
 		while(1)
 		{
 			if (rayX < 0 || rayX >= MAP_CELL * data->cols || rayY < 0 || rayY >= MAP_CELL * data->rows)
@@ -48,8 +35,6 @@ void draw_rays(t_data *data)
 				break ;
 			mlx_pixel_put(data->mlx_ptr_map, data->win_ptr_map, rayX, rayY, 0xFF13F0);
 		}
-		// printf("This is rayX after the while loop: %f\n", rayX);
-		// printf("This is rayY after the while loop: %f\n", rayY);
 		fovstart += M_PI / 45;
 		if (fovstart >= M_PI * 2)
 			fovstart -= M_PI * 2;
@@ -61,11 +46,11 @@ void draw_player(t_data *data)
 	int pixX;
 	int pixY;
 	
-	pixY = -4;
-	while(pixY < 4)
+	pixY = -2;
+	while(pixY < 2)
 	{
-		pixX = -4;
-		while(pixX < 4)
+		pixX = -2;
+		while(pixX < 2)
 		{
 			mlx_pixel_put(data->mlx_ptr_map, data->win_ptr_map, (data->player->position->x / CUBE_SIZE * MAP_CELL + pixX), (data->player->position->y / CUBE_SIZE * MAP_CELL + pixY), 0xFF0000);
 				pixX++;
