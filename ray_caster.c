@@ -152,6 +152,8 @@ void	ray_caster(t_data *data)
 		viewing_angle = data->player->angle + FOV/2 - min_angle * col; // data->player->angle + 30 - min_angle * col;
 		if (viewing_angle < 0)
 			viewing_angle += 360;
+		if (viewing_angle > 360)
+			viewing_angle -= 360;
 		// printf("viewing_angle: %f\n", viewing_angle);
 		cast_ray(data, plane_angle, viewing_angle, col);
 		col++;
