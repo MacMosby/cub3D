@@ -58,9 +58,17 @@ t_point	get_next_vertical_hit(t_point point, int direction, double v_angle)
 	double	dY;
 
 	dX = set_dX_vertical(direction);
-	dY = set_dY_vertical(v_angle);
 	point.x += dX;
-	point.y += dY;
+	dY = set_dY_vertical(v_angle);
+	if (direction == NE)
+		point.y -= dY;
+	else if (direction == NW)
+		point.y += dY;
+	else if (direction == SW)
+		point.y += dY;
+	else if (direction == SE)
+		point.y -= dY;
+	//point.y += dY;
 	return (point);
 }
 

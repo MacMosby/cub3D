@@ -49,9 +49,17 @@ t_point	get_next_horizontal_hit(t_point point, int direction, double v_angle)
 	double	dY;
 
 	dY = set_dY_horizontal(direction);
-	dX = set_dX_horizontal(v_angle);
-	point.x += dX;
 	point.y += dY;
+	dX = set_dX_horizontal(v_angle);
+	//point.x += dX;
+	if (direction == NE)
+		point.x += dX;
+	else if (direction == NW)
+		point.x += dX;
+	else if (direction == SW)
+		point.x -= dX;
+	else if (direction == SE)
+		point.x -= dX;
 	return (point);
 }
 
