@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:46 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/29 15:34:44 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:38:55 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,13 @@ void	move_forward(t_data *data)
 	}
 	printf("dY: %f\n", dY);
 	// don't forget to check for walls
-<<<<<<< HEAD
-	data->player->position->x += dX;
-	data->player->position->y -= dY;
-	ray_caster(data);
-	draw_minimap(data);
-=======
 	if (is_pos_valid(data, data->player->position->x + dX, data->player->position->y - dY))
 	{
 		data->player->position->x += dX;
 		data->player->position->y -= dY;
 		ray_caster(data);
+		draw_minimap(data);
 	}
->>>>>>> 2beadb0e9a80be559ff9fe0343000556148dd26d
 }
 
 void	move_backward(t_data *data)
@@ -122,19 +116,13 @@ void	move_left(t_data *data)
 		dY = MOVE_SPEED * sin(angle / (double)180 * M_PI);
 	}
 	// don't forget to check for walls
-<<<<<<< HEAD
-	data->player->position->x += dX;
-	data->player->position->y += dY;
-	ray_caster(data);
-	draw_minimap(data);
-=======
 	if (is_pos_valid(data, data->player->position->x + dX, data->player->position->y - dY))
 	{
 		data->player->position->x += dX;
 		data->player->position->y -= dY;
 		ray_caster(data);
+		draw_minimap(data);
 	}
->>>>>>> 2beadb0e9a80be559ff9fe0343000556148dd26d
 }
 
 void	move_right(t_data *data)
@@ -163,19 +151,13 @@ void	move_right(t_data *data)
 		dY = MOVE_SPEED * sin(angle / (double)180 * M_PI);
 	}
 	// don't forget to check for walls
-<<<<<<< HEAD
-	data->player->position->x += dX;
-	data->player->position->y += dY;
-	ray_caster(data);
-	draw_minimap(data);
-=======
 	if (is_pos_valid(data, data->player->position->x + dX, data->player->position->y - dY))
 	{
 		data->player->position->x += dX;
 		data->player->position->y -= dY;
 		ray_caster(data);
+		draw_minimap(data);
 	}
->>>>>>> 2beadb0e9a80be559ff9fe0343000556148dd26d
 }
 
 void	turn_left(t_data *data)
