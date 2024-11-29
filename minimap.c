@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:28:59 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/28 18:37:47 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:58:34 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ float normalize_angle(float angle)
 	return (angle);
 }
 
-// turns are in the wrong direction 
+// turns are in the wrong direction
 // debug with statements
 void draw_rays(t_data *data)
 {
@@ -36,17 +36,23 @@ void draw_rays(t_data *data)
 	{
 		rayX = data->player->position->x / CUBE_SIZE * MAP_CELL - 0.5;
 		rayY = data->player->position->y / CUBE_SIZE * MAP_CELL - 0.5;
+		// printf("This is rayX: %f\n", rayX);
+		// printf("This is rayY: %f\n", rayY);
 		while(1)
 		{
 			if (rayX < 0 || rayX >= MAP_CELL * data->cols || rayY < 0 || rayY >= MAP_CELL * data->rows)
     			break;
 			rayX += cos(fovstart) * 1.0f; 
-			rayY += sin(fovstart) * 1.0f;
+			rayY -= sin(fovstart) * 1.0f;
 			if (data->map[(int)(rayY / MAP_CELL)][(int)(rayX / MAP_CELL)] == '1')
 				break ;
 			mlx_pixel_put(data->mlx_ptr_map, data->win_ptr_map, rayX, rayY, 0xFF13F0);
 		}
+		// printf("This is rayX after the while loop: %f\n", rayX);
+		// printf("This is rayY after the while loop: %f\n", rayY);
 		fovstart += M_PI / 45;
+		if (fovstart >= M_PI * 2)
+			fovstart -= M_PI * 2;
 	}
 }
 
