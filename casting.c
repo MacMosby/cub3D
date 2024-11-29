@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:14:00 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/26 17:30:30 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:35:47 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,3 @@ void	cast_slice(t_data *data, double wall_distance, int col)
 		// if slice on horizontal grid boundary
 			// offset = P.x % CUBE_SIZE
 }
-
-
-
-
