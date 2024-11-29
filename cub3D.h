@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/29 15:09:56 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:36:56 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_data
 	t_color	c_ceiling;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	void	*img_ptr;
 	void	*mlx_ptr_map;
 	void	*win_ptr_map;
 	//double	plane_dist;

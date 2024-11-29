@@ -6,13 +6,13 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:28:59 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/29 16:23:58 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:28:39 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-float	ft_modulate(float angle)
+float	ft_normalize(float angle)
 {
 	if (angle > M_PI * 2)
 		angle -= M_PI * 2;
@@ -32,9 +32,9 @@ void draw_rays(t_data *data)
 
 	counter = 0;
 	fovstart = (data->player->angle) * (M_PI / 180) - (FOV / 2) * (M_PI / 180);
-	fovstart = ft_modulate(fovstart);
+	fovstart = ft_normalize(fovstart);
 	fovend = (data->player->angle) * (M_PI / 180) + (FOV / 2) * (M_PI / 180);
-	fovend = ft_modulate(fovend);
+	fovend = ft_normalize(fovend);
 	while(counter < 16)
 	{
 		rayX = data->player->position->x / CUBE_SIZE * MAP_CELL;
