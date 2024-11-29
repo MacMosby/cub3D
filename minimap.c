@@ -6,22 +6,36 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:28:59 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/29 15:32:20 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:23:58 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+float	ft_modulate(float angle)
+{
+	if (angle > M_PI * 2)
+		angle -= M_PI * 2;
+	else if (angle < 0)
+		angle += M_PI * 2;
+	return (angle);
+}
+
+// big spiritual explosion when doing a full circle
 void draw_rays(t_data *data)
 {
 	float rayX;
 	float rayY;
 	float fovstart;
 	float fovend;
+	int		counter;
 
+	counter = 0;
 	fovstart = (data->player->angle) * (M_PI / 180) - (FOV / 2) * (M_PI / 180);
+	fovstart = ft_modulate(fovstart);
 	fovend = (data->player->angle) * (M_PI / 180) + (FOV / 2) * (M_PI / 180);
-	while(fovstart < fovend)
+	fovend = ft_modulate(fovend);
+	while(counter < 16)
 	{
 		rayX = data->player->position->x / CUBE_SIZE * MAP_CELL;
 		rayY = data->player->position->y / CUBE_SIZE * MAP_CELL;
@@ -38,6 +52,7 @@ void draw_rays(t_data *data)
 		fovstart += M_PI / 45;
 		if (fovstart >= M_PI * 2)
 			fovstart -= M_PI * 2;
+		counter++;
 	}
 }
 
