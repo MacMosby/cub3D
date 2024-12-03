@@ -6,24 +6,32 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:46 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/03 16:46:53 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:25:57 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cub3D.h"
 
-int	is_pos_valid(t_data *data, double pos_x, double pos_y)
+int	is_pos_valid(t_data *data, double dX, double dY)
 {
-	int	grid_x;
-	int	grid_y;
+	t_point point;
+	t_point grid;
 
-	grid_x = floor(pos_x / (double)CUBE_SIZE);
-	grid_y = floor(pos_y / (double)CUBE_SIZE);
-
-	if (data->map[grid_y][grid_x] != '1')
-		return (1);
-	else
+	point.x = data->player->position->x + dX;
+	point.y = data->player->position->y + dY;
+	grid = get_grid_position(point);
+	if (data->map[(int)grid.y][(int)grid.x] == '1')
 		return (0);
+	point.x -= dX;
+	grid = get_grid_position(point);
+	if (data->map[(int)grid.y][(int)grid.x] != '1')
+		return (1);
+	point.x += dX;
+	point.y -= dY;
+	grid = get_grid_position(point);
+	if (data->map[(int)grid.y][(int)grid.x] != '1')
+		return (1);
+	return (0);
 }
 
 void	move_forward(t_data *data)
@@ -48,7 +56,8 @@ void	move_forward(t_data *data)
 		dY = MOVE_SPEED * sin(data->player->angle / (double)180 * M_PI);
 	}
 	printf("dY: %f\n", dY);
-	if (is_pos_valid(data, data->player->position->x + dX, data->player->position->y - dY))
+	// don't forget to check for walls
+	if (is_pos_valid(data, dX, -1 * dY))
 	{
 		data->player->position->x += dX;
 		data->player->position->y -= dY;
@@ -78,7 +87,8 @@ void	move_backward(t_data *data)
 		dY = MOVE_SPEED * sin(data->player->angle / (double)180 * M_PI);
 	}
 	printf("dY: %f\n", dY);
-	if (is_pos_valid(data, data->player->position->x - dX, data->player->position->y + dY))
+	// don't forget to check for walls
+	if (is_pos_valid(data, -1 * dX, dY))
 	{
 		data->player->position->x -= dX;
 		data->player->position->y += dY;
@@ -111,7 +121,8 @@ void	move_left(t_data *data)
 		dX = MOVE_SPEED * cos(angle / (double)180 * M_PI);
 		dY = MOVE_SPEED * sin(angle / (double)180 * M_PI);
 	}
-	if (is_pos_valid(data, data->player->position->x + dX, data->player->position->y - dY))
+	// don't forget to check for walls
+	if (is_pos_valid(data, dX, -1 * dY))
 	{
 		data->player->position->x += dX;
 		data->player->position->y -= dY;
@@ -144,7 +155,8 @@ void	move_right(t_data *data)
 		dX = MOVE_SPEED * cos(angle / (double)180 * M_PI);
 		dY = MOVE_SPEED * sin(angle / (double)180 * M_PI);
 	}
-	if (is_pos_valid(data, data->player->position->x + dX, data->player->position->y - dY))
+	// don't forget to check for walls
+	if (is_pos_valid(data, dX, -1 * dY))
 	{
 		data->player->position->x += dX;
 		data->player->position->y -= dY;
