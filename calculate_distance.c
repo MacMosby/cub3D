@@ -16,7 +16,7 @@
 double	calculate_distance(t_data *data, t_point *p2, double angle)
 {
 	// return (fabs(p1->x - p2->x) / cos(angle / (double)180 * M_PI));
-    
+
     double dx;
     double dy;
     double distance;
@@ -26,10 +26,10 @@ double	calculate_distance(t_data *data, t_point *p2, double angle)
     dy = p2->y - data->player->position->y;
     distance = sqrt(dx*dx + dy*dy);
     relativeAngle = fabs(angle - data->player->angle);
-    if (relativeAngle > 180.0) 
+    if (relativeAngle > 180.0)
         relativeAngle = 360.0 - relativeAngle;
-    distance = distance / cos(relativeAngle / 180.0 * M_PI); // added brackets around 180.0 * M_PI
-    return (distance); 
+    //distance = distance / cos(relativeAngle / 180.0 * M_PI); // added brackets around 180.0 * M_PI
+    return (distance);
 }
 
 // double	calculate_vert_distance(t_point *p1, t_point *p2, double angle)
