@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/29 16:36:56 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:36:48 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "libft/libft.h"
 
 # define CUBE_SIZE 64
-# define MAP_CELL 10
+# define MAP_CELL 20
 # define FOV 60
 # define WIDTH 800
 # define HEIGTH 600
@@ -63,6 +63,15 @@ typedef struct s_color
 	long		hexa;
 }	t_color; // has to look like OxFF0000
 
+typedef struct s_imag
+{
+	void	*img_ptr;
+	char	*pixels_ptr;
+	int		bpp;
+	int		endian;
+	int		line_len;
+}	t_imag;
+
 typedef struct s_data
 {
 	char	**map;
@@ -76,7 +85,7 @@ typedef struct s_data
 	t_color	c_ceiling;
 	void	*mlx_ptr;
 	void	*win_ptr;
-	void	*img_ptr;
+	t_imag	imag;
 	void	*mlx_ptr_map;
 	void	*win_ptr_map;
 	//double	plane_dist;
@@ -141,6 +150,9 @@ void	draw_minimap(t_data *data);
 void 	init_minimap(t_data *data);
 void	draw_player(t_data *data);
 
+// render
+void 	render(t_data *data);
+void 	my_pixel_put(int x, int y, t_imag *imag, int color);
 
 //testing
 void	print_map(t_data *data);

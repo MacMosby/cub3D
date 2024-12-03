@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:02:48 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/28 14:52:38 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:35:06 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ double	calculate_distance(t_data *data, t_point *p2, double angle)
     relativeAngle = fabs(angle - data->player->angle);
     if (relativeAngle > 180.0)
         relativeAngle = 360.0 - relativeAngle;
-    //distance = distance / cos(relativeAngle / 180.0 * M_PI); // added brackets around 180.0 * M_PI
+    // distance = distance / cos(relativeAngle / 180.0 * M_PI);
     return (distance);
 }
 

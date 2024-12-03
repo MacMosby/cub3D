@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:28:59 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/29 16:28:39 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:27:42 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ float	ft_normalize(float angle)
 	return (angle);
 }
 
-// big spiritual explosion when doing a full circle
 void draw_rays(t_data *data)
 {
 	float rayX;
@@ -47,7 +46,8 @@ void draw_rays(t_data *data)
 			rayY -= sin(fovstart) * 1.0f;
 			if (data->map[(int)(rayY / MAP_CELL)][(int)(rayX / MAP_CELL)] == '1')
 				break ;
-			mlx_pixel_put(data->mlx_ptr_map, data->win_ptr_map, rayX, rayY, 0xFF13F0);
+			// mlx_pixel_put(data->mlx_ptr_map, data->win_ptr_map, rayX, rayY, 0xFF13F0);
+			my_pixel_put(rayX, rayY, &data->imag, 0xFF13F0);
 		}
 		fovstart += M_PI / 45;
 		if (fovstart >= M_PI * 2)
@@ -67,7 +67,8 @@ void draw_player(t_data *data)
 		pixX = -2;
 		while(pixX < 2)
 		{
-			mlx_pixel_put(data->mlx_ptr_map, data->win_ptr_map, (data->player->position->x / CUBE_SIZE * MAP_CELL + pixX), (data->player->position->y / CUBE_SIZE * MAP_CELL + pixY), 0xFF0000);
+			// mlx_pixel_put(data->mlx_ptr_map, data->win_ptr_map, (data->player->position->x / CUBE_SIZE * MAP_CELL + pixX), (data->player->position->y / CUBE_SIZE * MAP_CELL + pixY), 0xFF0000);
+			my_pixel_put((data->player->position->x / CUBE_SIZE * MAP_CELL + pixX), (data->player->position->y / CUBE_SIZE * MAP_CELL + pixY), &data->imag, 0xFF0000);
 				pixX++;
 		}
 		pixY++;
@@ -102,7 +103,8 @@ void	draw_minimap(t_data *data)
 				pixX = 0;
 				while(pixX < MAP_CELL)
 				{
-					mlx_pixel_put(data->mlx_ptr_map, data->win_ptr_map, (MAP_CELL * j + pixX), (MAP_CELL * i + pixY), color);
+					// mlx_pixel_put(data->mlx_ptr_map, data->win_ptr_map, (MAP_CELL * j + pixX), (MAP_CELL * i + pixY), color);
+					my_pixel_put((MAP_CELL * j + pixX), (MAP_CELL * i + pixY), &data->imag, color);
 					pixX++;
 				}
 				pixY++;
@@ -114,19 +116,19 @@ void	draw_minimap(t_data *data)
 	draw_player(data);
 }
 
-void init_minimap(t_data *data)
-{
-	int map_width;
-	int map_height;
+// void init_minimap(t_data *data)
+// {
+// 	int map_width;
+// 	int map_height;
 
-	map_width = data->cols * MAP_CELL;
-	map_height = data->rows * MAP_CELL;
-	data->mlx_ptr_map = mlx_init();
-	if (!data->mlx_ptr_map)
-		printf("Something went wrong with map mlx init\n");
-	data->win_ptr_map = mlx_new_window(data->mlx_ptr_map, map_width, map_height, "minimap");
-	if (!data->win_ptr_map)
-	 	printf("Something went wrong with map mlx new window\n");
-	draw_minimap(data);
-	mlx_hook(data->win_ptr_map, 17, 1L << 17, close_window, &data);
-}
+// 	map_width = data->cols * MAP_CELL;
+// 	map_height = data->rows * MAP_CELL;
+// 	data->mlx_ptr_map = mlx_init();
+// 	if (!data->mlx_ptr_map)
+// 		printf("Something went wrong with map mlx init\n");
+// 	data->win_ptr_map = mlx_new_window(data->mlx_ptr_map, map_width, map_height, "minimap");
+// 	if (!data->win_ptr_map)
+// 	 	printf("Something went wrong with map mlx new window\n");
+// 	draw_minimap(data);
+// 	mlx_hook(data->win_ptr_map, 17, 1L << 17, close_window, &data);
+// }

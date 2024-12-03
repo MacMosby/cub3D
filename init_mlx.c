@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:33:46 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/28 17:53:22 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:26:21 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,14 @@ int	init_mlx(t_data *data)
 {
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGTH, "cub3D");
-	ray_caster(data);
+	data->imag.img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGTH);
+	data->imag.pixels_ptr = mlx_get_data_addr(data->imag.img_ptr, &data->imag.bpp, &data->imag.line_len, &data->imag.endian);
+	// ray_caster(data);
+	render(data);	
 	mlx_key_hook(data->win_ptr, key_handler, data);
 	mlx_hook(data->win_ptr, 17, 1L << 17, close_window, &data);
-	init_minimap(data);
+	// init_minimap(data);
 	mlx_loop(data->mlx_ptr);
-	mlx_loop(data->mlx_ptr_map);
+	// mlx_loop(data->mlx_ptr_map);
 	return (0);
 }
