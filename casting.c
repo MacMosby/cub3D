@@ -24,7 +24,7 @@ double	get_correct_distance(double hori_dist, double vert_dist, double angle)
 		return (vert_dist * cos(angle / (double)180 * M_PI));
 }
 
-void	cast_slice(t_data *data, double wall_distance, int col)
+void	cast_slice(t_data *data, double wall_distance, int col, int offset)
 {
 	int i = 0;
 	int	slice_height;
@@ -41,6 +41,7 @@ void	cast_slice(t_data *data, double wall_distance, int col)
 		i++;
 	}
 	// drawing the wall
+	printf("offset: %d\n", offset);
 	while (i < HEIGTH - ceiling_floor_height)
 	{
 		mlx_pixel_put(data->mlx_ptr, data->win_ptr, col, i, 0x00FF00);
