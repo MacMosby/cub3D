@@ -72,7 +72,7 @@ t_point	get_next_vertical_hit(t_point point, int direction, double v_angle)
 	return (point);
 }
 
-double	find_vertical_wall(t_data *data, double v_angle, int direction)
+t_point	find_vertical_wall(t_data *data, double v_angle, int direction, double *dist)
 {
 	t_point	point;
 	t_point	cube;
@@ -80,7 +80,10 @@ double	find_vertical_wall(t_data *data, double v_angle, int direction)
 	point = find_first_vertical_hit(data, direction, v_angle);
 	cube = get_grid_position(point);
 	if (cube.x < 0 || cube.x >= data->cols || cube.y < 0 || cube.y >= data->rows)
-		return (-1);
+	{
+		*dist = -1;
+		return (point);
+	}
 	while (data->map[(int)cube.y][(int)cube.x] != '1')
 	{
 		point = get_next_vertical_hit(point, direction, v_angle);
@@ -91,11 +94,13 @@ double	find_vertical_wall(t_data *data, double v_angle, int direction)
 			printf("\n\nvertical - x: %d\ny: %d\n", (int)floor(cube.x), (int)floor(cube.y));
 			printf("point: x=%f, y=%f\n", point.x, point.y);
 			printf("value of viewing angle: %f.\n\n", v_angle); */
-			return (-1);
+			*dist = -1;
+			return (point);
 		}
 	}
 	// printf("\n\nvertical - x: %d\ny: %d\n", (int)floor(cube.x), (int)floor(cube.y));
 	// printf("point: x=%f, y=%f\n", point.x, point.y);
 	// printf("value of viewing angle: %f.\n\n", v_angle);
-	return (calculate_distance(data, &point, v_angle));
+	*dist = calculate_distance(data, &point, v_angle);
+	return (point);
 }
