@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:46 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/29 15:38:55 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:25:57 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ void	move_forward(t_data *data)
 	{
 		data->player->position->x += dX;
 		data->player->position->y -= dY;
-		ray_caster(data);
-		draw_minimap(data);
+		render(data);
 	}
 }
 
@@ -93,8 +92,7 @@ void	move_backward(t_data *data)
 	{
 		data->player->position->x -= dX;
 		data->player->position->y += dY;
-		ray_caster(data);
-		draw_minimap(data);
+		render(data);
 	}
 }
 
@@ -128,8 +126,7 @@ void	move_left(t_data *data)
 	{
 		data->player->position->x += dX;
 		data->player->position->y -= dY;
-		ray_caster(data);
-		draw_minimap(data);
+		render(data);
 	}
 }
 
@@ -163,8 +160,7 @@ void	move_right(t_data *data)
 	{
 		data->player->position->x += dX;
 		data->player->position->y -= dY;
-		ray_caster(data);
-		draw_minimap(data);
+		render(data);
 	}
 }
 
@@ -174,8 +170,7 @@ void	turn_left(t_data *data)
 	data->player->angle += TURN_SPEED;
 	if (data->player->angle > 360)
 		data->player->angle -= 360;
-	ray_caster(data);
-	draw_minimap(data);
+	render(data);
 }
 
 void	turn_right(t_data *data)
@@ -184,6 +179,5 @@ void	turn_right(t_data *data)
 	data->player->angle -= TURN_SPEED;
 	if (data->player->angle < 0)
 		data->player->angle += 360;
-	ray_caster(data);
-	draw_minimap(data);
+	render(data);
 }
