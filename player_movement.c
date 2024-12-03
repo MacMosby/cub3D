@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:41:46 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/03 15:23:55 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:46:53 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,10 @@ void	move_forward(t_data *data)
 		dY = MOVE_SPEED * sin(data->player->angle / (double)180 * M_PI);
 	}
 	printf("dY: %f\n", dY);
-	// don't forget to check for walls
 	if (is_pos_valid(data, data->player->position->x + dX, data->player->position->y - dY))
 	{
 		data->player->position->x += dX;
 		data->player->position->y -= dY;
-		// ray_caster(data);
-		// draw_minimap(data);
 		render(data);
 	}
 }
@@ -81,13 +78,10 @@ void	move_backward(t_data *data)
 		dY = MOVE_SPEED * sin(data->player->angle / (double)180 * M_PI);
 	}
 	printf("dY: %f\n", dY);
-	// don't forget to check for walls
 	if (is_pos_valid(data, data->player->position->x - dX, data->player->position->y + dY))
 	{
 		data->player->position->x -= dX;
 		data->player->position->y += dY;
-		// ray_caster(data);
-		// draw_minimap(data);
 		render(data);
 	}
 }
@@ -117,13 +111,10 @@ void	move_left(t_data *data)
 		dX = MOVE_SPEED * cos(angle / (double)180 * M_PI);
 		dY = MOVE_SPEED * sin(angle / (double)180 * M_PI);
 	}
-	// don't forget to check for walls
 	if (is_pos_valid(data, data->player->position->x + dX, data->player->position->y - dY))
 	{
 		data->player->position->x += dX;
 		data->player->position->y -= dY;
-		// ray_caster(data);
-		// draw_minimap(data);
 		render(data);
 	}
 }
@@ -153,13 +144,10 @@ void	move_right(t_data *data)
 		dX = MOVE_SPEED * cos(angle / (double)180 * M_PI);
 		dY = MOVE_SPEED * sin(angle / (double)180 * M_PI);
 	}
-	// don't forget to check for walls
 	if (is_pos_valid(data, data->player->position->x + dX, data->player->position->y - dY))
 	{
 		data->player->position->x += dX;
 		data->player->position->y -= dY;
-		// ray_caster(data);
-		// draw_minimap(data);
 		render(data);
 	}
 }
@@ -170,8 +158,6 @@ void	turn_left(t_data *data)
 	data->player->angle += TURN_SPEED;
 	if (data->player->angle > 360)
 		data->player->angle -= 360;
-	// ray_caster(data);
-	// draw_minimap(data);
 	render(data);
 }
 
@@ -181,7 +167,5 @@ void	turn_right(t_data *data)
 	data->player->angle -= TURN_SPEED;
 	if (data->player->angle < 0)
 		data->player->angle += 360;
-	// ray_caster(data);
-	// draw_minimap(data);
 	render(data);
 }
