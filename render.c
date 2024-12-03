@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:57:57 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/03 15:34:01 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:03:28 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ void paint_background(t_data *data)
 		j = 0;
 		while(j < WIDTH)
 		{
-			my_pixel_put(j, i, &data->imag, 0xFFD580);
+			my_pixel_put(j, i, &data->imag, 0xFF7F80);
 			j++;
 		}
+		i++;
 	}
 }
 
@@ -33,15 +34,18 @@ void my_pixel_put(int x, int y, t_imag *imag, int color)
 {
 	int	position;
 
-	position = (y * imag->line_len)	+ (x * imag->bpp / 8);
-	*(unsigned int*)(imag->pixels_ptr + position) = color;
+	if ((x >= 0 && x < WIDTH) && (y >= 0 && y < HEIGTH))
+	{
+		position = (y * imag->line_len)	+ (x * imag->bpp / 8);
+		*(unsigned int*)(imag->pixels_ptr + position) = color;
+	}
 }
 
 void render(t_data *data)
 {
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	// handle all the different pixels
-	// 0. backround first?
+	// 0. background first?
 	paint_background(data);
 	// 1. maze
 	ray_caster(data);

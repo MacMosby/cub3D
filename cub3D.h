@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/03 15:36:48 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:06:29 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "libft/libft.h"
 
 # define CUBE_SIZE 64
-# define MAP_CELL 20
+# define MAP_CELL 10
 # define FOV 60
 # define WIDTH 800
 # define HEIGTH 600
