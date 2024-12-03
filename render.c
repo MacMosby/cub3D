@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 13:57:57 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/03 16:10:22 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:22:31 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void my_pixel_put(int x, int y, t_imag *imag, int color)
 {
 	int	position;
 
-	if ((x >= 0 && x < WIDTH) && (y >= 0 && y < HEIGTH))
+	if ((x >= 0 && x < WIDTH) && (y >= 0 && y < HEIGHT))
 	{
 		position = (y * imag->line_len)	+ (x * imag->bpp / 8);
 		*(unsigned int*)(imag->pixels_ptr + position) = color;

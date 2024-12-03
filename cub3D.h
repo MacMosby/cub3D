@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/03 16:50:15 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:22:09 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define MAP_CELL 15
 # define FOV 60
 # define WIDTH 800
-# define HEIGTH 600
+# define HEIGHT 600
 # define PLANE_DIST 627
 # define MOVE_SPEED 10
 # define TURN_SPEED 10

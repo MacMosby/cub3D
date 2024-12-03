@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:28:59 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/03 16:49:52 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:23:52 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	draw_minimap(t_data *data)
 				pixX = MM_OFFSET;
 				while(pixX < (MAP_CELL + MM_OFFSET))
 				{
+					// if (color == 0x0033CC || color == 0x33FFE6)
 					my_pixel_put((MAP_CELL * j + pixX), (MAP_CELL * i + pixY), &data->imag, color);
 					pixX++;
 				}

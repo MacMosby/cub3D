@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:33:46 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/03 15:26:21 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:22:20 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	key_handler(int key, void *param)
 int	init_mlx(t_data *data)
 {
 	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGTH, "cub3D");
-	data->imag.img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGTH);
+	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "cub3D");
+	data->imag.img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->imag.pixels_ptr = mlx_get_data_addr(data->imag.img_ptr, &data->imag.bpp, &data->imag.line_len, &data->imag.endian);
 	// ray_caster(data);
 	render(data);	
