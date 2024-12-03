@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/03 17:22:09 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:36:49 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define CUBE_SIZE 64
 # define MM_OFFSET 3
-# define MAP_CELL 15
+# define MAP_CELL 12
 # define FOV 60
 # define WIDTH 800
 # define HEIGHT 600
