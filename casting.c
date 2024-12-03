@@ -43,7 +43,7 @@ void	cast_slice(t_data *data, double wall_distance, int col, int offset)
 	}
 	// drawing the wall
 	printf("offset: %d\n", offset);
-	while (i < HEIGTH - ceiling_floor_height)
+	while (i < HEIGHT - ceiling_floor_height)
 	{
 		// mlx_pixel_put(data->mlx_ptr, data->win_ptr, col, i, 0x00FF00);
 		my_pixel_put(col, i, &data->imag, 0x00FF00);
