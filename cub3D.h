@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/03 17:36:49 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:15:32 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@
 # include <math.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include "colors.h"
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
 # include "libft/libft.h"
 
 # define CUBE_SIZE 64
 # define MM_OFFSET 3
-# define MAP_CELL 12
+# define MAP_CELL 10
+# define MM_WIDTH 150
+# define MM_HEIGHT 100
 # define FOV 60
 # define WIDTH 800
 # define HEIGHT 600
@@ -62,7 +65,7 @@ typedef struct s_color
 	int		b;
 	int		full;
 	long		hexa;
-}	t_color; // has to look like OxFF0000
+}	t_color;
 
 typedef struct s_imag
 {

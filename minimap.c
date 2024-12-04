@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:28:59 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/03 17:23:52 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:43:17 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void draw_player(t_data *data)
 		while(pixX < 2)
 		{
 			my_pixel_put((data->player->position->x / CUBE_SIZE * MAP_CELL + pixX + MM_OFFSET), \
-				(data->player->position->y / CUBE_SIZE * MAP_CELL + pixY + MM_OFFSET), &data->imag, 0xFF0000);
+				(data->player->position->y / CUBE_SIZE * MAP_CELL + pixY + MM_OFFSET), &data->imag, RED);
 				pixX++;
 		}
 		pixY++;
@@ -91,19 +91,19 @@ void	draw_minimap(t_data *data)
 		while(j < data->cols)
 		{
 			if (data->map[i][j] == '1')
-				color = 0x0033CC;
+				color = COLD_BLUE;
 			else if (data->map[i][j] == '*')
-				color = 0x77DD77;
+				color = GRASS_GREEN;
 			else
-				color = 0x33FFE6;
+				color = LIGHT_BLUE;
 			pixY = MM_OFFSET;
-			while(pixY < (MAP_CELL + MM_OFFSET))
+			while(pixY < (MAP_CELL + MM_OFFSET)) // add statement here to guarantee that pixY is within scale range?
 			{
 				pixX = MM_OFFSET;
-				while(pixX < (MAP_CELL + MM_OFFSET))
+				while(pixX < (MAP_CELL + MM_OFFSET)) // add statement here to guarantee that pixX is within scale range?
 				{
-					// if (color == 0x0033CC || color == 0x33FFE6)
-					my_pixel_put((MAP_CELL * j + pixX), (MAP_CELL * i + pixY), &data->imag, color);
+					if (color == LIGHT_BLUE || color == COLD_BLUE)
+						my_pixel_put((MAP_CELL * j + pixX), (MAP_CELL * i + pixY), &data->imag, color);
 					pixX++;
 				}
 				pixY++;
@@ -114,3 +114,29 @@ void	draw_minimap(t_data *data)
 	}
 	draw_player(data);
 }
+
+// void calculate_scale(t_data *data, float x_start, float y_start)
+// {
+// 	// player_row = floor(data->player->position.x / CUBE_SIZE);
+// 	// player_column = floor(data->player->position.y / CUBE_SIZE);
+
+// 	float x_start;
+// 	float y_start;
+// 	float width_bigmmap;
+// 	float height_bigmmap;
+
+// 	x_start = data->player->position.x - MM_WIDTH / 2;
+// 	y_start = data->player->position.y - MM_HEIGHT / 2;
+
+// 	width_bigmmap = MAP_CELL * data->cols;
+// 	height_bigmmap = MAP_CELL * data->rows;
+	
+// 	if (x_start < 0)
+// 		x_start = 0;
+// 	if (y_start < 0)
+// 		y_start = 0;
+// 	if (x_start + MM_WIDTH > width_bigmmap)
+// 		x_start = width_bigmmap - MM_WIDTH;
+// 	if (MM_HEIGHT - y_start < MM_WIDTH / 2)
+// 		x_start = MAP_CELL * data->cols - MM_WIDTH;
+// }

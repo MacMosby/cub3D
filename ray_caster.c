@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 13:03:02 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/29 16:44:27 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:39:37 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ void	ray_caster(t_data *data)
 	while (col < WIDTH)
 	{
 		plane_angle = fabs(min_angle * (col - WIDTH / 2)); // fabs(-30 + min_angle * col);
-		viewing_angle = data->player->angle + FOV/2 - min_angle * col; // data->player->angle + 30 - min_angle * col;
+		viewing_angle = data->player->angle + FOV / 2 - min_angle * col; // data->player->angle + 30 - min_angle * col;
 		if (viewing_angle < 0)
 			viewing_angle += 360;
 		if (viewing_angle > 360)
