@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:28:59 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/09 12:01:21 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/09 12:41:02 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ float	ft_normalize(float angle)
 	return (angle);
 }
 
+// problem with walls in the east and south
 void draw_rays(t_data *data, float x_start, float y_start)
 {
 	float rayX;
@@ -42,9 +43,9 @@ void draw_rays(t_data *data, float x_start, float y_start)
 		{
 			if (rayX < 0 || rayX >= MAP_CELL * data->cols || rayY < 0 || rayY >= MAP_CELL * data->rows)
     			break;
-			rayX += cos(fovstart) * 1.0f; 
-			rayY -= sin(fovstart) * 1.0f;
-			if (data->map[(int)((rayY + y_start) / MAP_CELL)][(int)((rayX + x_start) / MAP_CELL)] == '1')
+			rayX += cos(fovstart) * 0.5f; 
+			rayY -= sin(fovstart) * 0.5f;
+			if (data->map[(int)(floor((rayY + y_start) / MAP_CELL))][(int)(floor((rayX + x_start) / MAP_CELL))] == '1')
 				break ;
 			if (rayY > MM_HEIGHT || rayX > MM_WIDTH)
 				break ;
@@ -62,11 +63,11 @@ void draw_player(t_data *data, float x_start, float y_start)
 	int pixX;
 	int pixY;
 	
-	pixY = -2;
-	while(pixY < 2)
+	pixY = -1;
+	while(pixY <= 1)
 	{
-		pixX = -2;
-		while(pixX < 2)
+		pixX = -1;
+		while(pixX <= 1)
 		{
 			my_pixel_put((data->player->position->x / CUBE_SIZE * MAP_CELL + pixX + MM_OFFSET - x_start), \
 				(data->player->position->y / CUBE_SIZE * MAP_CELL + pixY + MM_OFFSET - y_start), &data->imag, RED);
@@ -135,12 +136,13 @@ void draw_minimap(t_data *data)
 
 	x_start = data->player->position->x * MAP_CELL / CUBE_SIZE - MM_WIDTH / 2;
 	y_start = data->player->position->y * MAP_CELL / CUBE_SIZE - MM_HEIGHT / 2;
-	printf("this is x_start: %f\n", x_start);
-	printf("this is y_start: %f\n", y_start);
+	// printf("this is x_start: %f\n", x_start);
+	// printf("this is y_start: %f\n", y_start);
 
 	width_bigmmap = MAP_CELL * data->cols;
 	height_bigmmap = MAP_CELL * data->rows;
 	
+	// problem might be that these are not precise enough for the player and rays
 	if (x_start < 0)
 		x_start = 0;
 	else if (x_start + MM_WIDTH > width_bigmmap)
@@ -150,10 +152,9 @@ void draw_minimap(t_data *data)
 	else if (y_start + MM_HEIGHT > height_bigmmap)
 		y_start = height_bigmmap - MM_HEIGHT;
 
-	printf("this is the updated x_start: %f\n", x_start);
-	printf("this is the updated y_start: %f\n", y_start);
+	// printf("this is the updated x_start: %f\n", x_start);
+	// printf("this is the updated y_start: %f\n", y_start);
 	
-
 	draw_scaledminimap(data, x_start, y_start);
 }
 
@@ -196,6 +197,3 @@ void draw_minimap(t_data *data)
 	}
 	draw_player(data);
 } */
-
-// x_offset = (data->player->position.x - player_column * CUBE_SIZE) * (MM_WIDTH / WIDTH);
-//	y_offset = (data->player->position.y - player_row * CUBE_SIZE) * (MM_HEIGHT / HEIGHT);
