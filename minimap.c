@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:28:59 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/04 15:43:17 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/09 12:01:21 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ float	ft_normalize(float angle)
 	return (angle);
 }
 
-void draw_rays(t_data *data)
+void draw_rays(t_data *data, float x_start, float y_start)
 {
 	float rayX;
 	float rayY;
@@ -34,17 +34,19 @@ void draw_rays(t_data *data)
 	fovstart = ft_normalize(fovstart);
 	fovend = (data->player->angle) * (M_PI / 180) + (FOV / 2) * (M_PI / 180);
 	fovend = ft_normalize(fovend);
-	while(counter < 16)
+	while (counter < 16)
 	{
-		rayX = data->player->position->x / CUBE_SIZE * MAP_CELL;
-		rayY = data->player->position->y / CUBE_SIZE * MAP_CELL;
+		rayX = data->player->position->x / CUBE_SIZE * MAP_CELL - x_start;
+		rayY = data->player->position->y / CUBE_SIZE * MAP_CELL - y_start;
 		while(1)
 		{
 			if (rayX < 0 || rayX >= MAP_CELL * data->cols || rayY < 0 || rayY >= MAP_CELL * data->rows)
     			break;
 			rayX += cos(fovstart) * 1.0f; 
 			rayY -= sin(fovstart) * 1.0f;
-			if (data->map[(int)(rayY / MAP_CELL)][(int)(rayX / MAP_CELL)] == '1')
+			if (data->map[(int)((rayY + y_start) / MAP_CELL)][(int)((rayX + x_start) / MAP_CELL)] == '1')
+				break ;
+			if (rayY > MM_HEIGHT || rayX > MM_WIDTH)
 				break ;
 			my_pixel_put(rayX + MM_OFFSET, rayY + MM_OFFSET, &data->imag, 0xFF13F0);
 		}
@@ -55,7 +57,7 @@ void draw_rays(t_data *data)
 	}
 }
 
-void draw_player(t_data *data)
+void draw_player(t_data *data, float x_start, float y_start)
 {
 	int pixX;
 	int pixY;
@@ -66,16 +68,96 @@ void draw_player(t_data *data)
 		pixX = -2;
 		while(pixX < 2)
 		{
-			my_pixel_put((data->player->position->x / CUBE_SIZE * MAP_CELL + pixX + MM_OFFSET), \
-				(data->player->position->y / CUBE_SIZE * MAP_CELL + pixY + MM_OFFSET), &data->imag, RED);
+			my_pixel_put((data->player->position->x / CUBE_SIZE * MAP_CELL + pixX + MM_OFFSET - x_start), \
+				(data->player->position->y / CUBE_SIZE * MAP_CELL + pixY + MM_OFFSET - y_start), &data->imag, RED);
 				pixX++;
 		}
 		pixY++;
 	}
-	draw_rays(data);
+	draw_rays(data, x_start, y_start);
 }
 
-void	draw_minimap(t_data *data)
+void	draw_scaledminimap(t_data *data, float x_start, float y_start)
+{
+	int i;
+	int j;
+	float pixX;
+	float pixY;
+	float scaled_x;
+	float scaled_y;
+	int color;
+
+	i = 0;
+	j = 0;
+	while(i < data->rows)
+	{
+		j = 0;
+		while(j < data->cols)
+		{
+			if (data->map[i][j] == '1')
+				color = COLD_BLUE;
+			else if (data->map[i][j] == '*')
+				color = GRASS_GREEN;
+			else
+				color = LIGHT_BLUE;
+			pixY = 0;
+			while(pixY < MAP_CELL)
+			{
+				pixX = 0;
+				while(pixX < MAP_CELL) 
+				{
+					scaled_x = pixX + MAP_CELL * j - x_start;
+					scaled_y = pixY + MAP_CELL * i - y_start;
+					
+					if (scaled_x >= 0 && scaled_x < MM_WIDTH &&
+   						scaled_y >= 0 && scaled_y < MM_HEIGHT)
+					{
+						if (color == LIGHT_BLUE || color == COLD_BLUE)
+							my_pixel_put((scaled_x + MM_OFFSET), (scaled_y + MM_OFFSET), &data->imag, color);
+					}
+					pixX++;
+				}
+				pixY++;
+			}
+			j++;
+		}
+		i++;
+	}
+	draw_player(data, x_start, y_start);
+}
+
+void draw_minimap(t_data *data)
+{
+	float x_start;
+	float y_start;
+	float width_bigmmap;
+	float height_bigmmap;
+
+	x_start = data->player->position->x * MAP_CELL / CUBE_SIZE - MM_WIDTH / 2;
+	y_start = data->player->position->y * MAP_CELL / CUBE_SIZE - MM_HEIGHT / 2;
+	printf("this is x_start: %f\n", x_start);
+	printf("this is y_start: %f\n", y_start);
+
+	width_bigmmap = MAP_CELL * data->cols;
+	height_bigmmap = MAP_CELL * data->rows;
+	
+	if (x_start < 0)
+		x_start = 0;
+	else if (x_start + MM_WIDTH > width_bigmmap)
+		x_start = width_bigmmap - MM_WIDTH;
+	if (y_start < 0)
+		y_start = 0;
+	else if (y_start + MM_HEIGHT > height_bigmmap)
+		y_start = height_bigmmap - MM_HEIGHT;
+
+	printf("this is the updated x_start: %f\n", x_start);
+	printf("this is the updated y_start: %f\n", y_start);
+	
+
+	draw_scaledminimap(data, x_start, y_start);
+}
+
+/* void	draw_minimap(t_data *data)
 {
 	int i;
 	int j;
@@ -113,30 +195,7 @@ void	draw_minimap(t_data *data)
 		i++;
 	}
 	draw_player(data);
-}
+} */
 
-// void calculate_scale(t_data *data, float x_start, float y_start)
-// {
-// 	// player_row = floor(data->player->position.x / CUBE_SIZE);
-// 	// player_column = floor(data->player->position.y / CUBE_SIZE);
-
-// 	float x_start;
-// 	float y_start;
-// 	float width_bigmmap;
-// 	float height_bigmmap;
-
-// 	x_start = data->player->position.x - MM_WIDTH / 2;
-// 	y_start = data->player->position.y - MM_HEIGHT / 2;
-
-// 	width_bigmmap = MAP_CELL * data->cols;
-// 	height_bigmmap = MAP_CELL * data->rows;
-	
-// 	if (x_start < 0)
-// 		x_start = 0;
-// 	if (y_start < 0)
-// 		y_start = 0;
-// 	if (x_start + MM_WIDTH > width_bigmmap)
-// 		x_start = width_bigmmap - MM_WIDTH;
-// 	if (MM_HEIGHT - y_start < MM_WIDTH / 2)
-// 		x_start = MAP_CELL * data->cols - MM_WIDTH;
-// }
+// x_offset = (data->player->position.x - player_column * CUBE_SIZE) * (MM_WIDTH / WIDTH);
+//	y_offset = (data->player->position.y - player_row * CUBE_SIZE) * (MM_HEIGHT / HEIGHT);

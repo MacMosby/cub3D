@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/04 13:15:32 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/09 11:50:37 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,10 @@ void 	space_check(t_data *data);
 
 // minimap
 void	draw_minimap(t_data *data);
+// void	draw_minimap(t_data *data, float x_start, float y_start);
 void 	init_minimap(t_data *data);
-void	draw_player(t_data *data);
+// void	draw_player(t_data *data);
+void draw_player(t_data *data, float x_start, float y_start);
 
 // render
 void 	render(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:14:00 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/04 13:01:16 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/09 11:45:02 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	cast_slice(t_data *data, double wall_distance, int col, int offset)
 		i++;
 	}
 	// drawing the wall
-	printf("offset: %d\n", offset);
+	// printf("offset: %d\n", offset);
+	offset += 0;
 	while (i < HEIGHT - ceiling_floor_height)
 	{
 		my_pixel_put(col, i, &data->imag, SANDY_YELLOW);
