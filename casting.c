@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:14:00 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/03 17:21:58 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/09 11:45:02 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,21 @@ void	cast_slice(t_data *data, double wall_distance, int col, int offset)
 	// drawing the ceiling
 	while (i < ceiling_floor_height)
 	{
-		// mlx_pixel_put(data->mlx_ptr, data->win_ptr, col, i, 0xFF0000);
-		my_pixel_put(col, i, &data->imag, 0xFF0000);
+		my_pixel_put(col, i, &data->imag, SKY_BLUE);
 		i++;
 	}
 	// drawing the wall
-	printf("offset: %d\n", offset);
+	// printf("offset: %d\n", offset);
+	offset += 0;
 	while (i < HEIGHT - ceiling_floor_height)
 	{
-		// mlx_pixel_put(data->mlx_ptr, data->win_ptr, col, i, 0x00FF00);
-		my_pixel_put(col, i, &data->imag, 0x00FF00);
+		my_pixel_put(col, i, &data->imag, SANDY_YELLOW);
 		i++;
 	}
 	// drawing the floor
 	while (i < HEIGHT)
 	{
-		// mlx_pixel_put(data->mlx_ptr, data->win_ptr, col, i, 0x0000FF);
-		my_pixel_put(col, i, &data->imag, 0x0000FF);
+		my_pixel_put(col, i, &data->imag, CLAY_RED);
 		i++;
 	}
 	// middle of slice should be in the the middle of the screen
