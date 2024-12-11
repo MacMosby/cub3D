@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:19:36 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/11/28 17:31:01 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:20:48 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_point	find_first_horizontal_hit(t_data *data, int direction, double v_angle)
 	t_point	point;
 
 	if (direction == NE || direction == N || direction == NW)
-		point.y = floor(data->player->position->y/CUBE_SIZE) * (CUBE_SIZE) - 1;
+		point.y = floor(data->player->position->y/CUBE_SIZE) * (CUBE_SIZE) - 0.001;
 	else if (direction == SW || direction == S || direction == SE)
 		point.y = floor(data->player->position->y/CUBE_SIZE) * (CUBE_SIZE) + CUBE_SIZE;
 	if (direction == N || direction == S)
@@ -94,6 +94,8 @@ t_point	find_horizontal_wall(t_data *data, double v_angle, int direction, double
 	// printf("\n\nhorizontal - x: %d\ny: %d\n", (int)floor(cube.x), (int)floor(cube.y));
 	// printf("point: x=%f, y=%f\n", point.x, point.y);
 	// printf("value of viewing angle: %f.\n\n", v_angle);
+	// printf("Horizontal wall point values: x = %f, y = %f\n", point.x, point.y);
+	// printf("Horizontal wall cube values: x = %f, y = %f\n", cube.x, cube.y);
 	*dist = calculate_distance(data, &point, v_angle);
 	return (point);
 }
