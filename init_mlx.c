@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:33:46 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/03 17:22:20 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/11 19:02:43 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ void	get_textures(t_data *data)
 {
 	int size = CUBE_SIZE;
 
-	data->ea_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "assets/east.xpm", &size, &size);
+	data->ea_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "textures/star_wars/star_wars_wall_east.xpm", &size, &size);
 	data->ea_img.pixels_ptr = mlx_get_data_addr(data->ea_img.img_ptr, &data->ea_img.bpp, &data->ea_img.line_len, &data->ea_img.endian);
-	data->no_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "assets/north.xpm", &size, &size);
+	data->no_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "textures/star_wars/star_wars_wall_north.xpm", &size, &size);
 	data->no_img.pixels_ptr = mlx_get_data_addr(data->no_img.img_ptr, &data->no_img.bpp, &data->no_img.line_len, &data->no_img.endian);
-	data->we_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "assets/west.xpm", &size, &size);
+	data->we_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "textures/star_wars/star_wars_wall_west.xpm", &size, &size);
 	data->we_img.pixels_ptr = mlx_get_data_addr(data->we_img.img_ptr, &data->we_img.bpp, &data->we_img.line_len, &data->we_img.endian);
-	data->so_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "assets/south.xpm", &size, &size);
+	data->so_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "textures/star_wars/star_wars_wall_south.xpm", &size, &size);
 	data->so_img.pixels_ptr = mlx_get_data_addr(data->so_img.img_ptr, &data->so_img.bpp, &data->so_img.line_len, &data->so_img.endian);
 }
 
