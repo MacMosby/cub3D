@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 13:03:02 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/04 13:39:37 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/11 16:37:38 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,6 @@ void	ray_caster(t_data *data)
 		// printf("viewing_angle: %f\n", viewing_angle);
 		cast_ray(data, plane_angle, viewing_angle, col);
 		col++;
-		//usleep(20000);
+		// usleep(20000);
 	}
 }

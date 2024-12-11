@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/11 13:15:47 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/11 16:37:53 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define MAP_CELL 10
 # define MM_WIDTH 220
 # define MM_HEIGHT 150
+# define EPSILON 0.064
 # define FOV 60
 # define WIDTH 800
 # define HEIGHT 600
