@@ -103,7 +103,7 @@ void	move_left(t_data *data)
 	double	angle;
 
 	angle = data->player->angle + 90;
-	if (angle > 360)
+	if (angle >= 360)
 		angle -= 360;
 	dX = 0;
 	dY = 0;
@@ -168,7 +168,7 @@ void	turn_left(t_data *data)
 {
 	printf("turn left\n");
 	data->player->angle += TURN_SPEED;
-	if (data->player->angle > 360)
+	if (data->player->angle >= 360)
 		data->player->angle -= 360;
 	render(data);
 }

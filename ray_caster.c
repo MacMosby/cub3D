@@ -154,7 +154,7 @@ void	w_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
 	real_dist = vert_dist * cos(plane_angle / (double)180 * M_PI);
 	offset = CUBE_SIZE - 1 - ((int)floor(vert_p.y) % CUBE_SIZE);
 	cast_slice(data, real_dist, col, offset);
-} 
+}
 
 void	cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
 {
