@@ -20,19 +20,32 @@ void	ne_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col
 	double	hori_dist;
 	double	real_dist;
 	int		offset;
+	int		wall;
 
 	hori_p = find_horizontal_wall(data, viewing_angle, NE, &hori_dist);
 	vert_p = find_vertical_wall(data, viewing_angle, NE, &vert_dist);
 	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
 	if (hori_dist < 0)
+	{
+		wall = E;
 		offset = (int)floor(vert_p.y) % CUBE_SIZE;
+	}
 	else if (vert_dist < 0)
+	{
+		wall = N;
 		offset = (int)floor(hori_p.x) % CUBE_SIZE;
+	}
 	else if (hori_dist < vert_dist)
+	{
+		wall = N;
 		offset = (int)floor(hori_p.x) % CUBE_SIZE;
+	}
 	else
+	{
+		wall = E;
 		offset = (int)floor(vert_p.y) % CUBE_SIZE;
-	cast_slice(data, real_dist, col, offset);
+	}
+	cast_slice(data, real_dist, col, offset, wall);
 }
 
 void	nw_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
@@ -43,19 +56,32 @@ void	nw_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col
 	double	hori_dist;
 	double	real_dist;
 	int		offset;
+	int		wall;
 
 	hori_p = find_horizontal_wall(data, viewing_angle, NW, &hori_dist);
 	vert_p = find_vertical_wall(data, viewing_angle, NW, &vert_dist);
 	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
 	if (hori_dist < 0)
+	{
+		wall = W;
 		offset = CUBE_SIZE - 1 - ((int)floor(vert_p.y) % CUBE_SIZE);
+	}
 	else if (vert_dist < 0)
+	{
+		wall = N;
 		offset = (int)floor(hori_p.x) % CUBE_SIZE;
+	}
 	else if (hori_dist < vert_dist)
+	{
+		wall = N;
 		offset = (int)floor(hori_p.x) % CUBE_SIZE;
+	}
 	else
+	{
+		wall = W;
 		offset = CUBE_SIZE - 1 - ((int)floor(vert_p.y) % CUBE_SIZE);
-	cast_slice(data, real_dist, col, offset);
+	}
+	cast_slice(data, real_dist, col, offset, wall);
 }
 
 void	sw_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
@@ -66,19 +92,32 @@ void	sw_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col
 	double	hori_dist;
 	double	real_dist;
 	int		offset;
+	int		wall;
 
 	hori_p = find_horizontal_wall(data, viewing_angle, SW, &hori_dist);
 	vert_p = find_vertical_wall(data, viewing_angle, SW, &vert_dist);
 	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
 	if (hori_dist < 0)
+	{
+		wall = W;
 		offset = CUBE_SIZE - 1 - ((int)floor(vert_p.y) % CUBE_SIZE);
+	}
 	else if (vert_dist < 0)
+	{
+		wall = S;
 		offset = CUBE_SIZE - 1 - ((int)floor(hori_p.x) % CUBE_SIZE);
+	}
 	else if (hori_dist < vert_dist)
+	{
+		wall = S;
 		offset = CUBE_SIZE - 1 - ((int)floor(hori_p.x) % CUBE_SIZE);
+	}
 	else
+	{
+		wall = W;
 		offset = CUBE_SIZE - 1 - ((int)floor(vert_p.y) % CUBE_SIZE);
-	cast_slice(data, real_dist, col, offset);
+	}
+	cast_slice(data, real_dist, col, offset, wall);
 }
 
 void	se_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
@@ -89,19 +128,32 @@ void	se_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col
 	double	hori_dist;
 	double	real_dist;
 	int		offset;
+	int		wall;
 
 	hori_p = find_horizontal_wall(data, viewing_angle, SE, &hori_dist);
 	vert_p = find_vertical_wall(data, viewing_angle, SE, &vert_dist);
 	real_dist = get_correct_distance(hori_dist, vert_dist, plane_angle);
 	if (hori_dist < 0)
+	{
+		wall = E;
 		offset = (int)floor(vert_p.y) % CUBE_SIZE;
+	}
 	else if (vert_dist < 0)
+	{
+		wall = S;
 		offset = CUBE_SIZE - 1 - ((int)floor(hori_p.x) % CUBE_SIZE);
+	}
 	else if (hori_dist < vert_dist)
+	{
+		wall = S;
 		offset = CUBE_SIZE - 1 - ((int)floor(hori_p.x) % CUBE_SIZE);
+	}
 	else
+	{
+		wall = E;
 		offset = (int)floor(vert_p.y) % CUBE_SIZE;
-	cast_slice(data, real_dist, col, offset);
+	}
+	cast_slice(data, real_dist, col, offset, wall);
 }
 
 void	n_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
@@ -114,7 +166,7 @@ void	n_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
 	hori_p = find_horizontal_wall(data, viewing_angle, N, &hori_dist);
 	real_dist = hori_dist * cos(plane_angle / (double)180 * M_PI);
 	offset = (int)floor(hori_p.x) % CUBE_SIZE;
-	cast_slice(data, real_dist, col, offset);
+	cast_slice(data, real_dist, col, offset, N);
 }
 
 void	s_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
@@ -127,7 +179,7 @@ void	s_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
 	hori_p = find_horizontal_wall(data, viewing_angle, S, &hori_dist);
 	real_dist = hori_dist * cos(plane_angle / (double)180 * M_PI);
 	offset = CUBE_SIZE - 1 - ((int)floor(hori_p.x) % CUBE_SIZE);
-	cast_slice(data, real_dist, col, offset);
+	cast_slice(data, real_dist, col, offset, S);
 }
 
 void	e_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
@@ -140,7 +192,7 @@ void	e_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
 	vert_p = find_vertical_wall(data, viewing_angle, E, &vert_dist);
 	real_dist = vert_dist * cos(plane_angle / (double)180 * M_PI);
 	offset = (int)floor(vert_p.y) % CUBE_SIZE;
-	cast_slice(data, real_dist, col, offset);
+	cast_slice(data, real_dist, col, offset, E);
 }
 
 void	w_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
@@ -153,7 +205,7 @@ void	w_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
 	vert_p = find_vertical_wall(data, viewing_angle, W, &vert_dist);
 	real_dist = vert_dist * cos(plane_angle / (double)180 * M_PI);
 	offset = CUBE_SIZE - 1 - ((int)floor(vert_p.y) % CUBE_SIZE);
-	cast_slice(data, real_dist, col, offset);
+	cast_slice(data, real_dist, col, offset, W);
 }
 
 void	cast_ray(t_data *data, double plane_angle, double viewing_angle, int col)
