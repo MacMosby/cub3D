@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:28:59 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/11 17:34:17 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:42:47 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ void draw_rays(t_data *data, float x_start, float y_start)
 	fovend = ft_normalize(fovend);
 	while (counter < 16)
 	{
-		rayX = data->player->position->x / CUBE_SIZE * MAP_CELL - x_start;
-		rayY = data->player->position->y / CUBE_SIZE * MAP_CELL - y_start;
+		rayX = data->player->position->x / CUBE_SIZE * MAP_CELL - x_start - 0.001f;
+		rayY = data->player->position->y / CUBE_SIZE * MAP_CELL - y_start - 0.001f;
 		while(1)
 		{
 			if (rayX < 0 || rayX >= MAP_CELL * data->cols || rayY < 0 || rayY >= MAP_CELL * data->rows)
     			break;
 			rayX += cos(fovstart) * 0.5f; 
 			rayY -= sin(fovstart) * 0.5f;
-			if (data->map[(int)(floor((rayY + y_start) / MAP_CELL))][(int)(floor((rayX + x_start) / MAP_CELL))] == '1')
+			if (data->map[(int)(floor((rayY + y_start - 0.001f) / MAP_CELL))][(int)(floor((rayX + x_start - 0.001f) / MAP_CELL))] == '1')
 				break ;
 			if (rayY > MM_HEIGHT || rayX > MM_WIDTH)
 				break ;
@@ -150,8 +150,12 @@ void draw_minimap(t_data *data)
 	if (y_start < 0)
 		y_start = 0;
 	else if (y_start + MM_HEIGHT > height_bigmmap)
-		y_start = height_bigmmap - MM_HEIGHT;
-
+	{
+		if (height_bigmmap < MM_HEIGHT)
+			y_start = 0;
+		else
+			y_start = height_bigmmap - MM_HEIGHT;
+	}
 	// printf("this is the updated x_start: %f\n", x_start);
 	// printf("this is the updated y_start: %f\n", y_start);
 	
