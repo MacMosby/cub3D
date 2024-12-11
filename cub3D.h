@@ -90,6 +90,10 @@ typedef struct s_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_imag	imag;
+	t_imag	ea_img;
+	t_imag	no_img;
+	t_imag	we_img;
+	t_imag	so_img;
 	void	*mlx_ptr_map;
 	void	*win_ptr_map;
 	//double	plane_dist;
@@ -123,7 +127,7 @@ void	ray_caster(t_data *data);
 t_point	find_horizontal_wall(t_data *data, double viewing_angle, int direction, double *dist);
 t_point	find_vertical_wall(t_data *data, double viewing_angle, int direction, double *dist);
 double	get_correct_distance(double hori_dist, double vert_dist, double angle);
-void	cast_slice(t_data *data, double wall_distance, int col, int offset);
+void	cast_slice(t_data *data, double wall_distance, int col, int offset, int wall);
 
 // setup
 void	init_struct(t_data *data);

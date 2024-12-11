@@ -60,12 +60,27 @@ int	key_down(int key, t_data *data)
 	return (0);
 }
 
+void	get_textures(t_data *data)
+{
+	int size = CUBE_SIZE;
+
+	data->ea_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "assets/east.xpm", &size, &size);
+	data->ea_img.pixels_ptr = mlx_get_data_addr(data->ea_img.img_ptr, &data->ea_img.bpp, &data->ea_img.line_len, &data->ea_img.endian);
+	data->no_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "assets/north.xpm", &size, &size);
+	data->no_img.pixels_ptr = mlx_get_data_addr(data->no_img.img_ptr, &data->no_img.bpp, &data->no_img.line_len, &data->no_img.endian);
+	data->we_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "assets/west.xpm", &size, &size);
+	data->we_img.pixels_ptr = mlx_get_data_addr(data->we_img.img_ptr, &data->we_img.bpp, &data->we_img.line_len, &data->we_img.endian);
+	data->so_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "assets/south.xpm", &size, &size);
+	data->so_img.pixels_ptr = mlx_get_data_addr(data->so_img.img_ptr, &data->so_img.bpp, &data->so_img.line_len, &data->so_img.endian);
+}
+
 int	init_mlx(t_data *data)
 {
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "cub3D");
 	data->imag.img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	data->imag.pixels_ptr = mlx_get_data_addr(data->imag.img_ptr, &data->imag.bpp, &data->imag.line_len, &data->imag.endian);
+	get_textures(data);
 	// ray_caster(data);
 	render(data);
 	mlx_key_hook(data->win_ptr, key_handler, data);
