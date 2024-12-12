@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/12 12:12:36 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:18:31 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,9 +143,7 @@ void	store_path_no(char *path, t_data *data);
 void	store_path_so(char *path, t_data *data);
 void	store_path_we(char *path, t_data *data);
 void	store_path_ea(char *path, t_data *data);
-void	store_and_check_color(char *info, t_color *place);
-// void	store_and_check_color_c(char *info, t_data *data);
-// void	store_and_check_color_f(char *info, t_data *data);
+void	handle_color(char *info, t_color *place, t_data *data, char *line);
 void 	flood_fill_wall_check(t_data *data);
 void 	flood_fill_space_check(t_data *data);
 char	*ft_strcpy(char *dest, char *src);
@@ -164,20 +162,14 @@ void draw_player(t_data *data, float x_start, float y_start);
 void 	render(t_data *data);
 void 	my_pixel_put(int x, int y, t_imag *imag, int color);
 
-//testing
-void	print_map(t_data *data);
-void 	print_struct(t_data *data);
-
-
 // errors
-void	color_error(char **colors);
-void	malloc_error(void);
-void	map_error(int fd);
+void	color_error(char **colors, t_data *data);
+void	malloc_error(t_data *data);
+void	map_error(int fd, t_data *data);
 
 // cleanup
 void	free_array(char **array);
 void	free_everything(t_data *data);
-
 
 t_point	get_grid_position(t_point point);
 

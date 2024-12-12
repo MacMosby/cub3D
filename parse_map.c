@@ -6,39 +6,40 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:40:56 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/25 11:54:41 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:19:08 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-char *handle_line(char *line, t_data *data, int fd)
+char	*handle_line(char *line, t_data *data, int fd)
 {
-	int 	i;
-	int 	len;
+	int		i;
+	int		len;
 	char	*newrow;
 
 	newrow = (char *)malloc((data->cols + 1) * sizeof(char));
 	i = 0;
-	while(line[i] != '\0' && line[i] == ' ')
+	while (line[i] != '\0' && line[i] == ' ')
 	{
 		line[i] = '*';
 		i++;
 	}
 	if (line[i] == '\n')
-		map_error(fd);
-	while(line[i] != '\0' && line[i] != '\n')
+		map_error(fd, data);
+	while (line[i] != '\0' && line[i] != '\n')
 	{
-		if (!(line[i] == '0' || line[i] == '1' || line[i] == 'N' || line[i] == 'S' || line[i] == 'W' \
+		if (!(line[i] == '0' || line[i] == '1' || line[i] == 'N' \
+			|| line[i] == 'S' || line[i] == 'W' \
 			|| line[i] == 'E' || line[i] == ' '))
-			map_error(fd);
+			map_error(fd, data);
 		i++;
 	}
 	len = ft_strlen(line);
 	ft_strlcpy(newrow, line, len);
 	if (len < data->cols + 1)
 	{
-		while(i < data->cols)
+		while (i < data->cols)
 		{
 			newrow[i] = '*';
 			i++;
@@ -48,19 +49,19 @@ char *handle_line(char *line, t_data *data, int fd)
 	return (newrow);
 }
 
-void store_map(t_data *data, char *inputfile, char **oldline)
+void	store_map(t_data *data, char *inputfile, char **oldline)
 {
 	int		fd;
 	char	*line;
-	int 	i;
+	int		i;
 
 	fd = open(inputfile, O_RDONLY);
-	data->map = (char**)malloc((data->rows + 1) * sizeof(char *));
+	data->map = (char **)malloc((data->rows + 1) * sizeof(char *));
 	if (!data->map)
-		malloc_error();
+		malloc_error(data);
 	i = 0;
 	line = get_next_line(fd);
-	while(ft_strcmp(line, *oldline))
+	while (ft_strcmp(line, *oldline))
 	{
 		free(line);
 		line = get_next_line(fd);
@@ -82,15 +83,14 @@ void store_map(t_data *data, char *inputfile, char **oldline)
 	close(fd);
 }
 
-void parse_map(int fd, char *inputfile, t_data *data, char **oldline)
+void	parse_map(int fd, char *inputfile, t_data *data, char **oldline)
 {
 	int		len;
-	char 	*line;
+	char	*line;
 
-	// 1. get_dimensions
 	line = ft_strdup(*oldline);
 	if (!line || line[0] == '\0')
-		map_error(fd);
+		map_error(fd, data);
 	data->rows++;
 	while (line != NULL)
 	{
@@ -100,21 +100,14 @@ void parse_map(int fd, char *inputfile, t_data *data, char **oldline)
 		if (!line)
 			break ;
 		if (line[0] == '\n')
-			map_error(fd);
+			map_error(fd, data);
 		data->rows++;
 		len = ft_strlen(line) - 1;
 		if (len > data->cols)
 			data->cols = len;
 	}
 	close(fd);
-	printf("This is the amount of columns: %i\n", data->cols);
-	printf("This is the amount of rows: %i\n", data->rows);
-	printf("This is the file: %s\n", inputfile);
-		
-	// 2. store map
 	store_map(data, inputfile, oldline);
-	
-	// 3. checks
 	player_check(data, fd);
 	flood_fill_wall_check(data);
 	flood_fill_space_check(data);

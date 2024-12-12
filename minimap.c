@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:28:59 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/12 11:37:38 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:01:59 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ float	ft_normalize(float angle)
 	return (angle);
 }
 
-// problem with walls in the east and south
 void draw_rays(t_data *data, float x_start, float y_start)
 {
 	float rayX;
@@ -127,6 +126,7 @@ void	draw_scaledminimap(t_data *data, float x_start, float y_start)
 	draw_player(data, x_start, y_start);
 }
 
+// problem when map is smaller than scaled minimap #TODO
 void draw_frame(t_data *data)
 {
 	int i;
@@ -157,13 +157,8 @@ void draw_minimap(t_data *data)
 
 	x_start = data->player->position->x * MAP_CELL / CUBE_SIZE - MM_WIDTH / 2;
 	y_start = data->player->position->y * MAP_CELL / CUBE_SIZE - MM_HEIGHT / 2;
-	// printf("this is x_start: %f\n", x_start);
-	// printf("this is y_start: %f\n", y_start);
-
 	width_bigmmap = MAP_CELL * data->cols;
 	height_bigmmap = MAP_CELL * data->rows;
-	
-	// problem might be that these are not precise enough for the player and rays
 	if (x_start < 0)
 		x_start = 0;
 	else if (x_start + MM_WIDTH > width_bigmmap)
@@ -177,48 +172,7 @@ void draw_minimap(t_data *data)
 		else
 			y_start = height_bigmmap - MM_HEIGHT;
 	}
-	// printf("this is the updated x_start: %f\n", x_start);
-	// printf("this is the updated y_start: %f\n", y_start);
 	draw_frame(data);
 	draw_scaledminimap(data, x_start, y_start);
 }
 
-/* void	draw_minimap(t_data *data)
-{
-	int i;
-	int j;
-	int pixX;
-	int pixY;
-	int color;
-
-	i = 0;
-	j = 0;
-	while(i < data->rows)
-	{
-		j = 0;
-		while(j < data->cols)
-		{
-			if (data->map[i][j] == '1')
-				color = COLD_BLUE;
-			else if (data->map[i][j] == '*')
-				color = GRASS_GREEN;
-			else
-				color = LIGHT_BLUE;
-			pixY = MM_OFFSET;
-			while(pixY < (MAP_CELL + MM_OFFSET)) // add statement here to guarantee that pixY is within scale range?
-			{
-				pixX = MM_OFFSET;
-				while(pixX < (MAP_CELL + MM_OFFSET)) // add statement here to guarantee that pixX is within scale range?
-				{
-					if (color == LIGHT_BLUE || color == COLD_BLUE)
-						my_pixel_put((MAP_CELL * j + pixX), (MAP_CELL * i + pixY), &data->imag, color);
-					pixX++;
-				}
-				pixY++;
-			}
-			j++;
-		}
-		i++;
-	}
-	draw_player(data);
-} */

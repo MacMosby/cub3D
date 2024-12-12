@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:10:27 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/28 13:03:07 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:18:00 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	parse_input(char *inputfile, t_data *data)
 {
-	int	fd;
+	int		fd;
 	char	*line;
 
 	fd = open(inputfile, O_RDONLY);
@@ -26,16 +26,14 @@ void	parse_input(char *inputfile, t_data *data)
 	}
 	line = parse_firstpart(fd, data);
 	parse_map(fd, inputfile, data, &line);
-	print_struct(data);
-	print_map(data);
 }
 
-int		check_ext(char *mapfile)
+int	check_ext(char *mapfile)
 {
 	int	i;
 
 	i = 0;
-	while(mapfile[i] != 0)
+	while (mapfile[i] != 0)
 		i++;
 	if (mapfile[--i] != 'b')
 		return (1);

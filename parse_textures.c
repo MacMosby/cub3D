@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:54:01 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/22 16:05:28 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:04:10 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ char	*parse_firstpart(int fd, t_data *data)
 			else if (!ft_strncmp(line + i, "EA", 2))
 				store_path_ea(line + i + 2, data);
 			else if (!ft_strncmp(line + i, "F", 1))
-				store_and_check_color(line + i + 1, &data->c_floor);
+				handle_color(line + i + 1, &data->c_floor, data, line);
 			else if (!ft_strncmp(line + i, "C", 1))
-				store_and_check_color(line + i + 1, &data->c_ceiling);
+				handle_color(line + i + 1, &data->c_ceiling, data, line);
 			else
 			{
 				if (check_struct(data) == 1)
