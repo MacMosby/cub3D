@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:28:59 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/11 18:42:47 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:37:38 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void draw_rays(t_data *data, float x_start, float y_start)
 				break ;
 			if (rayY > MM_HEIGHT || rayX > MM_WIDTH)
 				break ;
-			my_pixel_put(rayX + MM_OFFSET, rayY + MM_OFFSET, &data->imag, 0xFF13F0);
+			my_pixel_put(rayX + MM_OFFSET, rayY + MM_OFFSET, &data->imag, NEON_ORANGE);
 		}
 		fovstart += M_PI / 45;
 		if (fovstart >= M_PI * 2)
@@ -98,7 +98,7 @@ void	draw_scaledminimap(t_data *data, float x_start, float y_start)
 			if (data->map[i][j] == '1')
 				color = COLD_BLUE;
 			else if (data->map[i][j] == '*')
-				color = GRASS_GREEN;
+				color = GREY;
 			else
 				color = LIGHT_BLUE;
 			pixY = 0;
@@ -113,8 +113,8 @@ void	draw_scaledminimap(t_data *data, float x_start, float y_start)
 					if (scaled_x >= 0 && scaled_x < MM_WIDTH &&
    						scaled_y >= 0 && scaled_y < MM_HEIGHT)
 					{
-						if (color == LIGHT_BLUE || color == COLD_BLUE)
-							my_pixel_put((scaled_x + MM_OFFSET), (scaled_y + MM_OFFSET), &data->imag, color);
+						// if (color == LIGHT_BLUE || color == COLD_BLUE)
+						my_pixel_put((scaled_x + MM_OFFSET), (scaled_y + MM_OFFSET), &data->imag, color);
 					}
 					pixX++;
 				}
@@ -125,6 +125,27 @@ void	draw_scaledminimap(t_data *data, float x_start, float y_start)
 		i++;
 	}
 	draw_player(data, x_start, y_start);
+}
+
+void draw_frame(t_data *data)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while(i <= MM_HEIGHT + 1)
+	{
+		j = 0;
+		while(j <= MM_WIDTH + 1)
+		{
+			if (i == 0 || i == MM_HEIGHT + 1) // || j == 0 || j == data->cols + 1)
+				my_pixel_put(j + MM_OFFSET - 1, i + MM_OFFSET - 1, &data->imag, METALLIC_WHITE);
+			else if (j == 0 || j == MM_WIDTH + 1)
+				my_pixel_put(j + MM_OFFSET - 1, i + MM_OFFSET - 1, &data->imag, METALLIC_WHITE);
+			j++;
+		}
+		i++;
+	}
 }
 
 void draw_minimap(t_data *data)
@@ -158,7 +179,7 @@ void draw_minimap(t_data *data)
 	}
 	// printf("this is the updated x_start: %f\n", x_start);
 	// printf("this is the updated y_start: %f\n", y_start);
-	
+	draw_frame(data);
 	draw_scaledminimap(data, x_start, y_start);
 }
 

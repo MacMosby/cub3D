@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:14:00 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/09 11:45:02 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:10:10 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	cast_slice(t_data *data, double wall_distance, int col, int offset, int wal
 	// drawing the ceiling
 	while (i < ceiling_floor_height)
 	{
-		my_pixel_put(col, i, &data->imag, SKY_BLUE);
+		my_pixel_put(col, i, &data->imag, METAL);
 		i++;
 	}
 	// drawing the wall
@@ -57,7 +57,7 @@ void	cast_slice(t_data *data, double wall_distance, int col, int offset, int wal
 	// drawing the floor
 	while (i < HEIGHT)
 	{
-		my_pixel_put(col, i, &data->imag, CLAY_RED);
+		my_pixel_put(col, i, &data->imag, METALLIC_BLACK);
 		i++;
 	}
 	// middle of slice should be in the the middle of the screen
