@@ -6,12 +6,11 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:33:46 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/12 10:53:41 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:16:54 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
 
 int	close_window(t_data *data) // function has to be type int
 {
@@ -22,7 +21,8 @@ int	close_window(t_data *data) // function has to be type int
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr); */
 	printf("Exit with clicking X\n");
-	cleanup(data);
+	// cleanup(data);
+	free_everything(data);
 	exit(0); // ugly but what can we do here instead??
 	return (0);
 }
@@ -34,7 +34,8 @@ int	key_handler(int key, void *param)
 	if (key == XK_Escape)
 	{
 		printf("Exit with Escape key\n");
-		cleanup(data);
+		// cleanup(data);
+		free_everything(data);
 		exit(1);
 	}
 	else if (key == XK_Left)

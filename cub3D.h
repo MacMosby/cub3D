@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/12 11:34:59 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:12:36 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include "libft/libft.h"
 
 # define CUBE_SIZE 64
-# define MM_OFFSET 6
+# define MM_OFFSET 10
 # define MAP_CELL 10
 # define MM_WIDTH 220
 # define MM_HEIGHT 140
@@ -106,7 +106,7 @@ double	calculate_distance(t_data *data, t_point *p2, double angle);
 // double	calculate_vert_distance(t_point *p1, t_point *p2, double angle);
 
 // cleanup.c
-void	cleanup(t_data *data);
+// void	cleanup(t_data *data);
 
 // init_mlx.c
 int		init_mlx(t_data *data);

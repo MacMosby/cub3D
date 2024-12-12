@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:17:25 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/26 16:54:54 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:02:47 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@
 void init_struct(t_data *data)
 {
 	t_player	*player = malloc(sizeof(t_player));
-	t_point		*player_pos = malloc(sizeof(t_point)); // there was a problem with malloc here
-
+	t_point		*player_pos = malloc(sizeof(t_point));
+	
 	data->player = player;
 	data->player->angle = 0;  // 45;
 	data->player->position = player_pos;
