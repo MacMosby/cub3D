@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/12 17:18:31 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:23:42 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,9 @@ int		check_ext(char *mapfile);
 void	parse_input(char *inputfile, t_data *data);
 char	*parse_firstpart(int fd, t_data *data);
 void 	parse_map(int fd, char *inputfile, t_data *data, char **oldline);
+char	*find_start_map(int fd, char **oldline);
+char	*handle_line(char *line, t_data *data, int fd);
+int 	line_error_checks(char *line, int fd, t_data *data);
 void	store_path_no(char *path, t_data *data);
 void	store_path_so(char *path, t_data *data);
 void	store_path_we(char *path, t_data *data);
@@ -165,7 +168,8 @@ void 	my_pixel_put(int x, int y, t_imag *imag, int color);
 // errors
 void	color_error(char **colors, t_data *data);
 void	malloc_error(t_data *data);
-void	map_error(int fd, t_data *data);
+void	map_error(int fd, t_data *data, char *line);
+void	map_error2(int fd, t_data *data);
 
 // cleanup
 void	free_array(char **array);

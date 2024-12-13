@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:48:56 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/12 17:18:45 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:37:21 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,18 @@ void	color_error(char **colors, t_data *data)
 	exit(EXIT_FAILURE);
 }
 
-void	map_error(int fd, t_data *data)
+void	map_error(int fd, t_data *data, char *line)
+{
+	printf("\nError. Could not find all required information in the file\n");
+	printf("Please check whether your map has the right format.\n\n");
+	close(fd);
+	free_everything(data);
+	if (line)
+		free(line);
+	exit(EXIT_FAILURE);
+}
+
+void	map_error2(int fd, t_data *data)
 {
 	printf("\nError. Could not find all required information in the file\n");
 	printf("Please check whether your map has the right format.\n\n");

@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:17:25 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/12 12:02:47 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:48:43 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void init_struct(t_data *data)
 	data->player->position = player_pos;
 	data->player->position->x = 0; // 160;
 	data->player->position->y = 0; // 224;
-
 	data->ea = NULL;
 	data->no = NULL;
 	data->so = NULL;
@@ -79,6 +78,8 @@ void init_struct(t_data *data)
 	data->c_floor.hexa = 0;
 	data->cols = 0;
 	data->rows = 0;
+	data->map = NULL;
+	data->mlx_ptr = NULL;
 }
 
 int	init_everything(char *input, t_data *data)

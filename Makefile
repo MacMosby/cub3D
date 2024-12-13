@@ -6,7 +6,7 @@
 #    By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/31 15:17:42 by lde-taey          #+#    #+#              #
-#    Updated: 2024/12/12 12:43:24 by lde-taey         ###   ########.fr        #
+#    Updated: 2024/12/13 15:24:16 by lde-taey         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS = main.c \
 	parse_floodfill.c \
 	parse_input.c \
 	parse_map.c \
+	parse_map_tools.c \
 	parse_textures.c \
 	parse_utils.c \
 	parse_store_paths.c \

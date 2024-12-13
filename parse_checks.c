@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:08:14 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/12 17:18:05 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:37:11 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ void	player_check(t_data *data, int fd)
 	if (player == 0)
 	{
 		printf("No player found.");
-		map_error(fd, data);
+		map_error2(fd, data);
 	}
 	else if (player > 1)
 	{
 		printf("More than one player found.");
-		map_error(fd, data);
+		map_error2(fd, data);
 	}
 }
