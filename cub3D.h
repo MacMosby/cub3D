@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/12 12:12:36 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:38:38 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_color
 	int		g;
 	int		b;
 	int		full;
-	long		hexa;
+	long	hexa;
 }	t_color;
 
 typedef struct s_imag
@@ -97,6 +97,8 @@ typedef struct s_data
 	int		wall;
 	void	*mlx_ptr_map;
 	void	*win_ptr_map;
+	float	mm_xstart;
+	float	mm_ystart;
 	//double	plane_dist;
 	t_player	*player;
 } 	t_data;
@@ -152,13 +154,15 @@ int		check_ext(char *mapfile);
 void	parse_input(char *inputfile, t_data *data);
 char	*parse_firstpart(int fd, t_data *data);
 void 	parse_map(int fd, char *inputfile, t_data *data, char **oldline);
+char	*find_start_map(int fd, char **oldline);
+char	*handle_line(char *line, t_data *data, int fd);
+int 	line_error_checks(char *line, int fd, t_data *data);
 void	store_path_no(char *path, t_data *data);
 void	store_path_so(char *path, t_data *data);
 void	store_path_we(char *path, t_data *data);
 void	store_path_ea(char *path, t_data *data);
-void	store_and_check_color(char *info, t_color *place);
-// void	store_and_check_color_c(char *info, t_data *data);
-// void	store_and_check_color_f(char *info, t_data *data);
+void	handle_color_f(char *info, t_data *data, char *line, int fd);
+void	handle_color_c(char *info, t_data *data, char *line, int fd);
 void 	flood_fill_wall_check(t_data *data);
 void 	flood_fill_space_check(t_data *data);
 char	*ft_strcpy(char *dest, char *src);
@@ -168,29 +172,24 @@ void 	space_check(t_data *data);
 
 // minimap
 void	draw_minimap(t_data *data);
-// void	draw_minimap(t_data *data, float x_start, float y_start);
 void 	init_minimap(t_data *data);
-// void	draw_player(t_data *data);
-void draw_player(t_data *data, float x_start, float y_start);
+void	draw_player(t_data *data);
+void	draw_rays(t_data *data);
+float	ft_normalize(float angle);
 
 // render
 void 	render(t_data *data);
 void 	my_pixel_put(int x, int y, t_imag *imag, int color);
 
-//testing
-void	print_map(t_data *data);
-void 	print_struct(t_data *data);
-
-
 // errors
-void	color_error(char **colors);
-void	malloc_error(void);
-void	map_error(int fd);
+void	color_error(char **colors, t_data *data, char *line, int fd);
+void	malloc_error(t_data *data);
+void	map_error(int fd, t_data *data, char *line);
+void	map_error2(int fd, t_data *data);
 
 // cleanup
 void	free_array(char **array);
 void	free_everything(t_data *data);
-
 
 t_point	get_grid_position(t_point point);
 

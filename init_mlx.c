@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:33:46 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/12 12:16:54 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:37:31 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,7 @@
 
 int	close_window(t_data *data) // function has to be type int
 {
-	// need to clean - code below is from so long, not for cub3d yet
-	/* free_textures(data);
-	free_map(data);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr); */
 	printf("Exit with clicking X\n");
-	// cleanup(data);
 	free_everything(data);
 	exit(0); // ugly but what can we do here instead??
 	return (0);
@@ -35,7 +28,6 @@ int	key_handler(int key, void *param)
 	if (key == XK_Escape)
 	{
 		printf("Exit with Escape key\n");
-		// cleanup(data);
 		free_everything(data);
 		exit(1);
 	}

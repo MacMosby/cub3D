@@ -6,7 +6,7 @@
 #    By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/31 15:17:42 by lde-taey          #+#    #+#              #
-#    Updated: 2024/12/03 15:12:47 by lde-taey         ###   ########.fr        #
+#    Updated: 2024/12/16 14:30:22 by lde-taey         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,18 +32,19 @@ SRCS = main.c \
 	find_vertical_wall.c \
 	errors.c \
 	minimap.c \
+	minimap_tools.c \
 	parse_checks.c \
 	parse_colors.c \
 	parse_floodfill.c \
 	parse_input.c \
 	parse_map.c \
+	parse_map_tools.c \
 	parse_textures.c \
 	parse_utils.c \
 	parse_store_paths.c \
 	render.c \
 	player_turns.c \
-	get_grid_position.c \
-	testing.c #remove
+	get_grid_position.c
 
 OBJS = $(SRCS:.c=.o)
 

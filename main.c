@@ -6,13 +6,13 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:58 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/12 12:11:26 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:41:10 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int check_args(int argc, char **argv)
+int	check_args(int argc, char **argv)
 {
 	if (argc == 1 || argc > 2)
 	{

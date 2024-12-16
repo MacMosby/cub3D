@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 13:00:58 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/11/22 13:18:20 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:11:26 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strcpy(char *dest, char *src)
 	}
 	dest[i] = '\0';
 	return (dest);
-} 
+}
 
 int	ft_strcmp(char *s1, char *s2)
 {
