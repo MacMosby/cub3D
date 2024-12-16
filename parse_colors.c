@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:20:17 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/16 12:56:17 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:07:59 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int	get_hexa(t_color *place)
 	return ((place->r << 16) | (place->g << 8) | place->b);
 }
 
-// TODO too may values in function call
-void	check_color_value(char *color, char **colors, t_data *data, char *line, int fd)
+int	check_color_value(char *color)
 {
 	int	j;
 
@@ -27,9 +26,10 @@ void	check_color_value(char *color, char **colors, t_data *data, char *line, int
 	{
 		if (!ft_isdigit(color[j]) && color[j] != ' ' \
 			&& color[j] != '\n')
-			color_error(colors, data, line, fd);
+			return (0);
 		j++;
 	}
+	return (1);
 }
 
 void	color_check_loop(char **colors, t_data *data, char *line, int fd)
@@ -43,7 +43,8 @@ void	color_check_loop(char **colors, t_data *data, char *line, int fd)
 	{
 		if (colors[i] == NULL)
 			color_error(colors, data, line, fd);
-		check_color_value(colors[i], colors, data, line, fd);
+		if (!check_color_value(colors[i]))
+			color_error(colors, data, line, fd);
 		val = ft_atoi(colors[i]);
 		if (val < 0 || val > 255)
 			color_error(colors, data, line, fd);

@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:48:56 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/13 15:54:47 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:38:54 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,13 @@ void	map_error2(int fd, t_data *data)
 	printf("Please check whether your map has the right format.\n\n");
 	close(fd);
 	free_everything(data);
+	exit(EXIT_FAILURE);
+}
+
+void	information_error(int fd, char *line)
+{
+	printf("Error. Could not find expected object information in file\n");
+	free(line);
+	close(fd);
 	exit(EXIT_FAILURE);
 }

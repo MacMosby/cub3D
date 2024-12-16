@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/16 14:38:38 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:39:21 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,8 @@ void	handle_color_f(char *info, t_data *data, char *line, int fd);
 void	handle_color_c(char *info, t_data *data, char *line, int fd);
 void 	flood_fill_wall_check(t_data *data);
 void 	flood_fill_space_check(t_data *data);
+char	**create_visited_matrix(t_data *data);
+void	look_for_player(t_data *data, int *point_x, int *point_y);
 char	*ft_strcpy(char *dest, char *src);
 int		ft_strcmp(char *s1, char *s2);
 void	player_check(t_data *data, int fd);
@@ -171,6 +173,7 @@ void	color_error(char **colors, t_data *data, char *line, int fd);
 void	malloc_error(t_data *data);
 void	map_error(int fd, t_data *data, char *line);
 void	map_error2(int fd, t_data *data);
+void	information_error(int fd, char *line);
 
 // cleanup
 void	free_array(char **array);
