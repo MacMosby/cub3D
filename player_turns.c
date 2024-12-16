@@ -14,7 +14,6 @@
 
 void	turn_left(t_data *data)
 {
-	printf("turn left\n");
 	data->player->angle += TURN_SPEED;
 	if (data->player->angle >= 360)
 		data->player->angle -= 360;
@@ -23,7 +22,6 @@ void	turn_left(t_data *data)
 
 void	turn_right(t_data *data)
 {
-	printf("turn right\n");
 	data->player->angle -= TURN_SPEED;
 	if (data->player->angle < 0)
 		data->player->angle += 360;

@@ -14,7 +14,6 @@
 
 int	close_window(t_data *data) // function has to be type int
 {
-	printf("Exit with clicking X\n");
 	free_everything(data);
 	exit(0); // ugly but what can we do here instead??
 	return (0);
@@ -27,7 +26,6 @@ int	key_handler(int key, void *param)
 	data = param;
 	if (key == XK_Escape)
 	{
-		printf("Exit with Escape key\n");
 		free_everything(data);
 		exit(1);
 	}
