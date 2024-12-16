@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/16 13:19:52 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:38:38 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ typedef struct s_data
 	t_imag	so_img;
 	void	*mlx_ptr_map;
 	void	*win_ptr_map;
+	float	mm_xstart;
+	float	mm_ystart;
 	//double	plane_dist;
 	t_player	*player;
 } 	t_data;
@@ -155,10 +157,10 @@ void 	space_check(t_data *data);
 
 // minimap
 void	draw_minimap(t_data *data);
-// void	draw_minimap(t_data *data, float x_start, float y_start);
 void 	init_minimap(t_data *data);
-// void	draw_player(t_data *data);
-void draw_player(t_data *data, float x_start, float y_start);
+void	draw_player(t_data *data);
+void	draw_rays(t_data *data);
+float	ft_normalize(float angle);
 
 // render
 void 	render(t_data *data);

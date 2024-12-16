@@ -6,66 +6,14 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:17:25 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/16 12:59:43 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 14:34:49 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-/* void	build_map(t_data *data)
+void	init_values(t_data *data)
 {
-	char	**map;
-	int i = 0;
-	int j = 0;
-
-	map = malloc(6 * sizeof(char *));
-	while (i < 6)
-	{
-		map[i] = malloc(6 * sizeof(int));
-		i++;
-	}
-	i = 0;
-	while (i < 6)
-	{
-		while (j < 6)
-		{
-			map[i][j] = '0';
-			j++;
-		}
-		i++;
-	}
-	i = 0;
-	j = 0;
-	while (i < 6)
-	{
-		map[i][0] = '1';
-		map[i][5] = '1';
-		i++;
-	}
-	while (j < 6)
-	{
-		map[0][j] = '1';
-		map[5][j] = '1';
-		j++;
-	}
-	//map[4][1] = 1;
-	data->map = map;
-} */
-
-void init_struct(t_data *data)
-{
-	t_player	*player = malloc(sizeof(t_player));
-	if (!player)
-		malloc_error(data);
-	t_point		*player_pos = malloc(sizeof(t_point));
-	if (!player_pos)
-		malloc_error(data);
-	
-	data->player = player;
-	data->player->angle = 0.0;
-	data->player->position = player_pos;
-	data->player->position->x = 0.0;
-	data->player->position->y = 0.0;
 	data->ea = NULL;
 	data->no = NULL;
 	data->so = NULL;
@@ -84,6 +32,34 @@ void init_struct(t_data *data)
 	data->rows = 0;
 	data->map = NULL;
 	data->mlx_ptr = NULL;
+	data->mm_xstart = 0;
+	data->mm_ystart = 0;
+}
+
+void	init_struct(t_data *data)
+{
+	t_player	*player;
+	t_point		*player_pos;
+
+	player = malloc(sizeof(t_player));
+	if (!player)
+	{
+		printf("Error. Malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	player_pos = malloc(sizeof(t_point));
+	if (!player_pos)
+	{
+		printf("Error. Malloc failed\n");
+		free(player);
+		exit(EXIT_FAILURE);
+	}
+	data->player = player;
+	data->player->angle = 0.0;
+	data->player->position = player_pos;
+	data->player->position->x = 0.0;
+	data->player->position->y = 0.0;
+	init_values(data);
 }
 
 int	init_everything(char *input, t_data *data)
