@@ -29,8 +29,9 @@ int	close_window(t_data *data) // function has to be type int
 
 int	key_handler(int key, void *param)
 {
-	t_data *data = param;
+	t_data	*data;
 
+	data = param;
 	if (key == XK_Escape)
 	{
 		printf("Exit with Escape key\n");
@@ -45,11 +46,11 @@ int	key_handler(int key, void *param)
 	else if (key == XK_w || key == XK_W)
 		move_forward(data);
 	else if (key == XK_a || key == XK_A)
-		move_left(data);
+		move_left(data, 0, 0);
 	else if (key == XK_s || key == XK_S)
 		move_backward(data);
 	else if (key == XK_d || key == XK_D)
-		move_right(data);
+		move_right(data, 0, 0);
 	return (0);
 }
 
@@ -63,16 +64,25 @@ int	key_down(int key, t_data *data)
 
 void	get_textures(t_data *data)
 {
-	int size = CUBE_SIZE;
+	int	size;
 
-	data->ea_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "textures/star_wars/star_wars_wall_east.xpm", &size, &size);
-	data->ea_img.pixels_ptr = mlx_get_data_addr(data->ea_img.img_ptr, &data->ea_img.bpp, &data->ea_img.line_len, &data->ea_img.endian);
-	data->no_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "textures/star_wars/star_wars_wall_north.xpm", &size, &size);
-	data->no_img.pixels_ptr = mlx_get_data_addr(data->no_img.img_ptr, &data->no_img.bpp, &data->no_img.line_len, &data->no_img.endian);
-	data->we_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "textures/star_wars/star_wars_wall_west.xpm", &size, &size);
-	data->we_img.pixels_ptr = mlx_get_data_addr(data->we_img.img_ptr, &data->we_img.bpp, &data->we_img.line_len, &data->we_img.endian);
-	data->so_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr, "textures/star_wars/star_wars_wall_south.xpm", &size, &size);
-	data->so_img.pixels_ptr = mlx_get_data_addr(data->so_img.img_ptr, &data->so_img.bpp, &data->so_img.line_len, &data->so_img.endian);
+	size = CUBE_SIZE;
+	data->ea_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
+			data->ea, &size, &size);
+	data->ea_img.pixels_ptr = mlx_get_data_addr(data->ea_img.img_ptr,
+			&data->ea_img.bpp, &data->ea_img.line_len, &data->ea_img.endian);
+	data->no_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
+			data->no, &size, &size);
+	data->no_img.pixels_ptr = mlx_get_data_addr(data->no_img.img_ptr,
+			&data->no_img.bpp, &data->no_img.line_len, &data->no_img.endian);
+	data->we_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
+			data->we, &size, &size);
+	data->we_img.pixels_ptr = mlx_get_data_addr(data->we_img.img_ptr,
+			&data->we_img.bpp, &data->we_img.line_len, &data->we_img.endian);
+	data->so_img.img_ptr = mlx_xpm_file_to_image(data->mlx_ptr,
+			data->so, &size, &size);
+	data->so_img.pixels_ptr = mlx_get_data_addr(data->so_img.img_ptr,
+			&data->so_img.bpp, &data->so_img.line_len, &data->so_img.endian);
 }
 
 int	init_mlx(t_data *data)
@@ -80,7 +90,8 @@ int	init_mlx(t_data *data)
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "cub3D");
 	data->imag.img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
-	data->imag.pixels_ptr = mlx_get_data_addr(data->imag.img_ptr, &data->imag.bpp, &data->imag.line_len, &data->imag.endian);
+	data->imag.pixels_ptr = mlx_get_data_addr(data->imag.img_ptr,
+			&data->imag.bpp, &data->imag.line_len, &data->imag.endian);
 	get_textures(data);
 	render(data);
 	mlx_key_hook(data->win_ptr, key_handler, data);

@@ -25,6 +25,8 @@ SRCS = main.c \
 	init_mlx.c \
 	player_movement.c \
 	ray_caster.c \
+	ray_caster_axis.c \
+	ray_caster_zones.c \
 	casting.c \
 	find_horizontal_wall.c \
 	find_vertical_wall.c \
@@ -39,6 +41,8 @@ SRCS = main.c \
 	parse_utils.c \
 	parse_store_paths.c \
 	render.c \
+	player_turns.c \
+	get_grid_position.c \
 	testing.c #remove
 
 OBJS = $(SRCS:.c=.o)
