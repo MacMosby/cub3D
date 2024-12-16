@@ -6,13 +6,20 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 15:22:06 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/13 15:25:12 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:07:00 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	line_error_checks(char *line, int fd, t_data *data)
+void	cleanup_and_error(int fd, t_data *data, char *line, char *newrow)
+{
+	free(newrow);
+	newrow = NULL;
+	map_error(fd, data, line);
+}
+
+int	line_error_checks(char *line, int fd, t_data *data, char *newrow)
 {
 	int	i;
 
@@ -23,13 +30,13 @@ int	line_error_checks(char *line, int fd, t_data *data)
 		i++;
 	}
 	if (line[i] == '\n')
-		map_error(fd, data, line);
+		cleanup_and_error(fd, data, line, newrow);
 	while (line[i] != '\0' && line[i] != '\n')
 	{
 		if (!(line[i] == '0' || line[i] == '1' || line[i] == 'N' \
 			|| line[i] == 'S' || line[i] == 'W' \
 			|| line[i] == 'E' || line[i] == ' '))
-			map_error(fd, data, line);
+			cleanup_and_error(fd, data, line, newrow);
 		i++;
 	}
 	return (i);
@@ -42,7 +49,7 @@ char	*handle_line(char *line, t_data *data, int fd)
 	char	*newrow;
 
 	newrow = (char *)malloc((data->cols + 1) * sizeof(char));
-	i = line_error_checks(line, fd, data);
+	i = line_error_checks(line, fd, data, newrow);
 	len = ft_strlen(line);
 	ft_strlcpy(newrow, line, len);
 	if (len < data->cols + 1)

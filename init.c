@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:17:25 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/16 16:17:58 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:17:50 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ void	init_values(t_data *data)
 	data->mlx_ptr = NULL;
 	data->mm_xstart = 0;
 	data->mm_ystart = 0;
+	data->imag.img_ptr = NULL;
+	data->ea_img.img_ptr = NULL;
+	data->no_img.img_ptr = NULL;
+	data->we_img.img_ptr = NULL;
+	data->so_img.img_ptr = NULL;
 }
 
 void	init_struct(t_data *data)

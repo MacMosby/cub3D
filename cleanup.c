@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:34:21 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/16 13:03:42 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:23:27 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ void	free_array(char **array)
 	array = NULL;
 }
 
-// check if last line is necessary
-// add texture destroyer? #TODO
 void	free_everything(t_data *data)
 {
-	free_array(data->map);
+	if (data->map)
+		free_array(data->map);
 	free(data->player->position);
 	free(data->player);
 	free(data->we);

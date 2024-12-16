@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 14:14:00 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/12 11:10:10 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:13:07 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	draw_ceiling(t_data *data, int ceiling_height, int *i, int col)
 {
 	while (*i < ceiling_height)
 	{
-		my_pixel_put(col, *i, &data->imag, METAL);
+		my_pixel_put(col, *i, &data->imag, data->c_ceiling.hexa);
 		(*i)++;
 	}
 }
@@ -37,7 +37,7 @@ void	draw_floor(t_data *data, int *i, int col)
 {
 	while (*i < HEIGHT)
 	{
-		my_pixel_put(col, *i, &data->imag, METALLIC_BLACK);
+		my_pixel_put(col, *i, &data->imag, data->c_floor.hexa);
 		(*i)++;
 	}
 }

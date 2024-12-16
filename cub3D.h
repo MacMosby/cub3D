@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/16 16:19:38 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:48:26 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ char	*parse_firstpart(int fd, t_data *data);
 void	parse_map(int fd, char *inputfile, t_data *data, char **oldline);
 char	*find_start_map(int fd, char **oldline);
 char	*handle_line(char *line, t_data *data, int fd);
-int		line_error_checks(char *line, int fd, t_data *data);
+int		line_error_checks(char *line, int fd, t_data *data, char *newrow);
 void	store_path_no(char *path, t_data *data);
 void	store_path_so(char *path, t_data *data);
 void	store_path_we(char *path, t_data *data);

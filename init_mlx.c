@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:33:46 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/16 16:26:05 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:26:36 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	get_textures(t_data *data)
 			data->so, &size, &size);
 	data->so_img.pixels_ptr = mlx_get_data_addr(data->so_img.img_ptr,
 			&data->so_img.bpp, &data->so_img.line_len, &data->so_img.endian);
+	
 }
 
 int	init_mlx(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:40:56 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/16 12:12:31 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:55:59 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	store_map(t_data *data, char *inputfile, char **oldline)
 	int		i;
 
 	fd = open(inputfile, O_RDONLY);
-	data->map = (char **)malloc((data->rows + 1) * sizeof(char *));
+	data->map = (char **)ft_calloc((data->rows + 1), sizeof(char *));
 	if (!data->map)
 		malloc_error(data);
 	i = 0;
