@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/13 15:23:42 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 13:19:52 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct s_color
 	int		g;
 	int		b;
 	int		full;
-	long		hexa;
+	long	hexa;
 }	t_color;
 
 typedef struct s_imag
@@ -101,9 +101,7 @@ typedef struct s_data
 } 	t_data;
 
 // calculate_distance.c
-// double	calculate_distance(t_point *p1, t_point *p2, double angle);
 double	calculate_distance(t_data *data, t_point *p2, double angle);
-// double	calculate_vert_distance(t_point *p1, t_point *p2, double angle);
 
 // cleanup.c
 // void	cleanup(t_data *data);
@@ -146,7 +144,8 @@ void	store_path_no(char *path, t_data *data);
 void	store_path_so(char *path, t_data *data);
 void	store_path_we(char *path, t_data *data);
 void	store_path_ea(char *path, t_data *data);
-void	handle_color(char *info, t_color *place, t_data *data, char *line);
+void	handle_color_f(char *info, t_data *data, char *line, int fd);
+void	handle_color_c(char *info, t_data *data, char *line, int fd);
 void 	flood_fill_wall_check(t_data *data);
 void 	flood_fill_space_check(t_data *data);
 char	*ft_strcpy(char *dest, char *src);
@@ -166,7 +165,7 @@ void 	render(t_data *data);
 void 	my_pixel_put(int x, int y, t_imag *imag, int color);
 
 // errors
-void	color_error(char **colors, t_data *data);
+void	color_error(char **colors, t_data *data, char *line, int fd);
 void	malloc_error(t_data *data);
 void	map_error(int fd, t_data *data, char *line);
 void	map_error2(int fd, t_data *data);

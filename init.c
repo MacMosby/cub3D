@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:17:25 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/13 11:48:43 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:59:43 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,17 @@
 void init_struct(t_data *data)
 {
 	t_player	*player = malloc(sizeof(t_player));
+	if (!player)
+		malloc_error(data);
 	t_point		*player_pos = malloc(sizeof(t_point));
+	if (!player_pos)
+		malloc_error(data);
 	
 	data->player = player;
-	data->player->angle = 0;  // 45;
+	data->player->angle = 0.0;
 	data->player->position = player_pos;
-	data->player->position->x = 0; // 160;
-	data->player->position->y = 0; // 224;
+	data->player->position->x = 0.0;
+	data->player->position->y = 0.0;
 	data->ea = NULL;
 	data->no = NULL;
 	data->so = NULL;
@@ -84,11 +88,9 @@ void init_struct(t_data *data)
 
 int	init_everything(char *input, t_data *data)
 {
-	// printf("This is the input: %s", input);
 	init_struct(data);
-	// build_map(data);
 	parse_input(input, data);
 	if (!init_mlx(data))
-	 	return (1);
+		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:28:59 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/12 15:01:59 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 13:18:26 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,25 +126,50 @@ void	draw_scaledminimap(t_data *data, float x_start, float y_start)
 	draw_player(data, x_start, y_start);
 }
 
-// problem when map is smaller than scaled minimap #TODO
+void draw_small_map(t_data *data)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while(i <= data->rows * MAP_CELL + 1)
+		{
+			j = 0;
+			while(j <= data->cols * MAP_CELL + 1)
+			{
+				if (i == 0 || i == data->rows * MAP_CELL + 1)
+					my_pixel_put(j + MM_OFFSET - 1, i + MM_OFFSET - 1, &data->imag, METALLIC_WHITE);
+				else if (j == 0 || j == data->cols * MAP_CELL + 1)
+					my_pixel_put(j + MM_OFFSET - 1, i + MM_OFFSET - 1, &data->imag, METALLIC_WHITE);
+				j++;
+			}
+			i++;
+		}
+}
+
 void draw_frame(t_data *data)
 {
 	int i;
 	int j;
 
 	i = 0;
-	while(i <= MM_HEIGHT + 1)
+	if (MM_HEIGHT > data->cols * MAP_CELL && MM_WIDTH > data->rows * MAP_CELL)
+		draw_small_map(data);
+	else
 	{
-		j = 0;
-		while(j <= MM_WIDTH + 1)
+		while(i <= MM_HEIGHT + 1)
 		{
-			if (i == 0 || i == MM_HEIGHT + 1) // || j == 0 || j == data->cols + 1)
-				my_pixel_put(j + MM_OFFSET - 1, i + MM_OFFSET - 1, &data->imag, METALLIC_WHITE);
-			else if (j == 0 || j == MM_WIDTH + 1)
-				my_pixel_put(j + MM_OFFSET - 1, i + MM_OFFSET - 1, &data->imag, METALLIC_WHITE);
-			j++;
+			j = 0;
+			while(j <= MM_WIDTH + 1)
+			{
+				if (i == 0 || i == MM_HEIGHT + 1)
+					my_pixel_put(j + MM_OFFSET - 1, i + MM_OFFSET - 1, &data->imag, METALLIC_WHITE);
+				else if (j == 0 || j == MM_WIDTH + 1)
+					my_pixel_put(j + MM_OFFSET - 1, i + MM_OFFSET - 1, &data->imag, METALLIC_WHITE);
+				j++;
+			}
+			i++;
 		}
-		i++;
 	}
 }
 

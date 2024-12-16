@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:34:21 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/13 14:19:08 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 13:03:42 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,13 @@ void	free_array(char **array)
 // add texture destroyer? #TODO
 void	free_everything(t_data *data)
 {
-	if (data->map)
-		free_array(data->map);
-	if (data->player->position)
-		free(data->player->position);
-	if (data->player)
-		free(data->player);
-	if (data->we)
-		free(data->we);
-	if (data->no)
-		free(data->no);
-	if (data->so)
-		free(data->so);
-	if (data->ea)
-		free(data->ea);
+	free_array(data->map);
+	free(data->player->position);
+	free(data->player);
+	free(data->we);
+	free(data->no);
+	free(data->so);
+	free(data->ea);
 	if (data->mlx_ptr)
 	{
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);

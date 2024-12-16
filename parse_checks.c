@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:08:14 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/13 14:37:11 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 13:18:44 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	player_check(t_data *data, int fd)
 {
 	int	i;
 	int	j;
-	int	player;
+	int	play_num;
 
 	i = 0;
-	player = 0;
+	play_num = 0;
 	while (data->map[i] != NULL)
 	{
 		j = 0;
@@ -57,18 +57,18 @@ void	player_check(t_data *data, int fd)
 					data->player->angle = 270;
 				else if (data->map[i][j] == 'W')
 					data->player->angle = 180;
-				player++;
+				play_num++;
 			}
 			j++;
 		}
 		i++;
 	}
-	if (player == 0)
+	if (play_num == 0)
 	{
 		printf("No player found.");
 		map_error2(fd, data);
 	}
-	else if (player > 1)
+	else if (play_num > 1)
 	{
 		printf("More than one player found.");
 		map_error2(fd, data);

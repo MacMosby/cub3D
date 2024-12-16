@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:40:56 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/13 15:22:35 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:12:31 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	map_loop(t_data *data, char *line, int fd, char **oldline)
 		if (line[0] == '\n')
 		{
 			free (*oldline); 
-			map_error(fd, data, line); // leaks because of static buffer in get_next_line #TODO
+			map_error(fd, data, line);
 		}
 		data->rows++;
 		len = ft_strlen(line) - 1;
