@@ -42,6 +42,11 @@ void	free_everything(t_data *data)
 	free(data->ea);
 	if (data->mlx_ptr)
 	{
+		mlx_destroy_image(data->mlx_ptr, data->imag.img_ptr);
+		mlx_destroy_image(data->mlx_ptr, data->ea_img.img_ptr);
+		mlx_destroy_image(data->mlx_ptr, data->no_img.img_ptr);
+		mlx_destroy_image(data->mlx_ptr, data->we_img.img_ptr);
+		mlx_destroy_image(data->mlx_ptr, data->so_img.img_ptr);
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		mlx_destroy_display(data->mlx_ptr);
 		free(data->mlx_ptr);

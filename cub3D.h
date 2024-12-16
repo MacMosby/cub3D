@@ -94,6 +94,7 @@ typedef struct s_data
 	t_imag	no_img;
 	t_imag	we_img;
 	t_imag	so_img;
+	int		wall;
 	void	*mlx_ptr_map;
 	void	*win_ptr_map;
 	float	mm_xstart;
@@ -103,7 +104,9 @@ typedef struct s_data
 } 	t_data;
 
 // calculate_distance.c
-double	calculate_distance(t_data *data, t_point *p2, double angle);
+// double	calculate_distance(t_point *p1, t_point *p2, double angle);
+double	calculate_distance(t_data *data, t_point *p2);
+// double	calculate_vert_distance(t_point *p1, t_point *p2, double angle);
 
 // cleanup.c
 // void	cleanup(t_data *data);
@@ -117,8 +120,8 @@ int		check_ext(char *mapfile);
 // player_movement.c
 void	move_backward(t_data *data);
 void	move_forward(t_data *data);
-void	move_left(t_data *data);
-void	move_right(t_data *data);
+void	move_left(t_data *data, double dx, double dy);
+void	move_right(t_data *data, double dx, double dy);
 void	turn_left(t_data *data);
 void	turn_right(t_data *data);
 
@@ -127,7 +130,19 @@ void	ray_caster(t_data *data);
 t_point	find_horizontal_wall(t_data *data, double viewing_angle, int direction, double *dist);
 t_point	find_vertical_wall(t_data *data, double viewing_angle, int direction, double *dist);
 double	get_correct_distance(double hori_dist, double vert_dist, double angle);
-void	cast_slice(t_data *data, double wall_distance, int col, int offset, int wall);
+void	cast_slice(t_data *data, double wall_distance, int col, int offset);
+
+// ray_caster_axis.c
+void	n_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col);
+void	s_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col);
+void	e_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col);
+void	w_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col);
+
+// ray_caster_zones.c
+void	ne_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col);
+void	nw_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col);
+void	sw_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col);
+void	se_cast_ray(t_data *data, double plane_angle, double viewing_angle, int col);
 
 // setup
 void	init_struct(t_data *data);

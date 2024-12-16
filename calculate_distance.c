@@ -13,18 +13,14 @@
 #include "cub3D.h"
 
 /* calculates and returns the distance between two points */
-double	calculate_distance(t_data *data, t_point *p2, double angle)
+double	calculate_distance(t_data *data, t_point *p2)
 {
-    double dx;
-    double dy;
-    double distance;
-    double relativeAngle;
+	double	dx;
+	double	dy;
+	double	distance;
 
-    dx = p2->x - data->player->position->x;
-    dy = p2->y - data->player->position->y;
-    distance = sqrt(dx*dx + dy*dy);
-    relativeAngle = fabs(angle - data->player->angle);
-    if (relativeAngle > 180.0)
-        relativeAngle = 360.0 - relativeAngle;
-    return (distance);
+	dx = p2->x - data->player->position->x;
+	dy = p2->y - data->player->position->y;
+	distance = sqrt(dx * dx + dy * dy);
+	return (distance);
 }

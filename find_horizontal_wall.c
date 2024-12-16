@@ -17,85 +17,79 @@ t_point	find_first_horizontal_hit(t_data *data, int direction, double v_angle)
 	t_point	point;
 
 	if (direction == NE || direction == N || direction == NW)
-		point.y = floor(data->player->position->y/CUBE_SIZE) * (CUBE_SIZE) - 0.001;
+		point.y = floor(data->player->position->y / CUBE_SIZE)
+			* (CUBE_SIZE) - 0.001;
 	else if (direction == SW || direction == S || direction == SE)
-		point.y = floor(data->player->position->y/CUBE_SIZE) * (CUBE_SIZE) + CUBE_SIZE;
+		point.y = floor(data->player->position->y / CUBE_SIZE)
+			* (CUBE_SIZE) + CUBE_SIZE;
 	if (direction == N || direction == S)
 		point.x = data->player->position->x;
 	else
-		point.x = data->player->position->x + (data->player->position->y - point.y)/tan(v_angle / (double)180 * M_PI);
+		point.x = data->player->position->x + (data->player->position->y
+				- point.y) / tan(v_angle / (double)180 * M_PI);
 	return (point);
 }
 
-double	set_dY_horizontal(int direction)
+/* setting dy depending if the ray is facing up or down */
+double	set_dy_horizontal(int direction)
 {
 	if (direction == NE || direction == N || direction == NW)
-		return((double)(CUBE_SIZE * -1));
-	else //if (direction == SW || direction == S || direction == SE)
+		return ((double)(CUBE_SIZE * -1));
+	else
 		return ((double)CUBE_SIZE);
 }
 
-double	set_dX_horizontal(double v_angle)
+double	set_dx_horizontal(double v_angle)
 {
 	if (v_angle == 90 || v_angle == 270)
 		return (0);
 	else
-		return ((double)CUBE_SIZE/tan(v_angle / (double)180 * M_PI));
+		return ((double)CUBE_SIZE / tan(v_angle / (double)180 * M_PI));
 }
 
 t_point	get_next_horizontal_hit(t_point point, int direction, double v_angle)
 {
-	double	dX;
-	double	dY;
+	double	dx;
+	double	dy;
 
-	dY = set_dY_horizontal(direction);
-	point.y += dY;
-	dX = set_dX_horizontal(v_angle);
-	//point.x += dX;
+	dy = set_dy_horizontal(direction);
+	point.y += dy;
+	dx = set_dx_horizontal(v_angle);
 	if (direction == NE)
-		point.x += dX;
+		point.x += dx;
 	else if (direction == NW)
-		point.x += dX;
+		point.x += dx;
 	else if (direction == SW)
-		point.x -= dX;
+		point.x -= dx;
 	else if (direction == SE)
-		point.x -= dX;
+		point.x -= dx;
 	return (point);
 }
 
-t_point	find_horizontal_wall(t_data *data, double v_angle, int direction, double *dist)
+t_point	find_horizontal_wall(t_data *data, double angle, int dir, double *dist)
 {
 	t_point	point;
 	t_point	cube;
 
-	point = find_first_horizontal_hit(data, direction, v_angle);
+	point = find_first_horizontal_hit(data, dir, angle);
 	cube = get_grid_position(point);
-	if (cube.x < 0 || cube.x >= data->cols || cube.y < 0 || cube.y >= data->rows)
+	if (cube.x < 0 || cube.x >= data->cols
+		|| cube.y < 0 || cube.y >= data->rows)
 	{
 		*dist = -1;
 		return (point);
 	}
 	while (data->map[(int)cube.y][(int)cube.x] != '1')
 	{
-		point = get_next_horizontal_hit(point, direction, v_angle);
+		point = get_next_horizontal_hit(point, dir, angle);
 		cube = get_grid_position(point);
-		if (cube.x < 0 || cube.x >= data->cols || cube.y < 0 || cube.y >= data->rows)
+		if (cube.x < 0 || cube.x >= data->cols
+			|| cube.y < 0 || cube.y >= data->rows)
 		{
-			/* printf("horizontal: exited in while loop");
-			printf("\n\nhorizontal - x: %d\ny: %d\n", (int)floor(cube.x), (int)floor(cube.y));
-			printf("point: x=%f, y=%f\n", point.x, point.y);
-			printf("dX: %f\n", dX);
-			printf("dY: %f\n", dY);
-			printf("value of viewing angle: %f.\n\n", v_angle); */
 			*dist = -1;
 			return (point);
 		}
 	}
-	// printf("\n\nhorizontal - x: %d\ny: %d\n", (int)floor(cube.x), (int)floor(cube.y));
-	// printf("point: x=%f, y=%f\n", point.x, point.y);
-	// printf("value of viewing angle: %f.\n\n", v_angle);
-	// printf("Horizontal wall point values: x = %f, y = %f\n", point.x, point.y);
-	// printf("Horizontal wall cube values: x = %f, y = %f\n", cube.x, cube.y);
-	*dist = calculate_distance(data, &point, v_angle);
+	*dist = calculate_distance(data, &point);
 	return (point);
 }

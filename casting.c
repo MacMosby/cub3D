@@ -24,48 +24,64 @@ double	get_correct_distance(double hori_dist, double vert_dist, double angle)
 		return (vert_dist * cos(angle / (double)180 * M_PI));
 }
 
-void	cast_slice(t_data *data, double wall_distance, int col, int offset, int wall)
+void	draw_ceiling(t_data *data, int ceiling_height, int *i, int col)
 {
-	int i = 0;
+	while (*i < ceiling_height)
+	{
+		my_pixel_put(col, *i, &data->imag, METAL);
+		(*i)++;
+	}
+}
+
+void	draw_floor(t_data *data, int *i, int col)
+{
+	while (*i < HEIGHT)
+	{
+		my_pixel_put(col, *i, &data->imag, METALLIC_BLACK);
+		(*i)++;
+	}
+}
+
+int	set_color(t_data *data, int wall_row, int slice_height, int offset)
+{
+	int	color;
+
+	color = 0;
+	if (data->wall == E)
+		color = *(unsigned int *)(data->ea_img.pixels_ptr + ((wall_row)
+					* CUBE_SIZE / slice_height * data->ea_img.line_len)
+				+ (offset * data->ea_img.bpp / 8));
+	else if (data->wall == N)
+		color = *(unsigned int *)(data->no_img.pixels_ptr + ((wall_row)
+					* CUBE_SIZE / slice_height * data->no_img.line_len)
+				+ (offset * data->no_img.bpp / 8));
+	else if (data->wall == W)
+		color = *(unsigned int *)(data->we_img.pixels_ptr + ((wall_row)
+					* CUBE_SIZE / slice_height * data->we_img.line_len)
+				+ (offset * data->we_img.bpp / 8));
+	else if (data->wall == S)
+		color = *(unsigned int *)(data->so_img.pixels_ptr + ((wall_row)
+					* CUBE_SIZE / slice_height * data->so_img.line_len)
+				+ (offset * data->so_img.bpp / 8));
+	return (color);
+}
+
+void	cast_slice(t_data *data, double wall_distance, int col, int offset)
+{
+	int	i;
 	int	slice_height;
-	int	ceiling_floor_height;
+	int	floor_height;
+	int	color;
 
 	slice_height = CUBE_SIZE * (PLANE_DIST / wall_distance);
-	//printf("slice height: %d\n", slice_height);
-	ceiling_floor_height = (HEIGHT - slice_height) / 2;
-	//printf("floor height: %d\n", ceiling_floor_height);
-	// drawing the ceiling
-	while (i < ceiling_floor_height)
+	floor_height = (HEIGHT - slice_height) / 2;
+	i = 0;
+	draw_ceiling(data, floor_height, &i, col);
+	while (i < HEIGHT - floor_height)
 	{
-		my_pixel_put(col, i, &data->imag, METAL);
+		color = set_color(data, i - floor_height, slice_height, offset);
+		my_pixel_put(col, i, &data->imag, color);
 		i++;
 	}
-	// drawing the wall
-	// printf("offset: %d\n", offset);
-	while (i < HEIGHT - ceiling_floor_height)
-	{
-		if (wall == E)
-			my_pixel_put(col, i, &data->imag, *(unsigned int *)(data->ea_img.pixels_ptr + ((i - ceiling_floor_height) * CUBE_SIZE / slice_height * data->ea_img.line_len) + (offset * data->ea_img.bpp / 8)));
-		else if (wall == N)
-			my_pixel_put(col, i, &data->imag, *(unsigned int *)(data->no_img.pixels_ptr + ((i - ceiling_floor_height) * CUBE_SIZE / slice_height * data->no_img.line_len) + (offset * data->no_img.bpp / 8)));
-		else if (wall == W)
-			my_pixel_put(col, i, &data->imag, *(unsigned int *)(data->we_img.pixels_ptr + ((i - ceiling_floor_height) * CUBE_SIZE / slice_height * data->we_img.line_len) + (offset * data->we_img.bpp / 8)));
-		else if (wall == S)
-			my_pixel_put(col, i, &data->imag, *(unsigned int *)(data->so_img.pixels_ptr + ((i - ceiling_floor_height) * CUBE_SIZE / slice_height * data->so_img.line_len) + (offset * data->so_img.bpp / 8)));
-		i++;
-	}
-	// drawing the floor
-	while (i < HEIGHT)
-	{
-		my_pixel_put(col, i, &data->imag, METALLIC_BLACK);
-		i++;
-	}
-	// middle of slice should be in the the middle of the screen
-		// (window height/2) - (slice height/2)
-	// finding the offset of the bitmap to find the
-	// right slice to shoot onto the wall
-		// if slice on vertical grid boundary
-			// offset = P.y % CUBE_SIZE
-		// if slice on horizontal grid boundary
-			// offset = P.x % CUBE_SIZE
+	draw_floor(data, &i, col);
 }
