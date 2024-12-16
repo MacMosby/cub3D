@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:17:25 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/16 14:34:49 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:17:58 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void	init_struct(t_data *data)
 	player = malloc(sizeof(t_player));
 	if (!player)
 	{
-		printf("Error. Malloc failed\n");
+		printf("Error. \nMalloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 	player_pos = malloc(sizeof(t_point));
 	if (!player_pos)
 	{
-		printf("Error. Malloc failed\n");
+		printf("Error. \nMalloc failed\n");
 		free(player);
 		exit(EXIT_FAILURE);
 	}

@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:20:17 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/16 15:07:59 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:08:53 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	color_check_loop(char **colors, t_data *data, char *line, int fd)
 
 	i = 0;
 	val = 0;
-	while (i < 3) // TODO does not handle empty third value well
+	while (i < 3)
 	{
-		if (colors[i] == NULL)
+		if (colors[i] == NULL || (colors[i][0] == '\n' && colors[i][1] == '\0'))
 			color_error(colors, data, line, fd);
 		if (!check_color_value(colors[i]))
 			color_error(colors, data, line, fd);

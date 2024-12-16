@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:28:59 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/16 14:41:00 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:28:00 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ void	draw_scaledminimap(t_data *data)
 		while (j < data->cols)
 		{
 			if (data->map[i][j] == '1')
-				color = COLD_BLUE;
+				color = METAL;
 			else if (data->map[i][j] == '*')
 				color = GREY;
 			else
-				color = LIGHT_BLUE;
+				color = SILVERY;
 			calculate_and_put_pixel(data, color, i, j);
 			j++;
 		}

@@ -6,16 +6,16 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:33:46 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/12 12:37:31 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:26:05 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	close_window(t_data *data) // function has to be type int
+int	close_window(t_data *data)
 {
 	free_everything(data);
-	exit(0); // ugly but what can we do here instead??
+	exit(0);
 	return (0);
 }
 
