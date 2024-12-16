@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:08:14 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/16 13:18:44 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:01:32 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,21 @@ void	space_check(t_data *data)
 	}
 }
 
-void	player_check(t_data *data, int fd)
+void	store_player_data(t_data *data, int i, int j)
+{
+	data->player->position->x = j * CUBE_SIZE + CUBE_SIZE / 2;
+	data->player->position->y = i * CUBE_SIZE + CUBE_SIZE / 2;
+	if (data->map[i][j] == 'N')
+		data->player->angle = 90;
+	else if (data->map[i][j] == 'E')
+		data->player->angle = 0;
+	else if (data->map[i][j] == 'S')
+		data->player->angle = 270;
+	else if (data->map[i][j] == 'W')
+		data->player->angle = 180;
+}
+
+int	directions_check(t_data *data)
 {
 	int	i;
 	int	j;
@@ -47,22 +61,21 @@ void	player_check(t_data *data, int fd)
 			if (data->map[i][j] == 'N' || data->map[i][j] == 'E' || \
 				data->map[i][j] == 'S' || data->map[i][j] == 'W')
 			{
-				data->player->position->x = j * CUBE_SIZE + CUBE_SIZE / 2;
-				data->player->position->y = i * CUBE_SIZE + CUBE_SIZE / 2;
-				if (data->map[i][j] == 'N')
-					data->player->angle = 90;
-				else if (data->map[i][j] == 'E')
-					data->player->angle = 0;
-				else if (data->map[i][j] == 'S')
-					data->player->angle = 270;
-				else if (data->map[i][j] == 'W')
-					data->player->angle = 180;
+				store_player_data(data, i, j);
 				play_num++;
 			}
 			j++;
 		}
 		i++;
 	}
+	return (play_num);
+}
+
+void	player_check(t_data *data, int fd)
+{
+	int	play_num;
+
+	play_num = directions_check(data);
 	if (play_num == 0)
 	{
 		printf("No player found.");
