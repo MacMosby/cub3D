@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:40:56 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/17 14:43:58 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:28:31 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,5 @@ void	parse_map(int fd, char *inputfile, t_data *data, char **oldline)
 	flood_fill_wall_check(data);
 	flood_fill_space_check(data);
 	space_check(data);
+	zero_check(data, fd);
 }

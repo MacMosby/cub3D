@@ -6,11 +6,34 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:08:14 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/16 16:18:25 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:32:32 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+// this should check if there are no zeros outside of the walls
+void	zero_check(t_data *data, int fd)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (data->map[i])
+	{
+		j = 0;
+		while (data->map[i][j] != '\0')
+		{
+			if (data->map[i][j] == '0')
+			{
+				zero_horizontal_check(data, fd, i, j);
+				zero_vertical_check(data, fd, i, j);
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
 void	space_check(t_data *data)
 {

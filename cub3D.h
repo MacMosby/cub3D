@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/17 14:22:29 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:32:38 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,9 @@ char	*ft_strcpy(char *dest, char *src);
 int		ft_strcmp(char *s1, char *s2);
 void	player_check(t_data *data, int fd);
 void	space_check(t_data *data);
+void	zero_check(t_data *data, int fd);
+void	zero_horizontal_check(t_data *data, int fd, int i, int j);
+void	zero_vertical_check(t_data *data, int fd, int i, int j);
 
 // minimap
 void	draw_minimap(t_data *data);
