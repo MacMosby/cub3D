@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:40:56 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/17 18:29:02 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:52:03 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ void	map_loop(t_data *data, char *line, int fd, char **oldline)
 	data->rows++;
 	while (line != NULL)
 	{
+		len = ft_strlen(line) - 1;
+		if (len > data->cols)
+			data->cols = len;
 		free(line);
 		line = get_next_line(fd);
 		if (!line)
@@ -81,9 +84,6 @@ void	map_loop(t_data *data, char *line, int fd, char **oldline)
 			// }
 		}
 		data->rows++;
-		len = ft_strlen(line) - 1;
-		if (len > data->cols)
-			data->cols = len;
 	}
 }
 

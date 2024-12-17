@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:54:01 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/17 18:41:56 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:51:42 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	store_information(t_data *data, char *line, int fd)
 int	valid_map_line(char *line)
 {
 	int	i;
-	
+
 	i = 0;
 	while (line[i] != '\0' && line[i] == ' ')
 		i++;
@@ -75,7 +75,7 @@ char	*skip_newlines(char *line, int fd, t_data *data)
 {
 	while (!ft_strncmp(line, "\n", 1))
 	{
-		free(line);	
+		free(line);
 		line = get_next_line(fd);
 	}
 	if (!valid_map_line(line))
