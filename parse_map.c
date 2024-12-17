@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:40:56 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/17 18:52:03 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:08:41 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,22 @@ void	store_map(t_data *data, char *inputfile, char **oldline)
 	close(fd);
 }
 
-int	check_if_end(char *line, int fd) // sth is wrong with this function
+int	check_if_end(char *line, int fd)
 {
 	while (line != NULL && line[0] == '\n')
 	{
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (line == NULL) // it is the end
+	if (line == NULL)
 		return (1);
-	else // it encountered more information
+	else
 	{
-		free(line);
-		line = NULL;
+		while (line != NULL)
+		{
+			free(line);
+			line = get_next_line(fd);
+		}
 		return (0);
 	}
 }
@@ -75,13 +78,13 @@ void	map_loop(t_data *data, char *line, int fd, char **oldline)
 			break ;
 		if (line[0] == '\n')
 		{
-			// if (check_if_end(line, fd))
-			// 	break ;
-			// else
-			// {
+			if (check_if_end(line, fd))
+				break ;
+			else
+			{
 				free (*oldline);
-				map_error(fd, data, line);
-			// }
+				map_error2(fd, data);
+			}
 		}
 		data->rows++;
 	}
