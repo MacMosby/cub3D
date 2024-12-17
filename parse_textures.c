@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:54:01 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/17 15:38:30 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:41:56 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ int	store_information(t_data *data, char *line, int fd)
 	while (line[i] == ' ')
 		i++;
 	if (!ft_strncmp(line + i, "NO", 2))
-		store_path_no(line + i + 2, data);
+		store_path_no(line + i + 2, data, line, fd);
 	else if (!ft_strncmp(line + i, "SO", 2))
-		store_path_so(line + i + 2, data);
+		store_path_so(line + i + 2, data, line, fd);
 	else if (!ft_strncmp(line + i, "WE", 2))
-		store_path_we(line + i + 2, data);
+		store_path_we(line + i + 2, data, line, fd);
 	else if (!ft_strncmp(line + i, "EA", 2))
-		store_path_ea(line + i + 2, data);
+		store_path_ea(line + i + 2, data, line, fd);
 	else if (!ft_strncmp(line + i, "F", 1))
 		handle_color_f(line + i + 1, data, line, fd);
 	else if (!ft_strncmp(line + i, "C", 1))
@@ -53,15 +53,33 @@ int	store_information(t_data *data, char *line, int fd)
 	return (1);
 }
 
-char	*skip_newlines(char *line, int fd)
+int	valid_map_line(char *line)
 {
-	free(line);
-	line = get_next_line(fd);
+	int	i;
+	
+	i = 0;
+	while (line[i] != '\0' && line[i] == ' ')
+		i++;
+	while (line[i] != '\0' && line[i] != '\n')
+	{
+		if (!(line[i] == '0' || line[i] == '1' || line[i] == 'N' \
+			|| line[i] == 'S' || line[i] == 'W' \
+			|| line[i] == 'E' || line[i] == ' '))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+char	*skip_newlines(char *line, int fd, t_data *data)
+{
 	while (!ft_strncmp(line, "\n", 1))
 	{
-		free(line);
+		free(line);	
 		line = get_next_line(fd);
 	}
+	if (!valid_map_line(line))
+		special_error(fd, data, line);
 	return (line);
 }
 
@@ -87,6 +105,6 @@ char	*parse_firstpart(int fd, t_data *data)
 			free(line);
 		line = get_next_line(fd);
 	}
-	line = skip_newlines(line, fd);
+	line = skip_newlines(line, fd, data);
 	return (line);
 }

@@ -2,12 +2,8 @@ NO textures/star_wars/star_wars_wall_north.xpm
 SO textures/star_wars/star_wars_wall_south.xpm
 WE textures/star_wars/star_wars_wall_west.xpm
 EA textures/star_wars/star_wars_wall_east.xpm
-
 F 44,44,43
-C 33,33,23
-EA textures/star_wars/star_wars_wall_east.xpm
-
-
+C 33,33,323
 
         1111111111111111111111111
         1000000000110000000000001

@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:40:56 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/17 15:28:31 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:29:02 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,19 @@ void	store_map(t_data *data, char *inputfile, char **oldline)
 	close(fd);
 }
 
-int	check_if_end(char *line, int fd)
+int	check_if_end(char *line, int fd) // sth is wrong with this function
 {
-	char	*storage;
-
-	storage = ft_strdup(line);
 	while (line != NULL && line[0] == '\n')
 	{
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (line == NULL)
-	{
-		free(storage);
+	if (line == NULL) // it is the end
 		return (1);
-	}
-	else
+	else // it encountered more information
 	{
 		free(line);
-		line = storage;
-		free(storage);
+		line = NULL;
 		return (0);
 	}
 }
@@ -79,13 +72,13 @@ void	map_loop(t_data *data, char *line, int fd, char **oldline)
 			break ;
 		if (line[0] == '\n')
 		{
-			if (check_if_end(line, fd))
-				break ;
-			else
-			{
-				free (*oldline); 
+			// if (check_if_end(line, fd))
+			// 	break ;
+			// else
+			// {
+				free (*oldline);
 				map_error(fd, data, line);
-			}
+			// }
 		}
 		data->rows++;
 		len = ft_strlen(line) - 1;

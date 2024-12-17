@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:20:17 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/16 16:08:53 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:36:26 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	handle_color_c(char *info, t_data *data, char *line, int fd)
 {
 	char	**colors;
 
+	if (data->c_ceiling.full == 1)
+		information_error(fd, line, data);
 	colors = NULL;
 	if (!info || *info == '\0')
 		color_error(colors, data, line, fd);
@@ -79,6 +81,8 @@ void	handle_color_f(char *info, t_data *data, char *line, int fd)
 {
 	char	**colors;
 
+	if (data->c_floor.full == 1)
+		information_error(fd, line, data);
 	colors = NULL;
 	if (!info || *info == '\0') 
 		color_error(colors, data, line, fd);

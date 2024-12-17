@@ -5,3 +5,4 @@ a.out
 cub3D
 test.cub
 *.o
+libft/libft.a
