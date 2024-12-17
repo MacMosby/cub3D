@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 15:22:06 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/16 17:07:00 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/17 14:42:37 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,11 @@ char	*handle_line(char *line, t_data *data, int fd)
 
 	newrow = (char *)malloc((data->cols + 1) * sizeof(char));
 	i = line_error_checks(line, fd, data, newrow);
+	printf("This is i: %i\n", i);
 	len = ft_strlen(line);
+	printf("This is len: %i\n", len);
+	if (line[i] != '\n')
+		len++;
 	ft_strlcpy(newrow, line, len);
 	if (len < data->cols + 1)
 	{

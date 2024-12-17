@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/16 16:48:26 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/17 14:22:29 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ void	information_error(int fd, char *line);
 // cleanup
 void	free_array(char **array);
 void	free_everything(t_data *data);
+void	print_map(t_data *data);
 
 t_point	get_grid_position(t_point point);
 

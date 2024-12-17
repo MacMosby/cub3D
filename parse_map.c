@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 13:40:56 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/16 16:55:59 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/17 14:43:58 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	store_map(t_data *data, char *inputfile, char **oldline)
 
 	fd = open(inputfile, O_RDONLY);
 	data->map = (char **)ft_calloc((data->rows + 1), sizeof(char *));
-	if (!data->map)
-		malloc_error(data);
 	i = 0;
 	line = find_start_map(fd, oldline);
 	data->map[i] = handle_line(line, data, fd);
@@ -35,8 +33,36 @@ void	store_map(t_data *data, char *inputfile, char **oldline)
 		data->map[++i] = handle_line(line, data, fd);
 	}
 	data->map[++i] = NULL;
-	free(line);
+	while (line != NULL)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
 	close(fd);
+}
+
+int	check_if_end(char *line, int fd)
+{
+	char	*storage;
+
+	storage = ft_strdup(line);
+	while (line != NULL && line[0] == '\n')
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	if (line == NULL)
+	{
+		free(storage);
+		return (1);
+	}
+	else
+	{
+		free(line);
+		line = storage;
+		free(storage);
+		return (0);
+	}
 }
 
 void	map_loop(t_data *data, char *line, int fd, char **oldline)
@@ -53,8 +79,13 @@ void	map_loop(t_data *data, char *line, int fd, char **oldline)
 			break ;
 		if (line[0] == '\n')
 		{
-			free (*oldline); 
-			map_error(fd, data, line);
+			if (check_if_end(line, fd))
+				break ;
+			else
+			{
+				free (*oldline); 
+				map_error(fd, data, line);
+			}
 		}
 		data->rows++;
 		len = ft_strlen(line) - 1;

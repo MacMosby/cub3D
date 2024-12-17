@@ -6,7 +6,7 @@
 #    By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/31 15:17:42 by lde-taey          #+#    #+#              #
-#    Updated: 2024/12/16 15:13:44 by lde-taey         ###   ########.fr        #
+#    Updated: 2024/12/17 14:21:25 by lde-taey         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ SRCS = main.c \
 	render.c \
 	player_turns.c \
 	get_grid_position.c \
-	set_textures.c
+	set_textures.c \
+	testing.c
 
 OBJS = $(SRCS:.c=.o)
 
