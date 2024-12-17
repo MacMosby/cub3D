@@ -95,8 +95,6 @@ typedef struct s_data
 	t_imag		we_img;
 	t_imag		so_img;
 	int			wall;
-	void		*mlx_ptr_map;
-	void		*win_ptr_map;
 	float		mm_xstart;
 	float		mm_ystart;
 	t_player	*player;
@@ -201,5 +199,8 @@ void	free_array(char **array);
 void	free_everything(t_data *data);
 
 t_point	get_grid_position(t_point point);
+
+// set_textures.c
+void	set_textures(t_data *data);
 
 #endif

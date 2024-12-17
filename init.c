@@ -65,6 +65,7 @@ void	init_struct(t_data *data)
 	data->player->position->x = 0.0;
 	data->player->position->y = 0.0;
 	init_values(data);
+	data->win_ptr = NULL;
 }
 
 int	init_everything(char *input, t_data *data)

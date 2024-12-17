@@ -45,7 +45,8 @@ SRCS = main.c \
 	parse_store_paths.c \
 	render.c \
 	player_turns.c \
-	get_grid_position.c
+	get_grid_position.c \
+	set_textures.c
 
 OBJS = $(SRCS:.c=.o)
 
