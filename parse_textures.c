@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:54:01 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/16 15:44:21 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:38:30 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*parse_firstpart(int fd, t_data *data)
 
 	line = get_next_line(fd);
 	if (!line || line[0] == '\0')
-		information_error(fd, line);
+		information_error(fd, line, data);
 	while (check_struct(data) == 0)
 	{
 		if (ft_strncmp(line, "\n", 1))
@@ -80,7 +80,7 @@ char	*parse_firstpart(int fd, t_data *data)
 			{
 				if (check_struct(data) == 1)
 					break ;
-				information_error(fd, line);
+				information_error(fd, line, data);
 			}
 		}
 		if (line)

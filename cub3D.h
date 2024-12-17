@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/17 15:32:38 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:38:19 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ void	color_error(char **colors, t_data *data, char *line, int fd);
 void	malloc_error(t_data *data);
 void	map_error(int fd, t_data *data, char *line);
 void	map_error2(int fd, t_data *data);
-void	information_error(int fd, char *line);
+void	information_error(int fd, char *line, t_data *data);
 
 // cleanup
 void	free_array(char **array);

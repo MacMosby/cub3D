@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:48:56 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/16 16:18:44 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:39:52 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,15 @@ void	map_error2(int fd, t_data *data)
 	exit(EXIT_FAILURE);
 }
 
-void	information_error(int fd, char *line)
+void	information_error(int fd, char *line, t_data *data)
 {
 	printf("Error.\nCould not find expected object information in file\n");
-	free(line);
+	free_everything(data);
+	while (line != NULL)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
 	close(fd);
 	exit(EXIT_FAILURE);
 }
