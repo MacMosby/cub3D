@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 13:28:59 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/16 16:28:00 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/18 14:37:20 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,55 +64,15 @@ void	draw_scaledminimap(t_data *data)
 	draw_player(data);
 }
 
-void	draw_small_frame(t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i <= data->rows * MAP_CELL + 1)
-	{
-		j = 0;
-		while (j <= data->cols * MAP_CELL + 1)
-		{
-			if (i == 0 || i == data->rows * MAP_CELL + 1)
-				my_pixel_put(j + MM_OFFSET - 1, i + MM_OFFSET - 1, \
-					&data->imag, METALLIC_WHITE);
-			else if (j == 0 || j == data->cols * MAP_CELL + 1)
-				my_pixel_put(j + MM_OFFSET - 1, i + MM_OFFSET - 1, \
-					&data->imag, METALLIC_WHITE);
-			j++;
-		}
-		i++;
-	}
-}
-
 void	draw_frame(t_data *data)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	if (MM_HEIGHT > data->cols * MAP_CELL && MM_WIDTH > data->rows * MAP_CELL)
+	if (MM_HEIGHT > data->rows * MAP_CELL && MM_WIDTH > data->cols * MAP_CELL)
 		draw_small_frame(data);
+	else if (MM_HEIGHT > data->rows * MAP_CELL || \
+		MM_WIDTH > data->cols * MAP_CELL)
+		draw_adjusted_frame(data);
 	else
-	{
-		while (i <= MM_HEIGHT + 1)
-		{
-			j = 0;
-			while (j <= MM_WIDTH + 1)
-			{
-				if (i == 0 || i == MM_HEIGHT + 1)
-					my_pixel_put(j + MM_OFFSET - 1, i + MM_OFFSET - 1, \
-						&data->imag, METALLIC_WHITE);
-				else if (j == 0 || j == MM_WIDTH + 1)
-					my_pixel_put(j + MM_OFFSET - 1, i + MM_OFFSET - 1, \
-						&data->imag, METALLIC_WHITE);
-				j++;
-			}
-			i++;
-		}
-	}
+		draw_minimap_frame(data);
 }
 
 void	draw_minimap(t_data *data)
@@ -126,19 +86,7 @@ void	draw_minimap(t_data *data)
 		CUBE_SIZE - MM_HEIGHT / 2;
 	width_bigmmap = MAP_CELL * data->cols;
 	height_bigmmap = MAP_CELL * data->rows;
-	if (data->mm_xstart < 0)
-		data->mm_xstart = 0;
-	else if (data->mm_xstart + MM_WIDTH > width_bigmmap)
-		data->mm_xstart = width_bigmmap - MM_WIDTH;
-	if (data->mm_ystart < 0)
-		data->mm_ystart = 0;
-	else if (data->mm_ystart + MM_HEIGHT > height_bigmmap)
-	{
-		if (height_bigmmap < MM_HEIGHT)
-			data->mm_ystart = 0;
-		else
-			data->mm_ystart = height_bigmmap - MM_HEIGHT;
-	}
+	recalculate_start(data, width_bigmmap, height_bigmmap);
 	draw_frame(data);
 	draw_scaledminimap(data);
 }

@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:19:13 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/16 14:49:05 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/18 14:02:00 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,26 @@ void	draw_player(t_data *data)
 		pixy++;
 	}
 	draw_rays(data);
+}
+
+void	recalculate_start(t_data *data, float width_bigmm, float height_bigmm)
+{
+	if (data->mm_xstart < 0)
+		data->mm_xstart = 0;
+	else if (data->mm_xstart + MM_WIDTH > width_bigmm)
+	{
+		if (width_bigmm < MM_WIDTH)
+			data->mm_xstart = 0;
+		else
+			data->mm_xstart = width_bigmm - MM_WIDTH;
+	}
+	if (data->mm_ystart < 0)
+		data->mm_ystart = 0;
+	else if (data->mm_ystart + MM_HEIGHT > height_bigmm)
+	{
+		if (height_bigmm < MM_HEIGHT)
+			data->mm_ystart = 0;
+		else
+			data->mm_ystart = height_bigmm - MM_HEIGHT;
+	}
 }

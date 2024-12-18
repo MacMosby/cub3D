@@ -3,6 +3,5 @@ en.subject.pdf
 a.out
 .gitignore
 cub3D
-test.cub
 *.o
 libft/libft.a

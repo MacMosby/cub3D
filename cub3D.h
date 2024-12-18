@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 23:27:27 by mrodenbu          #+#    #+#             */
-/*   Updated: 2024/12/17 18:14:28 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/18 14:21:48 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,11 @@ void	init_minimap(t_data *data);
 void	draw_player(t_data *data);
 void	draw_rays(t_data *data);
 float	ft_normalize(float angle);
+void	recalculate_start(t_data *data, float width_mm, float height_mm);
+void	draw_small_frame(t_data *data);
+void	draw_adjusted_frame(t_data *data);
+void	draw_adjusted_height_frame(t_data *data);
+void	draw_minimap_frame(t_data *data);
 
 // render
 void	render(t_data *data);

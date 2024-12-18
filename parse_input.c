@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:10:27 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/17 14:43:21 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:49:46 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	parse_input(char *inputfile, t_data *data)
 	if (fd < 0)
 	{
 		printf("Error opening file. Please check your input.\n");
+		free_everything(data);
 		close(fd);
 		exit(EXIT_FAILURE);
 	}

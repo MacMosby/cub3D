@@ -6,7 +6,7 @@
 #    By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/31 15:17:42 by lde-taey          #+#    #+#              #
-#    Updated: 2024/12/17 18:53:31 by lde-taey         ###   ########.fr        #
+#    Updated: 2024/12/18 14:22:08 by lde-taey         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS = main.c \
 	errors_2.c \
 	minimap.c \
 	minimap_tools.c \
+	minimap_tools_frame.c \
 	parse_checks.c \
 	parse_checks_tools.c \
 	parse_colors.c \

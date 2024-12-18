@@ -6,7 +6,7 @@
 /*   By: lde-taey <lde-taey@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:24:58 by lde-taey          #+#    #+#             */
-/*   Updated: 2024/12/13 16:41:10 by lde-taey         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:50:44 by lde-taey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int	check_args(int argc, char **argv)
 {
 	if (argc == 1 || argc > 2)
 	{
-		printf("This program takes one (and only one) argument.\n");
+		printf("Error.\nThis program takes one (and only one) argument.\n");
 		return (1);
 	}
 	if (check_ext(argv[1]))
 	{
-		printf("This program only accepts .cub files as an argument.\n");
+		printf("Error.\nThis program only accepts .cub files as an argument.\n");
 		return (1);
 	}
 	return (0);

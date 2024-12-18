@@ -1,7 +1,7 @@
-NO ./xpm/egypt/egypt_wall_north.xpm
-SO ./xpm/egypt/egypt_wall_south.xpm
-EA ./xpm/egypt/egypt_wall_east.xpm
-WE ./xpm/egypt/egypt_wall_west.xpm
+NO textures/egypt/egypt_wall_north.xpm
+SO textures/egypt/egypt_wall_south.xpm
+WE textures/egypt/egypt_wall_west.xpm
+EA textures/egypt/egypt_wall_east.xpm
 
 F 23,18,4
 C 36,28,7
