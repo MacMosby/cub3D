@@ -68,9 +68,6 @@ C 225,30,0
 ## Bonus Features
 - **Wall Collisions:** Prevents walking through walls.
 - **Minimap System:** Displays a top-down view of the map.
-- **Interactive Doors:** Doors that can open and close.
-- **Animated Sprites:** Adds dynamic objects.
-- **Mouse Control:** Rotate the camera using the mouse.
 
 ## Technologies Used
 - **C** (standard libraries and system calls)
